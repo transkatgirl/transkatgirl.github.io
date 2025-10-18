@@ -1,4 +1,39 @@
 body {
-  font: 1em/1.25 sans-serif;
-  margin: 1em;
+	font: 1em/1.25 sans-serif;
+	margin: 0;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+}
+
+main {
+	margin: 0 1lh 1lh;
+}
+
+header {
+	margin: 1lh 1lh 0;
+}
+
+footer {
+	padding: 0.5lh 0;
+}
+
+ul {
+	padding-left: calc(0.5lh + 1em);
+}
+
+code {
+	background-color: lightgray;
+	padding: 0.15lh;
+}
+
+img {
+	max-width: 100%;
+}
+
+footer {
+	font-size: small;
+	background-color: lightgray;
+	width: 100%;
+	margin: 0;
+	text-align: center;
 }

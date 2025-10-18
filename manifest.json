@@ -1,0 +1,7 @@
+{
+	"name": "transkatgirl's blog",
+	"short_name": "kat's blog",
+	"icons": [
+		{ "src": "/icon-large.png", "type": "image/png", "sizes": "512x512" }
+	]
+}
