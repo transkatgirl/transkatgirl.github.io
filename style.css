@@ -40,3 +40,9 @@ footer {
 small {
 	font-size: 75%;
 }
+
+blockquote {
+	border-left: 0.33em solid gray;
+	margin-left: 0;
+	padding: 0.01lh 0 0.01lh 0.8lh;
+}
