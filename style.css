@@ -18,6 +18,10 @@ body {
 	min-height: 100vh;
 }
 
+li {
+	margin: 0.125lh 0;
+}
+
 h1,
 h2,
 h3,
