@@ -45,7 +45,7 @@ ul {
 
 code {
 	font: 80% "Fira Code", monospace, monospace;
-	background-color: #d6cfca;
+	background-color: #ddd6d1;
 	padding: 0.15lh;
 }
 
@@ -72,7 +72,9 @@ a {
 blockquote {
 	border-left: 0.33em solid #984647;
 	margin-left: 0;
-	padding: 0.01lh 0 0.01lh 0.8lh;
+	padding: 0.01lh 0.8lh;
+	background-color: #e3ddd7;
+	max-width: fit-content;
 }
 
 /* Colors:
@@ -80,7 +82,9 @@ blockquote {
 #36384f - oklch(0.35 0.04 280)
 
 #c3bcb7 - oklch(0.8 0.01 61)
-#d6cfca - oklch(0.86 0.01 61)
+#ddd6d1 - oklch(0.88 0.01 61)
+#e3ddd7 - oklch(0.9 0.01 61)
+
 
 #78292d - oklch(0.4 0.11 21)
 #984647 - oklch(0.5 0.11 21)
