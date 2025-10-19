@@ -45,7 +45,7 @@ ul {
 
 code {
 	font: 80% "Fira Code", monospace, monospace;
-	background-color: lightgray;
+	background-color: #d0c9c4; /* oklch(0.84 0.01 61) */
 	padding: 0.15lh;
 }
 
@@ -55,7 +55,7 @@ img {
 
 footer {
 	font-family: "Fira Code", monospace, monospace;
-	background-color: lightgray;
+	background-color: #d0c9c4; /* oklch(0.84 0.01 61) */
 	width: 100%;
 	margin: 0;
 	text-align: center;
@@ -65,8 +65,12 @@ small {
 	font-size: 75%;
 }
 
+a {
+	color: #78292d; /* oklch(0.4 0.11 21) */
+}
+
 blockquote {
-	border-left: 0.33em solid gray;
+	border-left: 0.33em solid #984647; /* oklch(0.5 0.11 21) */
 	margin-left: 0;
 	padding: 0.01lh 0 0.01lh 0.8lh;
 }
