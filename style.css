@@ -47,7 +47,11 @@ ul {
 	padding-left: calc(0.5lh + 1em);
 }
 
-figure {
+figure:has(blockquote) {
+	margin: 0;
+}
+
+figure:has(blockquote) figcaption {
 	margin-left: 1lh;
 }
 
