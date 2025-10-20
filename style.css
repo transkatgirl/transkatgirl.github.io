@@ -101,6 +101,10 @@ aside {
 	max-width: fit-content;
 }
 
+hgroup:has(p) h1 {
+	margin-bottom: 0;
+}
+
 hgroup p {
 	font-size: 85%;
 }
