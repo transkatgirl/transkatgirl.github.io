@@ -91,6 +91,21 @@ blockquote {
 	max-width: fit-content;
 }
 
+aside {
+	border-left: 0.33em solid #984647;
+	margin-left: 0;
+	padding: 0.01lh 0.8lh;
+	max-width: fit-content;
+}
+
+hgroup p {
+	font-size: 85%;
+}
+
+address {
+	font-style: inherit;
+}
+
 /* Colors:
 
 #36384f - oklch(0.35 0.04 280)
