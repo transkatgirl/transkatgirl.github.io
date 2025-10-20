@@ -91,6 +91,14 @@ blockquote {
 	max-width: fit-content;
 }
 
+blockquote p::before {
+	content: open-quote;
+}
+
+blockquote p::after {
+	content: close-quote;
+}
+
 /* Colors:
 
 #36384f - oklch(0.35 0.04 280)
