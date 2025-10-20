@@ -16,6 +16,8 @@ body {
 	display: grid;
 	grid-template-rows: auto 1fr auto;
 	min-height: 100vh;
+	color: black;
+	background-color: white;
 }
 
 li {
@@ -107,6 +109,31 @@ address {
 	font-style: inherit;
 }
 
+table {
+	border-collapse: collapse;
+	border: 0.2em solid #c3bcb7;
+	font-size: 80%;
+	letter-spacing: 0.02em;
+}
+
+td,
+th {
+	border: 0.1em solid #c3bcb7;
+	padding: 10px 20px;
+}
+
+th {
+	background-color: #eae3de;
+}
+
+td {
+	text-align: center;
+}
+
+tr:nth-child(odd) td {
+	background-color: #faf4ee;
+}
+
 /* Colors:
 
 #36384f - oklch(0.35 0.04 280)
@@ -114,7 +141,8 @@ address {
 #c3bcb7 - oklch(0.8 0.01 61)
 #ddd6d1 - oklch(0.88 0.01 61)
 #e3ddd7 - oklch(0.9 0.01 61)
-
+#eae3de - oklch(0.92 0.01 61)
+#faf4ee - oklch(0.97 0.01 61)
 
 #78292d - oklch(0.4 0.11 21)
 #984647 - oklch(0.5 0.11 21)
