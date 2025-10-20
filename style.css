@@ -138,6 +138,10 @@ tr:nth-child(odd) td {
 	background-color: #faf4ee;
 }
 
+.reflink {
+	font-size: 80%;
+}
+
 /* Colors:
 
 #36384f - oklch(0.35 0.04 280)
