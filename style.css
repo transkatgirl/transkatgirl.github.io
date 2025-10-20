@@ -56,7 +56,8 @@ figure:has(blockquote) figcaption {
 	margin-left: 1lh;
 }
 
-code {
+code,
+pre {
 	font: 80% "Fira Code", monospace, monospace;
 	background-color: #ddd6d1;
 	padding: 0.15lh;
