@@ -36,6 +36,7 @@ b {
 
 main {
 	margin: 0 1lh 1lh;
+	width: calc(100vw-2lh);
 }
 
 header {
@@ -125,6 +126,11 @@ table {
 	border: 0.2em solid #c3bcb7;
 	font-size: 80%;
 	letter-spacing: 0.02em;
+}
+
+.scroll-container {
+	overflow: auto;
+	max-width: 100%;
 }
 
 td,
