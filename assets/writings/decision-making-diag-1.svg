@@ -48,6 +48,17 @@
 	<circle cx="70" cy="70" r="5" fill="gray" />
 	<circle cx="70" cy="90" r="5" fill="gray" />
 
+	<path d="M 100 10 L 130 -60" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 30 L 130 -10" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 70 L 130 110" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 90 L 130 150" stroke="green" stroke-dasharray="5,2.5" />
+
+	<path d="M 100 50 L 130 10" stroke="green" />
+	<path d="M 100 50 L 130 30" stroke="green" />
+	<path d="M 100 50 L 130 50" stroke="green" />
+	<path d="M 100 50 L 130 70" stroke="green" />
+	<path d="M 100 50 L 130 90" stroke="green" />
+
 	<circle cx="100" cy="10" r="5" fill="green" />
 	<circle cx="100" cy="30" r="5" fill="green" />
 	<circle cx="100" cy="50" r="5" fill="green" />
@@ -59,15 +70,6 @@
 	<circle cx="130" cy="50" r="5" fill="green" />
 	<circle cx="130" cy="70" r="5" fill="green" />
 	<circle cx="130" cy="90" r="5" fill="green" />
-
-
-	<!--
-
-	reference:
-	- https://developer.mozilla.org/en-US/docs/Web/SVG
-	- https://www.w3.org/TR/SVG11/
-
-	-->
 
 	<style>
 	<![CDATA[
