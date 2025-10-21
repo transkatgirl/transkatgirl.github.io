@@ -1,0 +1,16 @@
+<svg
+	version="1.1"
+	viewBox="0 0 200 100"
+	preserveAspectRatio="slice"
+	xmlns="http://www.w3.org/2000/svg"
+>
+	<rect x="0" y="0" width="200" height="100" fill="#78292d" />
+
+	<!--
+
+	reference:
+	- https://developer.mozilla.org/en-US/docs/Web/SVG
+	- https://www.w3.org/TR/SVG11/
+
+	-->
+</svg>

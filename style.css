@@ -74,7 +74,8 @@ pre {
 	padding: 0.15lh;
 }
 
-img {
+img,
+svg {
 	max-width: 100%;
 }
 
