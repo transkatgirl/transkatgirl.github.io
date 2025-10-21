@@ -4,6 +4,8 @@
 	preserveAspectRatio="slice"
 	xmlns="http://www.w3.org/2000/svg"
 >
+	<rect x="0" y="0" width="140" height="100" fill="white" />
+
 	<path d="M 70 0 L 70 100" stroke="black" />
 
 	<path d="M -20 50 L 10 10" stroke="gray" />
@@ -70,24 +72,4 @@
 	<circle cx="130" cy="50" r="5" fill="green" />
 	<circle cx="130" cy="70" r="5" fill="green" />
 	<circle cx="130" cy="90" r="5" fill="green" />
-
-	<style>
-	<![CDATA[
-		@font-face {
-			font-family: "Fira Code";
-			font-display: swap;
-			src: url("/fonts/FiraCode.woff2") format("woff2");
-		}
-
-		@font-face {
-			font-family: "Lexend";
-			font-display: swap;
-			src: url("/fonts/Lexend.woff2") format("woff2");
-		}
-
-		text {
-			font: normal 18px/1.25 Lexend, sans-serif;
-		}
-	]]>
-	</style>
 </svg>
