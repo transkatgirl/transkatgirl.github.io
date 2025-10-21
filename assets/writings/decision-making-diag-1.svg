@@ -1,12 +1,65 @@
 <svg
 	version="1.1"
-	viewBox="0 0 200 100"
+	viewBox="0 0 140 100"
 	preserveAspectRatio="slice"
 	xmlns="http://www.w3.org/2000/svg"
 >
-	<rect x="0" y="0" width="200" height="100" fill="#b96463" />
-	<text x="100" y="50" text-anchor="middle" dominant-baseline="middle">placeholder
-		image</text>
+	<path d="M 70 0 L 70 100" stroke="black" />
+
+	<path d="M -20 50 L 10 10" stroke="gray" />
+	<path d="M -20 50 L 10 30" stroke="gray" />
+	<path d="M -20 50 L 10 50" stroke="green" />
+	<path d="M -20 50 L 10 70" stroke="gray" />
+	<path d="M -20 50 L 10 90" stroke="gray" />
+
+	<path d="M 10 50 L 40 10" stroke="gray" />
+	<path d="M 10 50 L 40 30" stroke="gray" />
+	<path d="M 10 50 L 40 50" stroke="green" />
+	<path d="M 10 50 L 40 70" stroke="gray" />
+	<path d="M 10 50 L 40 90" stroke="gray" />
+
+	<circle cx="10" cy="10" r="5" fill="gray" />
+	<circle cx="10" cy="30" r="5" fill="gray" />
+	<circle cx="10" cy="50" r="5" fill="green" />
+	<circle cx="10" cy="70" r="5" fill="gray" />
+	<circle cx="10" cy="90" r="5" fill="gray" />
+
+	<path d="M 40 50 L 70 10" stroke="gray" />
+	<path d="M 40 50 L 70 30" stroke="gray" />
+	<path d="M 40 50 L 70 50" stroke="green" />
+	<path d="M 40 50 L 70 70" stroke="gray" />
+	<path d="M 40 50 L 70 90" stroke="gray" />
+
+	<circle cx="40" cy="10" r="5" fill="gray" />
+	<circle cx="40" cy="30" r="5" fill="gray" />
+	<circle cx="40" cy="50" r="5" fill="green" />
+	<circle cx="40" cy="70" r="5" fill="gray" />
+	<circle cx="40" cy="90" r="5" fill="gray" />
+
+	<path d="M 70 50 L 100 10" stroke="green" />
+	<path d="M 70 50 L 100 30" stroke="green" />
+	<path d="M 70 50 L 100 50" stroke="green" />
+	<path d="M 70 50 L 100 70" stroke="green" />
+	<path d="M 70 50 L 100 90" stroke="green" />
+
+	<circle cx="70" cy="10" r="5" fill="gray" />
+	<circle cx="70" cy="30" r="5" fill="gray" />
+	<circle cx="70" cy="50" r="5" fill="green" />
+	<circle cx="70" cy="70" r="5" fill="gray" />
+	<circle cx="70" cy="90" r="5" fill="gray" />
+
+	<circle cx="100" cy="10" r="5" fill="green" />
+	<circle cx="100" cy="30" r="5" fill="green" />
+	<circle cx="100" cy="50" r="5" fill="green" />
+	<circle cx="100" cy="70" r="5" fill="green" />
+	<circle cx="100" cy="90" r="5" fill="green" />
+
+	<circle cx="130" cy="10" r="5" fill="green" />
+	<circle cx="130" cy="30" r="5" fill="green" />
+	<circle cx="130" cy="50" r="5" fill="green" />
+	<circle cx="130" cy="70" r="5" fill="green" />
+	<circle cx="130" cy="90" r="5" fill="green" />
+
 
 	<!--
 
