@@ -36,7 +36,7 @@ b {
 
 main {
 	margin: 0 1lh 1lh;
-	width: calc(100vw-2lh);
+	width: calc(100vw - 2lh);
 }
 
 header {
