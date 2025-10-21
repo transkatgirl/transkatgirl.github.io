@@ -4,7 +4,9 @@
 	preserveAspectRatio="slice"
 	xmlns="http://www.w3.org/2000/svg"
 >
-	<rect x="0" y="0" width="200" height="100" fill="#78292d" />
+	<rect x="0" y="0" width="200" height="100" fill="#b96463" />
+	<text x="100" y="50" text-anchor="middle" dominant-baseline="middle">placeholder
+		image</text>
 
 	<!--
 
@@ -13,4 +15,24 @@
 	- https://www.w3.org/TR/SVG11/
 
 	-->
+
+	<style>
+	<![CDATA[
+		@font-face {
+			font-family: "Fira Code";
+			font-display: swap;
+			src: url("/fonts/FiraCode.woff2") format("woff2");
+		}
+
+		@font-face {
+			font-family: "Lexend";
+			font-display: swap;
+			src: url("/fonts/Lexend.woff2") format("woff2");
+		}
+
+		text {
+			font: normal 18px/1.25 Lexend, sans-serif;
+		}
+	]]>
+	</style>
 </svg>
