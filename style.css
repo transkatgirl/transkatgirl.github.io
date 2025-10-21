@@ -46,6 +46,13 @@ footer {
 	padding: 0.5lh;
 }
 
+@media (min-width: 65em) {
+	main {
+		margin: 0 auto 1lh;
+		max-width: calc(65rem - 2lh);
+	}
+}
+
 ul {
 	padding-left: calc(0.5lh + 1em);
 }
