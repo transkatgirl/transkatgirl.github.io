@@ -1,12 +1,232 @@
 <svg
 	version="1.1"
-	viewBox="0 0 200 100"
+	viewBox="0 0 140 112"
 	preserveAspectRatio="slice"
 	xmlns="http://www.w3.org/2000/svg"
 >
-	<rect x="0" y="0" width="200" height="100" fill="#b96463" />
-	<text x="100" y="50" text-anchor="middle" dominant-baseline="middle">placeholder
-		image</text>
+	<rect x="0" y="0" width="140" height="111" fill="white" />
+
+	<path d="M 70 0 L 70 100" stroke="black" />
+
+	<path d="M -20 50 L 10 10" stroke="gray" />
+	<path d="M -20 50 L 10 15" stroke="gray" />
+	<path d="M -20 50 L 10 20" stroke="gray" />
+	<path d="M -20 50 L 10 25" stroke="gray" />
+	<path d="M -20 50 L 10 30" stroke="gray" />
+	<path d="M -20 50 L 10 35" stroke="gray" />
+	<path d="M -20 50 L 10 40" stroke="gray" />
+	<path d="M -20 50 L 10 45" stroke="gray" />
+	<path d="M -20 50 L 10 50" stroke="green" />
+	<path d="M -20 50 L 10 55" stroke="gray" />
+	<path d="M -20 50 L 10 60" stroke="gray" />
+	<path d="M -20 50 L 10 65" stroke="gray" />
+	<path d="M -20 50 L 10 70" stroke="gray" />
+	<path d="M -20 50 L 10 75" stroke="gray" />
+	<path d="M -20 50 L 10 80" stroke="gray" />
+	<path d="M -20 50 L 10 85" stroke="gray" />
+	<path d="M -20 50 L 10 90" stroke="gray" />
+
+	<path d="M 10 50 L 40 10" stroke="gray" />
+	<path d="M 10 50 L 40 15" stroke="gray" />
+	<path d="M 10 50 L 40 20" stroke="gray" />
+	<path d="M 10 50 L 40 25" stroke="gray" />
+	<path d="M 10 50 L 40 30" stroke="gray" />
+	<path d="M 10 50 L 40 35" stroke="gray" />
+	<path d="M 10 50 L 40 40" stroke="gray" />
+	<path d="M 10 50 L 40 45" stroke="gray" />
+	<path d="M 10 50 L 40 50" stroke="green" />
+	<path d="M 10 50 L 40 55" stroke="gray" />
+	<path d="M 10 50 L 40 60" stroke="gray" />
+	<path d="M 10 50 L 40 65" stroke="gray" />
+	<path d="M 10 50 L 40 70" stroke="gray" />
+	<path d="M 10 50 L 40 75" stroke="gray" />
+	<path d="M 10 50 L 40 80" stroke="gray" />
+	<path d="M 10 50 L 40 85" stroke="gray" />
+	<path d="M 10 50 L 40 90" stroke="gray" />
+
+	<circle cx="10" cy="10" r="5" fill="gray" />
+	<circle cx="10" cy="15" r="5" fill="gray" />
+	<circle cx="10" cy="20" r="5" fill="gray" />
+	<circle cx="10" cy="25" r="5" fill="gray" />
+	<circle cx="10" cy="30" r="5" fill="gray" />
+	<circle cx="10" cy="35" r="5" fill="gray" />
+	<circle cx="10" cy="40" r="5" fill="gray" />
+	<circle cx="10" cy="45" r="5" fill="gray" />
+	<circle cx="10" cy="50" r="5" fill="green" />
+	<circle cx="10" cy="55" r="5" fill="gray" />
+	<circle cx="10" cy="60" r="5" fill="gray" />
+	<circle cx="10" cy="65" r="5" fill="gray" />
+	<circle cx="10" cy="70" r="5" fill="gray" />
+	<circle cx="10" cy="75" r="5" fill="gray" />
+	<circle cx="10" cy="80" r="5" fill="gray" />
+	<circle cx="10" cy="85" r="5" fill="gray" />
+	<circle cx="10" cy="90" r="5" fill="gray" />
+
+	<path d="M 40 50 L 70 10" stroke="gray" />
+	<path d="M 40 50 L 70 15" stroke="gray" />
+	<path d="M 40 50 L 70 20" stroke="gray" />
+	<path d="M 40 50 L 70 25" stroke="gray" />
+	<path d="M 40 50 L 70 30" stroke="gray" />
+	<path d="M 40 50 L 70 35" stroke="gray" />
+	<path d="M 40 50 L 70 40" stroke="gray" />
+	<path d="M 40 50 L 70 45" stroke="gray" />
+	<path d="M 40 50 L 70 50" stroke="green" />
+	<path d="M 40 50 L 70 55" stroke="gray" />
+	<path d="M 40 50 L 70 60" stroke="gray" />
+	<path d="M 40 50 L 70 65" stroke="gray" />
+	<path d="M 40 50 L 70 70" stroke="gray" />
+	<path d="M 40 50 L 70 75" stroke="gray" />
+	<path d="M 40 50 L 70 80" stroke="gray" />
+	<path d="M 40 50 L 70 85" stroke="gray" />
+	<path d="M 40 50 L 70 90" stroke="gray" />
+
+	<circle cx="40" cy="10" r="5" fill="gray" />
+	<circle cx="40" cy="15" r="5" fill="gray" />
+	<circle cx="40" cy="20" r="5" fill="gray" />
+	<circle cx="40" cy="25" r="5" fill="gray" />
+	<circle cx="40" cy="30" r="5" fill="gray" />
+	<circle cx="40" cy="35" r="5" fill="gray" />
+	<circle cx="40" cy="40" r="5" fill="gray" />
+	<circle cx="40" cy="45" r="5" fill="gray" />
+	<circle cx="40" cy="50" r="5" fill="green" />
+	<circle cx="40" cy="55" r="5" fill="gray" />
+	<circle cx="40" cy="60" r="5" fill="gray" />
+	<circle cx="40" cy="65" r="5" fill="gray" />
+	<circle cx="40" cy="70" r="5" fill="gray" />
+	<circle cx="40" cy="75" r="5" fill="gray" />
+	<circle cx="40" cy="80" r="5" fill="gray" />
+	<circle cx="40" cy="85" r="5" fill="gray" />
+	<circle cx="40" cy="90" r="5" fill="gray" />
+
+	<path d="M 70 50 L 100 10" stroke="green" />
+	<path d="M 70 50 L 100 15" stroke="green" />
+	<path d="M 70 50 L 100 20" stroke="green" />
+	<path d="M 70 50 L 100 25" stroke="green" />
+	<path d="M 70 50 L 100 30" stroke="green" />
+	<path d="M 70 50 L 100 35" stroke="green" />
+	<path d="M 70 50 L 100 40" stroke="green" />
+	<path d="M 70 50 L 100 45" stroke="green" />
+	<path d="M 70 50 L 100 50" stroke="green" />
+	<path d="M 70 50 L 100 55" stroke="green" />
+	<path d="M 70 50 L 100 60" stroke="green" />
+	<path d="M 70 50 L 100 65" stroke="green" />
+	<path d="M 70 50 L 100 70" stroke="green" />
+	<path d="M 70 50 L 100 75" stroke="green" />
+	<path d="M 70 50 L 100 80" stroke="green" />
+	<path d="M 70 50 L 100 85" stroke="green" />
+	<path d="M 70 50 L 100 90" stroke="green" />
+
+	<circle cx="70" cy="10" r="5" fill="gray" />
+	<circle cx="70" cy="15" r="5" fill="gray" />
+	<circle cx="70" cy="20" r="5" fill="gray" />
+	<circle cx="70" cy="25" r="5" fill="gray" />
+	<circle cx="70" cy="30" r="5" fill="gray" />
+	<circle cx="70" cy="35" r="5" fill="gray" />
+	<circle cx="70" cy="40" r="5" fill="gray" />
+	<circle cx="70" cy="45" r="5" fill="gray" />
+	<circle cx="70" cy="50" r="5" fill="green" />
+	<circle cx="70" cy="55" r="5" fill="gray" />
+	<circle cx="70" cy="60" r="5" fill="gray" />
+	<circle cx="70" cy="65" r="5" fill="gray" />
+	<circle cx="70" cy="70" r="5" fill="gray" />
+	<circle cx="70" cy="75" r="5" fill="gray" />
+	<circle cx="70" cy="80" r="5" fill="gray" />
+	<circle cx="70" cy="85" r="5" fill="gray" />
+	<circle cx="70" cy="90" r="5" fill="gray" />
+
+	<path d="M 100 10 L 130 -59" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 15 L 130 -52" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 20 L 130 -45" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 25 L 130 -38" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 30 L 130 -31" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 35 L 130 -24" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 40 L 130 -17" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 45 L 130 -10" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 55 L 130 110" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 60 L 130 117" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 65 L 130 124" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 70 L 130 131" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 75 L 130 138" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 80 L 130 145" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 85 L 130 152" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 90 L 130 159" stroke="green" stroke-dasharray="5,2.5" />
+
+	<path d="M 100 50 L 130 10" stroke="green" />
+	<path d="M 100 50 L 130 15" stroke="green" />
+	<path d="M 100 50 L 130 20" stroke="green" />
+	<path d="M 100 50 L 130 25" stroke="green" />
+	<path d="M 100 50 L 130 30" stroke="green" />
+	<path d="M 100 50 L 130 35" stroke="green" />
+	<path d="M 100 50 L 130 40" stroke="green" />
+	<path d="M 100 50 L 130 45" stroke="green" />
+	<path d="M 100 50 L 130 50" stroke="green" />
+	<path d="M 100 50 L 130 55" stroke="green" />
+	<path d="M 100 50 L 130 60" stroke="green" />
+	<path d="M 100 50 L 130 65" stroke="green" />
+	<path d="M 100 50 L 130 70" stroke="green" />
+	<path d="M 100 50 L 130 75" stroke="green" />
+	<path d="M 100 50 L 130 80" stroke="green" />
+	<path d="M 100 50 L 130 85" stroke="green" />
+	<path d="M 100 50 L 130 90" stroke="green" />
+
+	<circle cx="100" cy="10" r="5" fill="green" />
+	<circle cx="100" cy="15" r="5" fill="green" />
+	<circle cx="100" cy="20" r="5" fill="green" />
+	<circle cx="100" cy="25" r="5" fill="green" />
+	<circle cx="100" cy="30" r="5" fill="green" />
+	<circle cx="100" cy="35" r="5" fill="green" />
+	<circle cx="100" cy="40" r="5" fill="green" />
+	<circle cx="100" cy="45" r="5" fill="green" />
+	<circle cx="100" cy="50" r="5" fill="green" />
+	<circle cx="100" cy="55" r="5" fill="green" />
+	<circle cx="100" cy="60" r="5" fill="green" />
+	<circle cx="100" cy="65" r="5" fill="green" />
+	<circle cx="100" cy="70" r="5" fill="green" />
+	<circle cx="100" cy="75" r="5" fill="green" />
+	<circle cx="100" cy="80" r="5" fill="green" />
+	<circle cx="100" cy="85" r="5" fill="green" />
+	<circle cx="100" cy="90" r="5" fill="green" />
+
+	<circle cx="130" cy="10" r="5" fill="green" />
+	<circle cx="130" cy="15" r="5" fill="green" />
+	<circle cx="130" cy="20" r="5" fill="green" />
+	<circle cx="130" cy="25" r="5" fill="green" />
+	<circle cx="130" cy="30" r="5" fill="green" />
+	<circle cx="130" cy="35" r="5" fill="green" />
+	<circle cx="130" cy="40" r="5" fill="green" />
+	<circle cx="130" cy="45" r="5" fill="green" />
+	<circle cx="130" cy="50" r="5" fill="green" />
+	<circle cx="130" cy="55" r="5" fill="green" />
+	<circle cx="130" cy="60" r="5" fill="green" />
+	<circle cx="130" cy="65" r="5" fill="green" />
+	<circle cx="130" cy="70" r="5" fill="green" />
+	<circle cx="130" cy="75" r="5" fill="green" />
+	<circle cx="130" cy="80" r="5" fill="green" />
+	<circle cx="130" cy="85" r="5" fill="green" />
+	<circle cx="130" cy="90" r="5" fill="green" />
+
+	<rect x="0" y="98" width="140" height="14" fill="white" />
+
+	<rect x="9" y="100" width="2" height="2" fill="black" />
+	<rect x="9" y="104" width="2" height="2" fill="black" />
+	<rect x="9" y="108" width="2" height="2" fill="black" />
+
+	<rect x="39" y="100" width="2" height="2" fill="black" />
+	<rect x="39" y="104" width="2" height="2" fill="black" />
+	<rect x="39" y="108" width="2" height="2" fill="black" />
+
+	<rect x="69" y="100" width="2" height="2" fill="black" />
+	<rect x="69" y="104" width="2" height="2" fill="black" />
+	<rect x="69" y="108" width="2" height="2" fill="black" />
+
+	<rect x="99" y="100" width="2" height="2" fill="black" />
+	<rect x="99" y="104" width="2" height="2" fill="black" />
+	<rect x="99" y="108" width="2" height="2" fill="black" />
+
+	<rect x="129" y="100" width="2" height="2" fill="black" />
+	<rect x="129" y="104" width="2" height="2" fill="black" />
+	<rect x="129" y="108" width="2" height="2" fill="black" />
+
 
 	<!--
 
@@ -15,24 +235,4 @@
 	- https://www.w3.org/TR/SVG11/
 
 	-->
-
-	<style>
-	<![CDATA[
-		@font-face {
-			font-family: "Fira Code";
-			font-display: swap;
-			src: url("/fonts/FiraCode.woff2") format("woff2");
-		}
-
-		@font-face {
-			font-family: "Lexend";
-			font-display: swap;
-			src: url("/fonts/Lexend.woff2") format("woff2");
-		}
-
-		text {
-			font: normal 18px/1.25 Lexend, sans-serif;
-		}
-	]]>
-	</style>
 </svg>

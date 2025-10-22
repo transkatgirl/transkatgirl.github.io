@@ -53,7 +53,7 @@
 	<path d="M 100 10 L 130 -60" stroke="green" stroke-dasharray="5,2.5" />
 	<path d="M 100 30 L 130 -10" stroke="green" stroke-dasharray="5,2.5" />
 	<path d="M 100 70 L 130 110" stroke="green" stroke-dasharray="5,2.5" />
-	<path d="M 100 90 L 130 150" stroke="green" stroke-dasharray="5,2.5" />
+	<path d="M 100 90 L 130 160" stroke="green" stroke-dasharray="5,2.5" />
 
 	<path d="M 100 50 L 130 10" stroke="green" />
 	<path d="M 100 50 L 130 30" stroke="green" />
