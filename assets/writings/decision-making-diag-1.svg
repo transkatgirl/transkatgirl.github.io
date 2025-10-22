@@ -8,7 +8,6 @@
 
 	<path d="M 70 0 L 70 100" stroke="black" />
 
-	<path d="M -20 50 L 10 10" stroke="gray" />
 	<path d="M -20 50 L 10 30" stroke="gray" />
 	<path d="M -20 50 L 10 50" stroke="green" />
 	<path d="M -20 50 L 10 70" stroke="gray" />
@@ -20,17 +19,14 @@
 	<path d="M 10 50 L 40 70" stroke="gray" />
 	<path d="M 10 50 L 40 90" stroke="gray" />
 
-	<circle cx="10" cy="10" r="5" fill="gray" />
 	<circle cx="10" cy="30" r="5" fill="gray" />
 	<circle cx="10" cy="50" r="5" fill="green" />
 	<circle cx="10" cy="70" r="5" fill="gray" />
 	<circle cx="10" cy="90" r="5" fill="gray" />
 
-	<path d="M 40 50 L 70 10" stroke="gray" />
 	<path d="M 40 50 L 70 30" stroke="gray" />
 	<path d="M 40 50 L 70 50" stroke="green" />
 	<path d="M 40 50 L 70 70" stroke="gray" />
-	<path d="M 40 50 L 70 90" stroke="gray" />
 
 	<circle cx="40" cy="10" r="5" fill="gray" />
 	<circle cx="40" cy="30" r="5" fill="gray" />
@@ -42,18 +38,14 @@
 	<path d="M 70 50 L 100 30" stroke="green" />
 	<path d="M 70 50 L 100 50" stroke="green" />
 	<path d="M 70 50 L 100 70" stroke="green" />
-	<path d="M 70 50 L 100 90" stroke="green" />
 
-	<circle cx="70" cy="10" r="5" fill="gray" />
 	<circle cx="70" cy="30" r="5" fill="gray" />
 	<circle cx="70" cy="50" r="5" fill="green" />
 	<circle cx="70" cy="70" r="5" fill="gray" />
-	<circle cx="70" cy="90" r="5" fill="gray" />
 
 	<path d="M 100 10 L 130 -60" stroke="green" stroke-dasharray="5,2.5" />
 	<path d="M 100 30 L 130 -10" stroke="green" stroke-dasharray="5,2.5" />
 	<path d="M 100 70 L 130 110" stroke="green" stroke-dasharray="5,2.5" />
-	<path d="M 100 90 L 130 160" stroke="green" stroke-dasharray="5,2.5" />
 
 	<path d="M 100 50 L 130 10" stroke="green" />
 	<path d="M 100 50 L 130 30" stroke="green" />
@@ -65,7 +57,6 @@
 	<circle cx="100" cy="30" r="5" fill="green" />
 	<circle cx="100" cy="50" r="5" fill="green" />
 	<circle cx="100" cy="70" r="5" fill="green" />
-	<circle cx="100" cy="90" r="5" fill="green" />
 
 	<circle cx="130" cy="10" r="5" fill="green" />
 	<circle cx="130" cy="30" r="5" fill="green" />
