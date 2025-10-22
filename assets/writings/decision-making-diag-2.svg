@@ -8,6 +8,7 @@
 
 	<path d="M 70 0 L 70 100" stroke="black" />
 
+	<path d="M -20 50 L 10 5" stroke="gray" />
 	<path d="M -20 50 L 10 10" stroke="gray" />
 	<path d="M -20 50 L 10 15" stroke="gray" />
 	<path d="M -20 50 L 10 20" stroke="gray" />
@@ -25,7 +26,9 @@
 	<path d="M -20 50 L 10 80" stroke="gray" />
 	<path d="M -20 50 L 10 85" stroke="gray" />
 	<path d="M -20 50 L 10 90" stroke="gray" />
+	<path d="M -20 50 L 10 95" stroke="gray" />
 
+	<path d="M 10 50 L 40 5" stroke="gray" />
 	<path d="M 10 50 L 40 10" stroke="gray" />
 	<path d="M 10 50 L 40 15" stroke="gray" />
 	<path d="M 10 50 L 40 20" stroke="gray" />
@@ -43,6 +46,7 @@
 	<path d="M 10 50 L 40 80" stroke="gray" />
 	<path d="M 10 50 L 40 85" stroke="gray" />
 	<path d="M 10 50 L 40 90" stroke="gray" />
+	<path d="M 10 50 L 40 95" stroke="gray" />
 
 	<circle cx="10" cy="10" r="5" fill="gray" />
 	<circle cx="10" cy="15" r="5" fill="gray" />
@@ -62,6 +66,7 @@
 	<circle cx="10" cy="85" r="5" fill="gray" />
 	<circle cx="10" cy="90" r="5" fill="gray" />
 
+	<path d="M 40 50 L 70 5" stroke="gray" />
 	<path d="M 40 50 L 70 10" stroke="gray" />
 	<path d="M 40 50 L 70 15" stroke="gray" />
 	<path d="M 40 50 L 70 20" stroke="gray" />
@@ -79,6 +84,7 @@
 	<path d="M 40 50 L 70 80" stroke="gray" />
 	<path d="M 40 50 L 70 85" stroke="gray" />
 	<path d="M 40 50 L 70 90" stroke="gray" />
+	<path d="M 40 50 L 70 95" stroke="gray" />
 
 	<circle cx="40" cy="10" r="5" fill="gray" />
 	<circle cx="40" cy="15" r="5" fill="gray" />
@@ -98,6 +104,7 @@
 	<circle cx="40" cy="85" r="5" fill="gray" />
 	<circle cx="40" cy="90" r="5" fill="gray" />
 
+	<path d="M 70 50 L 100 5" stroke="green" />
 	<path d="M 70 50 L 100 10" stroke="green" />
 	<path d="M 70 50 L 100 15" stroke="green" />
 	<path d="M 70 50 L 100 20" stroke="green" />
@@ -115,6 +122,7 @@
 	<path d="M 70 50 L 100 80" stroke="green" />
 	<path d="M 70 50 L 100 85" stroke="green" />
 	<path d="M 70 50 L 100 90" stroke="green" />
+	<path d="M 70 50 L 100 95" stroke="green" />
 
 	<circle cx="70" cy="10" r="5" fill="gray" />
 	<circle cx="70" cy="15" r="5" fill="gray" />
@@ -151,6 +159,7 @@
 	<path d="M 100 85 L 130 152" stroke="green" stroke-dasharray="5,2.5" />
 	<path d="M 100 90 L 130 159" stroke="green" stroke-dasharray="5,2.5" />
 
+	<path d="M 100 50 L 130 5" stroke="green" />
 	<path d="M 100 50 L 130 10" stroke="green" />
 	<path d="M 100 50 L 130 15" stroke="green" />
 	<path d="M 100 50 L 130 20" stroke="green" />
@@ -168,6 +177,7 @@
 	<path d="M 100 50 L 130 80" stroke="green" />
 	<path d="M 100 50 L 130 85" stroke="green" />
 	<path d="M 100 50 L 130 90" stroke="green" />
+	<path d="M 100 50 L 130 95" stroke="green" />
 
 	<circle cx="100" cy="10" r="5" fill="green" />
 	<circle cx="100" cy="15" r="5" fill="green" />
