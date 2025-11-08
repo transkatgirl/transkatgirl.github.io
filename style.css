@@ -72,11 +72,17 @@ pre {
 	font: 80% "Fira Code", monospace, monospace;
 	background-color: #ddd6d1;
 	padding: 0.15lh;
+	border-radius: 0.1em;
+}
+
+pre > code {
+	font: inherit;
 }
 
 img,
 svg {
 	max-width: 100%;
+	border-radius: 0.1em;
 }
 
 footer {
@@ -96,19 +102,17 @@ a {
 	color: #78292d;
 }
 
+aside,
 blockquote {
 	border-left: 0.33em solid #984647;
 	margin-left: 0;
 	padding: 0.01lh 0.8lh;
-	background-color: #e3ddd7;
 	max-width: fit-content;
+	border-radius: 0.1em;
 }
 
-aside {
-	border-left: 0.33em solid #984647;
-	margin-left: 0;
-	padding: 0.01lh 0.8lh;
-	max-width: fit-content;
+blockquote {
+	background-color: #e3ddd7;
 }
 
 hgroup:has(p) h1 {
@@ -124,10 +128,11 @@ address {
 }
 
 table {
-	border-collapse: collapse;
-	border: 0.2em solid #c3bcb7;
+	border-spacing: 0;
+	border: 0.1em solid #c3bcb7;
 	font-size: 80%;
 	letter-spacing: 0.02em;
+	border-radius: 0.15em;
 }
 
 .scroll-container {
