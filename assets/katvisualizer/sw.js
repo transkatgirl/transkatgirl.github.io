@@ -1,0 +1,1 @@
+var i="katvisualizer-pwa";var n=["./","./main.js","./index.html","./katvisualizer_wasm.js","./katvisualizer_wasm_bg.wasm"];self.addEventListener("install",function(a){a.waitUntil(caches.open(i).then(function(a){return a.addAll(n)}))});self.addEventListener("fetch",function(i){i.respondWith(caches.match(i.request).then(function(a){return a||fetch(i.request)}))});
