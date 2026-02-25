@@ -1,1 +1,1 @@
-class CopyProcessor extends AudioWorkletProcessor{process(o,s,r){const e=o[0];const c=s[0];for(let o=0;o<e.length;++o){c[o].set(e[o],0)}this.port.postMessage(e);return true}}registerProcessor("copy-processor",CopyProcessor);
+class CopyProcessor extends AudioWorkletProcessor{process(o,s,r){const e=o[0];const c=s[0];for(let o=0;o<e.length;++o){c[o].set(e[o],0)}this.port.postMessage(e);return true}}registerProcessor("copy-processor",CopyProcessor);//2026-02-25
