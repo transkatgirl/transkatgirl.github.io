@@ -91,7 +91,7 @@
 							<td>
 								the center of the setup; it's simultaneously the
 								camera, video encoder, and one of the cellular
-								uplinks. (any iPhone >=12 will likely work fine
+								uplinks. (any iPhone >= 12 will likely work fine
 								in this role).
 							</td>
 						</tr>
@@ -186,6 +186,25 @@
 				>).
 			</p>
 			<p>now, we can get into the software side of things.</p>
+			<p>
+				i use <a href="https://github.com/eerimoq/moblin">moblin</a> as
+				my streaming app, as it's open source and has pretty much all of
+				the features that most streamers would want.
+			</p>
+			<p>
+				due to limitations of major streaming platforms (none of them
+				support SRTLA or disconnect protection w/ moblin), i use
+				<a href="https://streamrun.com">Streamrun</a> as a transcoding
+				server due to its ease of use, affordability, and reliability.
+				however, if you already have the necessary equipment and are
+				willing to spend time tinkering, you can
+				<a
+					href="https://start.irlstreami.ng/streaming-servers/hosting-your-own-server"
+					>host a transcoding server yourself using OBS</a
+				>
+				(if you want to use SRTLA, you'll also need to setup
+				<a href="https://github.com/e04/go-irl">go-irl</a>).
+			</p>
 		</main>
 		<footer>
 			<small
