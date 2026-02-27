@@ -239,7 +239,14 @@
 									Adaptive bitrate: on
 									<ul>
 										<li>Algorithm: BELABOX</li>
-										<li>Minimum bitrate: 250 kbit/s</li>
+										<li>
+											Minimum bitrate (with connection
+											bonding): 250 kbit/s
+										</li>
+										<li>
+											Minimum bitrate (without connection
+											bonding): 150 kbit/s
+										</li>
 									</ul>
 								</li>
 								<li>Big packets: on</li>
@@ -286,6 +293,12 @@
 								</li>
 								<li>Bitrate (mono): 128 kbit/s</li>
 								<li>Bitrate (stereo): 256 kbit/s</li>
+								<li>
+									Only use stereo if your content
+									<em>actually</em> benefits from it (this
+									usually isn't the case; dialogue sounds
+									better in mono)
+								</li>
 							</ul>
 						</li>
 						<li>Background streaming: on</li>
