@@ -192,8 +192,20 @@
 				the features that most streamers would want.
 			</p>
 			<p>
-				due to limitations of major streaming platforms (none of them
-				support SRTLA or disconnect protection w/ moblin), i use
+				you'll want to use the SRT(LA) protocol for streaming: it's
+				UDP-based, supports adaptively adjusting the bitrate based on
+				network conditions, and SRTLA allows for bonding multiple
+				connections together to increase available bandwidth and
+				reliability.
+			</p>
+			<p>
+				in addition, you'll also want to make sure that your endpoint
+				supports some form of disconnect prevention, so that the stream
+				doesn't end when the connection drops.
+			</p>
+			<p>
+				however, due to limitations of major streaming platforms (none
+				of them support the SRT(LA) protocol), i use
 				<a href="https://streamrun.com">Streamrun</a> as a transcoding
 				server due to its ease of use, affordability, and reliability.
 				however, if you already have the necessary equipment and are
@@ -202,8 +214,59 @@
 					href="https://start.irlstreami.ng/streaming-servers/hosting-your-own-server"
 					>host a transcoding server yourself using OBS</a
 				>
-				(if you want to use SRTLA, you'll also need to setup
+				(if you want to use connection bonding, you'll also need to
+				setup
 				<a href="https://github.com/e04/go-irl">go-irl</a>).
+			</p>
+			<p>these are the settings i'd recommend using in moblin:</p>
+			<ul>
+				<li>
+					SRT(LA):
+					<ul>
+						<li>Latency: 1000ms</li>
+						<li>Adaptive bitrate: on</li>
+						<li>Big packets: on</li>
+						<li>Implementation: Moblin</li>
+					</ul>
+				</li>
+				<li>
+					Video:
+					<ul>
+						<li>
+							Resolution: 720p to 1080p, depending on expected
+							network conditions
+						</li>
+						<li>
+							FPS: 30 (only use 60 if you're capturing activities
+							with lots of motion)
+						</li>
+						<li>Low light boost: on</li>
+						<li>Codec: H.265</li>
+						<li>Bitrate (1080p60): 12 mbit/s</li>
+						<li>Bitrate (1080p30): 8 mbit/s</li>
+						<li>Bitrate (720p60): 6 mbit/s</li>
+						<li>Bitrate (720p30): 4 mbit/s</li>
+						<li>Keyframe interval: 2s</li>
+						<li>B-frames: off</li>
+						<li>Adaptive resolution: on</li>
+						<li>Timecodes: off (unless you need them)</li>
+					</ul>
+				</li>
+				<li>
+					Audio:
+					<ul>
+						<li>
+							Codec: AAC (result in lower generation loss compared
+							to Opus)
+						</li>
+						<li>Bitrate (mono): 128 kbit/s</li>
+						<li>Bitrate (stereo): 256 kbit/s</li>
+					</ul>
+				</li>
+			</ul>
+			<p>
+				(when it comes to the encoder settings on your streaming server,
+				just use whatever your target streaming platforms recommend)
 			</p>
 		</main>
 		<footer>
