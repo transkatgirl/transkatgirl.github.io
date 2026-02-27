@@ -235,11 +235,12 @@
 							SRT(LA):
 							<ul>
 								<li>Latency: 1000ms</li>
-								<li>Adaptive bitrate: on</li>
-								<li>Adaptive bitrate -> Algorithm: BELABOX</li>
 								<li>
-									Adaptive bitrate -> Minimum bitrate: 150
-									kbit/s
+									Adaptive bitrate: on
+									<ul>
+										<li>Algorithm: BELABOX</li>
+										<li>Minimum bitrate: 250 kbit/s</li>
+									</ul>
 								</li>
 								<li>Big packets: on</li>
 								<li>Implementation: Moblin</li>
@@ -264,7 +265,15 @@
 								<li>Bitrate (720p30): 4 mbit/s</li>
 								<li>Keyframe interval: 2s</li>
 								<li>B-frames: off</li>
-								<li>Adaptive resolution: on</li>
+								<li>
+									Adaptive resolution: on
+									<ul>
+										<li>
+											Thresholds: Adjust upwards until
+											&lt;250 kbit/s = 160p
+										</li>
+									</ul>
+								</li>
 								<li>Timecodes: off (unless you need them)</li>
 							</ul>
 						</li>
