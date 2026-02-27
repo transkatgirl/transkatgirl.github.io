@@ -158,8 +158,7 @@
 							<td>
 								affordable, high capacity, and capable of
 								charging the streaming phone, microphone, and
-								travel router
-								<em>at the same time</em>.
+								travel router at the same time.
 							</td>
 						</tr>
 						<tr>
@@ -200,36 +199,36 @@
 					>stuff that isn't streaming related</a
 				>).
 			</p>
-			<p>now, we can get into the software side of things.</p>
+			<p>now we can get into the software side of things.</p>
 			<p>
 				i use <a href="https://github.com/eerimoq/moblin">moblin</a> as
 				my streaming app, as it's open source and has pretty much all of
 				the features that most streamers would want.
 			</p>
 			<small>
-				if you're reading this post before moblin version 30.2028.0 is
+				(if you're reading this post before moblin version 30.2028.0 is
 				released on the App Store, you should use the TestFlight version
-				of moblin.
+				of moblin.)
 			</small>
 			<p>
-				i highly recommended that you use the SRT(LA) protocol for
+				i highly recommend that you use the SRT(LA) protocol for
 				streaming: it's UDP-based, supports adaptively adjusting the
 				bitrate based on network conditions, and SRTLA allows for
 				bonding multiple connections together to increase available
 				bandwidth and reliability.
 			</p>
 			<p>
-				in addition, you'll also want to make sure that your endpoint
-				supports some form of disconnect prevention, so that the stream
-				doesn't end when the connection drops.
+				in addition, you'll also want to make sure that your streaming
+				endpoint supports some form of disconnect prevention, so that
+				the stream doesn't end when the connection drops.
 			</p>
 			<p>
-				however, due to limitations of major streaming platforms (none
-				of them support the SRT(LA) protocol), i use
+				because none of the major streaming platforms support the
+				SRT(LA) protocol, i use
 				<a href="https://streamrun.com">Streamrun</a> as a transcoding
 				server due to its ease of use, affordability, and reliability.
 				however, if you already have the necessary equipment and are
-				willing to spend time tinkering, you can
+				willing to spend some time tinkering, you can
 				<a
 					href="https://start.irlstreami.ng/streaming-servers/hosting-your-own-server"
 					>host a transcoding server yourself using OBS</a
