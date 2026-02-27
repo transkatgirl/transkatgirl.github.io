@@ -192,11 +192,11 @@
 				the features that most streamers would want.
 			</p>
 			<p>
-				you'll want to use the SRT(LA) protocol for streaming: it's
-				UDP-based, supports adaptively adjusting the bitrate based on
-				network conditions, and SRTLA allows for bonding multiple
-				connections together to increase available bandwidth and
-				reliability.
+				i highly recommended that you use the SRT(LA) protocol for
+				streaming: it's UDP-based, supports adaptively adjusting the
+				bitrate based on network conditions, and SRTLA allows for
+				bonding multiple connections together to increase available
+				bandwidth and reliability.
 			</p>
 			<p>
 				in addition, you'll also want to make sure that your endpoint
@@ -223,6 +223,14 @@
 				<li>
 					Stream:
 					<ul>
+						<li>
+							URL (with connection bonding): make sure it starts
+							with <code>srtla://</code>
+						</li>
+						<li>
+							URL (without connection bonding): make sure it
+							starts with <code>srt://</code>
+						</li>
 						<li>
 							SRT(LA):
 							<ul>
@@ -309,11 +317,22 @@
 				(when it comes to the encoder settings on your streaming server,
 				just use whatever your target streaming platforms recommend)
 			</p>
-			<p>
-				don't forget to configure all of the streaming platforms you
-				stream to within moblin, so that you can easily read and
-				moderate your chat without leaving the app.
-			</p>
+			<p>don't forget to:</p>
+			<ul>
+				<li>
+					configure your overlays, scenes, and widgets as you see fit
+				</li>
+				<li>
+					configure all of the streaming platforms you stream to
+					within moblin (lets you read and moderate your chat within
+					the app)
+				</li>
+				<li>
+					test everything end-to-end (so, do a test stream to your
+					streaming server using all of your equipment)
+					<b>before going live!</b>
+				</li>
+			</ul>
 		</main>
 		<footer>
 			<small
