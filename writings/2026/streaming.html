@@ -277,11 +277,11 @@
 				<a href="https://github.com/irlserver/srtla">srtla</a>.
 			</p>
 			<details>
-				<summary>mediamtx settings</summary>
+				<summary>example mediamtx settings</summary>
 				<pre><code>paths:
     compressed:
         runOnReady: >
-            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport udp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -c copy -f rtsp rtsp://localhost:8554/example1 -c copy -f rtsp rtsp://localhost:8554/example2 -c copy -f rtsp rtsp://localhost:8554/example3
+            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport udp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -c copy -f flv rtmp://localhost:1935/example1 -c copy -f flv rtmp://localhost:1935/example2 -c copy -f flv rtmp://localhost:1935/example3
         runOnReadyRestart: yes
     ingest:
         alwaysAvailable: true
