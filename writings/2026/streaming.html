@@ -49,14 +49,13 @@
 			<p>
 				in the interest of helping out other people who are trying to do
 				irl streaming, i decided to put together a list of everything in
-				my (modest, but reasonable quality) irl streaming setup.
+				my (modest, but decent quality) irl streaming setup.
 			</p>
 			<p>
 				however, in the process of putting this together, there are
 				tradeoffs i made which may not be acceptable for other people. i
-				prioritized portability over video/audio quality,
-				weatherproofing over portability, and ergonomics over
-				portability.
+				prioritized portability and reliability over video/audio
+				quality, and weatherproofing+ergonomics over portability.
 			</p>
 			<p>
 				this is what what i keep in my
@@ -72,6 +71,37 @@
 					</thead>
 					<tbody>
 						<tr>
+							<th rowspan="2">recording equipment</th>
+							<td>iPhone 15 Pro</td>
+							<td>
+								the center of the setup; it's simultaneously the
+								camera, video encoder, and one of the cellular
+								uplinks (any iPhone >= 12 will likely work fine
+								in this role, but newer is better).
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="https://amzn.to/4aYXBzc">DJI Mic 3</a>
+								(comes with Windscreen)
+							</td>
+							<td>
+								a high-quality wireless mic with good battery
+								life. however, it sadly requires a USB-C
+								receiver for usable sound quality, and
+								<b
+									>neither the receiver nor the unit itself is
+									waterproof</b
+								>.<br />note: if you decide to get a different
+								microphone, make sure to get a windscreen for
+								it, as
+								<b
+									>windscreens are required for reliably
+									usable outdoor audio</b
+								>.
+							</td>
+						</tr>
+						<tr>
 							<th rowspan="2">weatherproofing</th>
 							<td>
 								<a
@@ -80,7 +110,7 @@
 								>
 							</td>
 							<td>
-								<b>an absolute necessity.</b> most streaming
+								<b>an absolute necessity</b>; most streaming
 								gear isn't water-resistant, and you
 								<em>will</em> eventually get caught off guard by
 								rain when you least expect it.<br />
@@ -104,45 +134,15 @@
 								you do <em>not</em> want to end up holding an
 								umbrella for several hours, and this offers an
 								easy way to mount an umbrella to a backpack.<br />i'd
-								recommend buying extras, as they're cheap and
-								you don't want to get stuck in the rain without
-								one.
+								strongly recommend buying extras, as they're
+								cheap and easy to lose.
 							</td>
 						</tr>
 						<tr>
-							<th rowspan="2">recording equipment</th>
-							<td>iPhone 15 Pro</td>
-							<td>
-								the center of the setup; it's simultaneously the
-								camera, backup microphone, video encoder, and
-								one of the cellular uplinks (any iPhone >= 12
-								will likely work fine in this role, but newer is
-								better).
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<a href="https://amzn.to/4aYXBzc">DJI Mic 3</a>
-								(comes with Windscreen)
-							</td>
-							<td>
-								a high-quality wireless mic with good battery
-								life. however, it sadly requires a USB-C
-								receiver for usable sound quality, and
-								<b
-									>neither the receiver nor the unit itself
-									are waterproof</b
-								>.<br />note: if you decide to get a different
-								microphone, make sure to get a windscreen for
-								it, as
-								<b
-									>windscreens are required for reliably
-									usable outdoor audio</b
-								>.
-							</td>
-						</tr>
-						<tr>
-							<th rowspan="3">camera mounting (WIP)</th>
+							<th rowspan="3">
+								camera mounting (WIP; trying to find better
+								gear)
+							</th>
 							<td>
 								<a href="https://amzn.to/4u58vfE"
 									>ergonomic camera handle w/ phone clamp</a
@@ -179,12 +179,13 @@
 							</td>
 							<td>
 								affordable, high capacity, and supports up to
-								140W USB PD in/out.
+								140W USB PD in/out. may be somewhat overkill for
+								shorter streams, where a smaller phone-only
+								power bank is fine.
 							</td>
 						</tr>
 						<tr>
 							<td>
-								2x
 								<a
 									href="https://nestout.com/products/outdoor-usbc-cable"
 									>Nestout USB-C Cable</a
@@ -193,7 +194,10 @@
 							<td>
 								useful for charging equipment while outdoors; it
 								supports 100W USB PD and is IP54 rated
-								<em>when the endcaps are on</em>
+								<em>when the endcaps are on</em><br />i'd
+								recommend buying extras; it's worth the
+								additional cost to make sure you have a backup
+								in case one is broken or lost.
 							</td>
 						</tr>
 						<tr>
@@ -249,11 +253,6 @@
 				my streaming app, as it's open source and has pretty much all of
 				the features that most streamers would want.
 			</p>
-			<small>
-				(if you're reading this post before Moblin version 30.2028.0 is
-				released on the App Store, you should use the TestFlight version
-				of Moblin.)
-			</small>
 			<p>
 				i highly recommend that you use the SRT(LA) protocol for
 				streaming: it's UDP-based, supports adaptively adjusting the
