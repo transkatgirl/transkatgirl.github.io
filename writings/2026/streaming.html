@@ -271,15 +271,26 @@
 				<a href="https://streamrun.com">Streamrun</a> as a transcoding
 				server due to its ease of use, affordability, and reliability.
 				however, if you already have the necessary equipment and are
-				willing to spend some time tinkering, you can
-				<a
-					href="https://start.irlstreami.ng/streaming-servers/hosting-your-own-server"
-					>host a transcoding server yourself using OBS</a
-				>
-				(if you want to use connection bonding, you'll also need to
-				setup
-				<a href="https://github.com/e04/go-irl">go-irl</a>).
+				willing to spend some time tinkering, you can host a transcoding
+				server yourself using
+				<a href="https://mediamtx.org">mediamtx</a> and
+				<a href="https://github.com/e04/go-irl">go-irl</a>.
 			</p>
+			<details>
+				<summary>mediamtx encoder settings</summary>
+				<pre><code>paths:
+    compressed:
+    ingest:
+        alwaysAvailable: true
+        alwaysAvailableTracks:
+            - codec: H265
+            - codec: MPEG4Audio
+              sampleRate: 48000
+              channelCount: 1
+        runOnReady: >
+            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport udp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -ac 2 -vf "fps=fps=30,format=yuv420p,scale=1280:720" -c:v libx264 -preset faster -tune zerolatency -profile:v high -g $((fps * 2)) -b:v 7000k -minrate 7000k -maxrate 7000k -bufsize 7000k -c:a aac_at -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
+        runOnReadyRestart: yes</code></pre>
+			</details>
 			<p>these are the settings i'd recommend using in Moblin:</p>
 			<ul>
 				<li>

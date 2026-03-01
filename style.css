@@ -76,6 +76,14 @@ pre {
 }
 
 pre > code {
+	background: unset;
+}
+
+pre {
+	text-wrap: pretty;
+}
+
+pre > code {
 	font: inherit;
 }
 
