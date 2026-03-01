@@ -291,7 +291,7 @@
               sampleRate: 48000
               channelCount: 1
         runOnReady: >
-            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport udp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -ac 2 -vf "fps=fps=30,format=yuv420p,scale=1280:720" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7000k -minrate 7000k -maxrate 7000k -bufsize 7000k -c:a aac_at -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
+            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport udp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=48000:flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,scale=1280x720:flags=lanczos" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7000k -minrate 7000k -maxrate 7000k -bufsize 7000k -c:a aac_at -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
         runOnReadyRestart: yes</code></pre>
 			</details>
 			<p>these are the settings i'd recommend using in Moblin:</p>
