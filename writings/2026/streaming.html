@@ -273,11 +273,12 @@
 				however, if you already have the necessary equipment and are
 				willing to spend some time tinkering, you can host a transcoding
 				server yourself using
-				<a href="https://mediamtx.org">mediamtx</a> and
+				<a href="https://mediamtx.org">mediamtx</a>,
+				<a href="https://ffmpeg.org">ffmpeg</a> and
 				<a href="https://github.com/irlserver/srtla">srtla</a>.
 			</p>
 			<details>
-				<summary>example mediamtx settings</summary>
+				<summary>notes on self-hosting a transcoding server</summary>
 				<p>
 					i briefly played around with trying to run my own
 					transcoding server before i decided it probably wasn't worth
@@ -285,7 +286,9 @@
 					who would like to do so, here's the configuration i came up
 					with:
 				</p>
-				<pre><code>paths:
+				<pre><code># [mediamtx defaults ommitted]
+
+paths:
     compressed:
         runOnReady: >
             ffmpeg -fflags nobuffer -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -c copy -f flv rtmp://localhost:1935/example1 -c copy -f flv rtmp://localhost:1935/example2 -c copy -f flv rtmp://localhost:1935/example3
@@ -300,6 +303,23 @@
         runOnReady: >
             ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,scale=1280x720:flags=lanczos" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7000k -minrate 7000k -maxrate 7000k -bufsize 7000k -c:a aac_at -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
         runOnReadyRestart: yes</code></pre>
+				<p>
+					<b
+						>i have no idea how well this works in real-world
+						conditions</b
+					>, as i never ended up using this configuration to stream to
+					popular streaming services. however, if you do end up trying
+					it (or if you already have a configuration that works for
+					you), please let me know (contact info is on my blog's
+					<a href="/">home page</a>).
+				</p>
+				<p>
+					note: if you can't get ffmpeg as a transcoder to work
+					properly, you can always use OBS for that role instead. the
+					main reason i wanted to avoid doing so was because OBS has
+					much heavier resource usage than ffmpeg alone, making it far
+					more costly to host on a cloud VPS.
+				</p>
 			</details>
 			<p>these are the settings i'd recommend using in Moblin:</p>
 			<ul>
