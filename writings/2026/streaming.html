@@ -338,10 +338,20 @@ paths:
 							SRT(LA):
 							<ul>
 								<li>
-									Latency: 1000ms (increase this to 2000ms if
-									you're more concerned about avoiding dropped
-									keyframes than trying to have the lowest
-									latency reasonably possible)
+									Latency: 1500ms
+									<ul>
+										<li>
+											increase in increments of 500ms (up
+											to 3000ms) if you encounter dropped
+											keyframes
+										</li>
+										<li>
+											if you're willing to accept dropped
+											keyframes, can be decreased to
+											1000ms without affecting battery
+											life
+										</li>
+									</ul>
 								</li>
 								<li>
 									Adaptive bitrate: on
