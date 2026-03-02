@@ -301,8 +301,16 @@ paths:
               sampleRate: 48000
               channelCount: 1
         runOnReady: >
-            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,scale=1280x720:flags=lanczos" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7000k -minrate 7000k -maxrate 7000k -bufsize 7000k -c:a aac_at -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
+            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,scale=1280x720:flags=lanczos" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7000k -minrate 7000k -maxrate 7000k -bufsize 7000k -c:a libfdk_aac -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
         runOnReadyRestart: yes</code></pre>
+				<small
+					>you'll need a build of ffmpeg that includes the
+					<code>libfdk_aac</code> encoder to run this (if you're on
+					MacOS, you can replace the aac encoder
+					<code>-c:a [encoder]</code> with <code>aac_at</code>).
+					ffmpeg's built-in aac encoder really sucks and you should
+					avoid it at all costs.</small
+				>
 				<p>
 					<b
 						>i have no idea how well this works in real-world
