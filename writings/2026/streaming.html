@@ -277,6 +277,19 @@
 				<a href="https://ffmpeg.org">ffmpeg</a> and
 				<a href="https://github.com/irlserver/srtla">srtla</a>.
 			</p>
+			<aside>
+				<p>
+					when it comes to your fallback stream, i'd recommend using a
+					test pattern w/ silent audio (i personally really like
+					<a
+						href="https://gist.github.com/hum4n0id/cda96fb07a34300cdb2c0e314c14df0a"
+						>GStreamer's test pattern</a
+					>, which is used by Streamrun Pro's test video), as "No
+					Signal" or "Stream is Offline" messages can be confusing to
+					viewers.
+				</p>
+			</aside>
+			<br />
 			<details>
 				<summary>notes on self-hosting a transcoding server</summary>
 				<p>
