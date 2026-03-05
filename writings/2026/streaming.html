@@ -300,9 +300,9 @@
 				i use
 				<a href="https://streamrun.com">Streamrun</a> as my transcoding
 				server due to its ease of use, affordability, and reliability.
-				however, if you already have the necessary equipment and are
-				willing to spend some time tinkering, you can host a transcoding
-				server yourself using
+				however, if you already have a spare computer w/ a stable
+				internet connection and are willing to spend some time
+				tinkering, you can host a transcoding server yourself using
 				<a href="https://mediamtx.org">mediamtx</a>,
 				<a href="https://ffmpeg.org">ffmpeg</a> and
 				<a href="https://github.com/irlserver/srtla">srtla</a>.
@@ -368,7 +368,10 @@ paths:
 					<a href="/">home page</a>).
 				</p>
 			</details>
-			<p>these are the settings i'd recommend using in Moblin:</p>
+			<p>
+				once you've setup your transcoding server, these are the
+				settings i'd recommend using in Moblin:
+			</p>
 			<ul>
 				<li>
 					Stream:
@@ -384,7 +387,10 @@ paths:
 						<li>
 							SRT(LA):
 							<ul>
-								<li>Latency (WiFi): 4x streaming server RTT</li>
+								<li>
+									Latency (WiFi): 4x the RTT to streaming
+									server
+								</li>
 								<li>
 									Latency (Cellular): 1500ms to 3000ms (higher
 									latency improves stream stability, lower
