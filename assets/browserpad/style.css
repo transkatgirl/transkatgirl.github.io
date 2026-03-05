@@ -54,6 +54,9 @@ nav {
 	font-weight: bold;
 }
 @media (max-height: 17em) {
+	textarea {
+		height: 100%;
+	}
 	nav {
 		display: none;
 	}
