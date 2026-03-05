@@ -330,11 +330,13 @@
 					with:
 				</p>
 				<pre><code># [mediamtx defaults ommitted]
+readTimeout: 1s # Should be set to SRT latency
+# [mediamtx defaults ommitted]
 
 paths:
     compressed:
         runOnReady: >
-            ffmpeg -fflags nobuffer -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -c copy -map 0:v -map 0:a -f tee -use_fifo true -fifo_options drop_pkts_on_overflow=1:attempt_recovery=1:recovery_wait_time=1 "[f=flv]rtmp://localhost:1935/example1|[f=flv]rtmp://localhost:1935/example2|[f=flv]rtmp://localhost:1935/example3"
+            ffmpeg -fflags +flush_packets+nobuffer -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -c copy -map 0:v -map 0:a -f tee -use_fifo true -fifo_options drop_pkts_on_overflow=1:attempt_recovery=1:recovery_wait_time=1 "[f=flv]rtmp://localhost:1935/example1|[f=flv]rtmp://localhost:1935/example2|[f=flv]rtmp://localhost:1935/example3"
         runOnReadyRestart: yes
     ingest:
         alwaysAvailable: true
@@ -344,7 +346,7 @@ paths:
               sampleRate: 48000
               channelCount: 1
         runOnReady: >
-            ffmpeg -fflags +flush_packets+genpts+igndts+discardcorrupt+nobuffer -flags low_delay -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,scale=1280x720:flags=lanczos" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7000k -minrate 7000k -maxrate 7000k -bufsize 7000k -c:a libfdk_aac -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
+            ffmpeg -fflags +flush_packets+nobuffer -flags low_delay -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,scale=1280x720:flags=lanczos" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7000k -minrate 7000k -maxrate 7000k -bufsize 7000k -c:a libfdk_aac -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
         runOnReadyRestart: yes</code></pre>
 				<small
 					>you'll need a build of ffmpeg that includes the
