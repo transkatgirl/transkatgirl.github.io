@@ -81,6 +81,7 @@ pre > code {
 
 pre {
 	text-wrap: pretty;
+	overflow-wrap: break-word;
 }
 
 pre > code {
