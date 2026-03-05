@@ -76,8 +76,8 @@
 							<td>
 								the center of the setup; it's simultaneously the
 								camera, video encoder, and one of the cellular
-								uplinks (any iPhone >= 12 will likely work fine
-								in this role, but newer is better).
+								uplinks (any iPhone &gt;= 12 will likely work
+								fine in this role, but newer is better).
 							</td>
 						</tr>
 						<tr>
@@ -371,10 +371,11 @@ paths:
 						<li>
 							SRT(LA):
 							<ul>
+								<li>Latency (WiFi): 4x streaming server RTT</li>
 								<li>
-									Latency: 1500ms to 3000ms (higher latency
-									improves stream stability, lower allows for
-									more interactive experiences)
+									Latency (Cellular): 1500ms to 3000ms (higher
+									latency improves stream stability, lower
+									allows for more interactive experiences)
 									<ul>
 										<li>
 											If low latency is <em>far</em> more
@@ -384,11 +385,11 @@ paths:
 										<li>
 											If stream stability is more
 											important than low latency, use
-											3000ms (or 5000ms if you use
-											Starlink)
+											3000ms
 										</li>
 									</ul>
 								</li>
+								<li>Latency (Moving Starlink): 5000ms</li>
 								<li>
 									Adaptive bitrate: on
 									<ul>
@@ -397,7 +398,12 @@ paths:
 									</ul>
 								</li>
 								<li>Big packets: on</li>
-								<li>Implementation: Moblin</li>
+								<li>
+									Implementation (latency &gt;= 1s): Moblin
+								</li>
+								<li>
+									Implementation (latency &lt; 1s): Official
+								</li>
 							</ul>
 						</li>
 						<li>
