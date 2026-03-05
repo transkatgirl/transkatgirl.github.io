@@ -266,20 +266,36 @@
 				the features that most streamers would want.
 			</p>
 			<p>
-				i highly recommend that you use the SRT(LA) protocol for
-				streaming: it's UDP-based, supports adaptively adjusting the
-				bitrate based on network conditions, and SRTLA allows for
-				bonding multiple connections together to increase available
-				bandwidth and reliability.
+				if you're not streaming from home / somewhere with a stable,
+				high-bandwidth internet connection, you will want to stream to a
+				transcoding server and then have the transcoding server stream
+				to your target streaming platforms. using a transcoding server
+				offers the following advantages:
+			</p>
+			<ul>
+				<li>
+					it allows you to use the SRT protocol, which can adaptively
+					adjust the bitrate based on network conditions
+				</li>
+				<li>
+					it allows you to bond together multiple connections using
+					SRTLA to increase available bandwidth and reliability
+				</li>
+				<li>
+					it adds disconnect protection, so that the stream doesn't
+					end when the connection drops
+				</li>
+				<li>
+					it allows you to stream to multiple platforms without a
+					multiplicative increase in your bandwidth usage
+				</li>
+			</ul>
+			<p>
+				(the disadvantage of using a transcoding server is increased
+				latency, cost, and setup complexity.)
 			</p>
 			<p>
-				in addition, you'll also want to make sure that your streaming
-				endpoint supports some form of disconnect prevention, so that
-				the stream doesn't end when the connection drops.
-			</p>
-			<p>
-				because none of the major streaming platforms support the
-				SRT(LA) protocol, i use
+				i use
 				<a href="https://streamrun.com">Streamrun</a> as a transcoding
 				server due to its ease of use, affordability, and reliability.
 				however, if you already have the necessary equipment and are
