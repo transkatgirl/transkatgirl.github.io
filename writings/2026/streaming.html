@@ -373,13 +373,19 @@ paths:
 							<ul>
 								<li>
 									Latency: 1500ms to 3000ms (higher latency
-									reduces stream artifacting; lower allows for
+									improves stream stability, lower allows for
 									more interactive experiences)
 									<ul>
 										<li>
-											If low latency is far more important
-											than avoiding artifacting, use
+											If low latency is <em>far</em> more
+											important than stream stability, use
 											1000ms
+										</li>
+										<li>
+											If stream stability is more
+											important than low latency, use
+											3000ms (or 5000ms if you use
+											Starlink)
 										</li>
 									</ul>
 								</li>
