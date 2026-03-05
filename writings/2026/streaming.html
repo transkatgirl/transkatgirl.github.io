@@ -266,20 +266,22 @@
 				the features that most streamers would want.
 			</p>
 			<p>
-				if you're not streaming from home / somewhere with a stable,
-				high-bandwidth internet connection, you will want to stream to a
+				assuming you're not streaming from somewhere with a stable,
+				high-bandwidth internet connection, you will need to stream to a
 				transcoding server and then have the transcoding server stream
 				to your target streaming platforms. using a transcoding server
 				offers the following advantages:
 			</p>
 			<ul>
 				<li>
-					it allows you to use the SRT protocol, which can adaptively
-					adjust the bitrate based on network conditions
+					it allows you to use the SRT protocol, which is much better
+					at handling unreliable connections and changes in available
+					bandwidth
 				</li>
 				<li>
 					it allows you to bond together multiple connections using
-					SRTLA to increase available bandwidth and reliability
+					SRTLA to increase available bandwidth and improve
+					reliability
 				</li>
 				<li>
 					it adds disconnect protection, so that the stream doesn't
@@ -296,7 +298,7 @@
 			</p>
 			<p>
 				i use
-				<a href="https://streamrun.com">Streamrun</a> as a transcoding
+				<a href="https://streamrun.com">Streamrun</a> as my transcoding
 				server due to its ease of use, affordability, and reliability.
 				however, if you already have the necessary equipment and are
 				willing to spend some time tinkering, you can host a transcoding
@@ -307,7 +309,7 @@
 			</p>
 			<aside>
 				<p>
-					when it comes to your fallback stream, i'd recommend using a
+					when it comes to the fallback stream, i personally use a
 					test pattern w/ silent audio (i personally really like
 					<a
 						href="https://gist.github.com/hum4n0id/cda96fb07a34300cdb2c0e314c14df0a"
