@@ -10,13 +10,13 @@ textarea {
 	border: none;
 	outline: none;
 	resize: none;
-	font: 1em monospace;
+	font: 1.25em monospace;
 }
 #textbox {
 	border-right: 1px solid PaleTurquoise;
 	border-radius: 0px;
 	border-color: darkgray;
-	background-color: transparent;
+	background-color: #fff3;
 	width: 100%;
 	padding: 0.5em;
 	overflow-y: scroll;
