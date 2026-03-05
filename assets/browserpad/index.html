@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Browserpad - A notepad in the browser</title>
+		<link
+			rel="icon"
+			type="image/x-icon"
+			href="data:image/x-icon;base64,R0lGODlhEAAQAKEAAAAAAICAgP///wAAACH/
+    C05FVFNDQVBFMi4wAwEAAAAh/hFDcmVhdGVkIHdpdGggR0lNUAAh+QQBZAADACwAAAAAEAAQAAACJIyPacLtvp5kEUwYmL00i81VXK
+    eNgjiioQdeqsuakXl6tIIjBQAh+QQBZAADACwAAAAAEAAQAAACIIyPacLtvp5kcb5qG85iZ2+BkyiRV8BBaEqtrKkqslEAADs="
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</head>
+	<body>
+		<textarea
+			id="textbox"
+			autofocus="autofocus"
+			placeholder="type here"
+		></textarea>
+		<nav>
+			<span id="controls">
+				<input type="checkbox" id="spellcheck" />
+				<label for="spellcheck">spell-checking</label> │
+				<span id="open">
+					<input type="file" value="open" />
+					<a href="#">open</a>
+				</span>
+				<span id="save">
+					<input id="filename" placeholder="browserpad.txt" />
+					<a href="#">save</a>
+				</span>
+				│
+				<a href="#" title="About Browserpad" id="about-icon">ⓘ</a>
+			</span>
+		</nav>
+		<dialog id="about">
+			<h2>Kat's Browserpad Fork</h2>
+			<p>
+				As the name indicates, Browserpad is a notepad in the browser.
+			</p>
+			<p>
+				It is a plain text editor built entirely with HTML, CSS and
+				JavaScript.
+			</p>
+			<p>
+				This is transkatgirl's minimalist fork of
+				<a href="https://github.com/Browserpad/browserpad">browserpad</a
+				>. The source code is
+				<a href="https://github.com/transkatgirl/transkatgirl.github.io"
+					>available on GitHub</a
+				>.
+			</p>
+			<form method="dialog"><button>close</button></form>
+		</dialog>
+		<script src="script.js"></script>
+	</body>
+</html>

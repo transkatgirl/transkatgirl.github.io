@@ -1,0 +1,55 @@
+html,
+body {
+	height: 100%;
+	box-sizing: border-box;
+	margin: 0;
+}
+textarea {
+	height: calc(100% - 2rem);
+	box-sizing: border-box;
+	border: none;
+	outline: none;
+	resize: none;
+	font: 1em monospace;
+}
+#textbox {
+	border-right: 1px solid PaleTurquoise;
+	border-radius: 0px;
+	border-color: darkgray;
+	background-color: transparent;
+	width: 100%;
+	padding: 0.5em;
+	overflow-y: scroll;
+}
+nav {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	box-sizing: border-box;
+	width: 100%;
+	height: 2rem;
+	padding: 0 0.5em;
+	background-color: #eee;
+	border-top: 1px solid silver;
+	line-height: 2rem;
+	color: gray;
+	font-family: sans-serif;
+	font-size: 85%;
+}
+#controls {
+	float: right;
+}
+#save a {
+	text-decoration: none;
+}
+#open > input {
+	display: none;
+}
+#about > form {
+	text-align: right;
+}
+#about-icon {
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+}
