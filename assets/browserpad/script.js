@@ -9,6 +9,7 @@ function storeLocally() {
 	localStorage.setItem("browserpad", textbox.value);
 }
 window.beforeunload = storeLocally;
+textbox.onchange = storeLocally;
 
 // Allow inputting tabs in the textarea instead of changing focus to the next element
 // (must use onkeydown to prevent default behavior of moving focus)

@@ -53,7 +53,7 @@ nav {
 	color: black;
 	font-weight: bold;
 }
-@media (max-height: 14.5em) {
+@media (max-height: 17em) {
 	nav {
 		display: none;
 	}
