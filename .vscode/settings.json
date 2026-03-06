@@ -2,6 +2,7 @@
 	"files.exclude": {
 		"writings/agi-inequality-threat.html": true,
 		"writings/backpack.html": true,
-		"writings/decision-making.html": true
+		"writings/decision-making.html": true,
+		"map": true
 	}
 }
