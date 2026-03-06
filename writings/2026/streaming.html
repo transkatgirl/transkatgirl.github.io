@@ -395,9 +395,8 @@ paths:
 									allows for more interactive experiences)
 									<ul>
 										<li>
-											If low latency is <em>far</em> more
-											important than stream stability, use
-											1000ms
+											If low latency is more important
+											than stream stability, use 1200ms
 										</li>
 										<li>
 											If stream stability is more
@@ -437,7 +436,10 @@ paths:
 								<li>Bitrate (1080p30): 10 mbit/s</li>
 								<li>Bitrate (720p60): 9 mbit/s</li>
 								<li>Bitrate (720p30): 6 mbit/s</li>
-								<li>Keyframe interval: 1s</li>
+								<li>
+									Keyframe interval: 1s (makes recovery from
+									dropped frames quicker)
+								</li>
 								<li>B-frames: off</li>
 								<li>
 									Adaptive resolution: on
