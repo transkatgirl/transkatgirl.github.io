@@ -388,6 +388,16 @@ paths:
 								<li>
 									Latency (WiFi): 4x the RTT to streaming
 									server
+									<ul>
+										<li>
+											Latency &lt; 300ms is not
+											recommended
+										</li>
+										<li>
+											Latency &lt; 600ms is not
+											recommended on multi-AP networks
+										</li>
+									</ul>
 								</li>
 								<li>
 									Latency (Cellular): 1500ms to 3000ms (higher
@@ -395,8 +405,8 @@ paths:
 									allows for more interactive experiences)
 									<ul>
 										<li>
-											If low latency is more important
-											than stream stability, use 1200ms
+											Latency &lt; 1000ms is not
+											recommended
 										</li>
 										<li>
 											If stream stability is more
@@ -405,7 +415,18 @@ paths:
 										</li>
 									</ul>
 								</li>
-								<li>Latency (Moving Starlink): 5000ms</li>
+								<li>
+									Latency (Moving Starlink): 3000ms to 5000ms
+									(higher latency improves stream stability,
+									lower allows for more interactive
+									experiences)
+									<ul>
+										<li>
+											Latency &lt; 2000ms is not
+											recommended
+										</li>
+									</ul>
+								</li>
 								<li>
 									Adaptive bitrate: on
 									<ul>
