@@ -1,0 +1,91 @@
+<svg
+	version="1.1"
+	viewBox="0 0 195 150"
+	preserveAspectRatio="slice"
+	xmlns="http://www.w3.org/2000/svg"
+>
+	<rect x="0" y="0" width="195" height="150" fill="white" />
+	<text x="97.5" y="12.5" text-anchor="middle" dominant-baseline="middle" class="title">Kat's
+		Streaming
+		Schedule</text>
+
+	<rect x="5" y="22.5" width="90" height="122.5" fill="#8abd93" />
+	<rect x="100" y="22.5" width="90" height="122.5" fill="#cd9bc4" />
+
+	<text x="50" y="32.5" text-anchor="middle" dominant-baseline="middle" class="subtitle">Twitch
+		Plays Kat</text>
+
+	<text x="50" y="57.5" text-anchor="middle" dominant-baseline="middle" class="small">some cute
+		fun
+		with chat!</text>
+
+	<text x="10" y="70" text-anchor="start" dominant-baseline="middle" class="body">Sunday @ Noon
+		PST</text>
+	<text x="10" y="79" text-anchor="start" dominant-baseline="middle" class="body">Saturday @
+		Noon
+		PST</text>
+
+
+	<image x="10" y="95" height="15" href="/assets/mirror/837623.svg" />
+	<text x="10" y="115" text-anchor="start" dominant-baseline="middle" class="small">
+		twitch.tv/transkatgirl</text>
+	<image x="10" y="120" height="15" href="/assets/mirror/474951.svg" />
+	<text x="10" y="140" text-anchor="start" dominant-baseline="middle" class="small">
+		kick.com/transkatgirl</text>
+
+	<text x="145" y="32.5" text-anchor="middle" dominant-baseline="middle" class="subtitle">Twitch
+		Plays Kat:</text>
+	<text x="145" y="43.5" text-anchor="middle" dominant-baseline="middle" class="subtitle">
+		After Dark</text>
+
+	<text x="145" y="57.5" text-anchor="middle" dominant-baseline="middle" class="small">kat being
+		deranged and
+		insane</text>
+
+	<text x="105" y="70" text-anchor="start" dominant-baseline="middle" class="body">Wednesday @
+		8 PM
+		PST</text>
+	<text x="105" y="79" text-anchor="start" dominant-baseline="middle" class="body">and</text>
+	<text x="105" y="88" text-anchor="start" dominant-baseline="middle" class="body">whenever i
+		fucking want</text>
+
+	<image x="105" y="95" height="15" href="/assets/mirror/474951.svg" />
+	<text x="105" y="115" text-anchor="start" dominant-baseline="middle" class="small">
+		kick.com/transkatgirl</text>
+
+	<style>
+	<![CDATA[
+		@font-face {
+			font-family: "Fira Code";
+			font-display: swap;
+			src: url("/fonts/FiraCode.woff2") format("woff2");
+		}
+
+		@font-face {
+			font-family: "Lexend";
+			font-display: swap;
+			src: url("/fonts/Lexend.woff2") format("woff2");
+		}
+
+		text {
+			font: normal 18px/1.25 Lexend, sans-serif;
+		}
+
+		.title{
+			font-size: 14px;
+		}
+
+		.subtitle {
+			font-size: 10px;
+		}
+
+		.body {
+			font-size: 7px;
+		}
+
+		.small {
+			font-size: 5px;
+		}
+	]]>
+	</style>
+</svg>
