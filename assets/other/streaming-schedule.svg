@@ -13,7 +13,9 @@
 	<rect x="100" y="22.5" width="90" height="122.5" fill="#cd9bc4" />
 
 	<text x="50" y="32.5" text-anchor="middle" dominant-baseline="middle" class="subtitle">Twitch
-		Plays Kat</text>
+		Plays Kat:</text>
+	<text x="50" y="43.5" text-anchor="middle" dominant-baseline="middle" class="subtitle">
+		Be My GPS</text>
 
 	<text x="50" y="57.5" text-anchor="middle" dominant-baseline="middle" class="small">some cute
 		fun
@@ -43,7 +45,7 @@
 		insane</text>
 
 	<text x="105" y="70" text-anchor="start" dominant-baseline="middle" class="body">Wednesday @
-		8 PM
+		6 PM
 		PST</text>
 	<text x="105" y="79" text-anchor="start" dominant-baseline="middle" class="body">and</text>
 	<text x="105" y="88" text-anchor="start" dominant-baseline="middle" class="body">whenever i
