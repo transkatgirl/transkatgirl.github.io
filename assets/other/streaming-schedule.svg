@@ -22,10 +22,10 @@
 		with chat!</text>
 
 	<text x="10" y="70" text-anchor="start" dominant-baseline="middle" class="body">Sunday @ Noon
-		PST</text>
+		PT</text>
 	<text x="10" y="79" text-anchor="start" dominant-baseline="middle" class="body">Saturday @
 		Noon
-		PST</text>
+		PT</text>
 
 
 	<image x="10" y="95" height="15" href="/assets/mirror/837623.svg" />
@@ -45,8 +45,8 @@
 		insane</text>
 
 	<text x="105" y="70" text-anchor="start" dominant-baseline="middle" class="body">Wednesday @
-		6 PM
-		PST</text>
+		8 PM
+		PT</text>
 	<text x="105" y="79" text-anchor="start" dominant-baseline="middle" class="body">and</text>
 	<text x="105" y="88" text-anchor="start" dominant-baseline="middle" class="body">whenever i
 		fucking want</text>
