@@ -31,7 +31,7 @@
 			<hgroup>
 				<h1>my irl streaming setup</h1>
 				<p>🚧 this page is a work in progress!</p>
-				<!-- <p>written <time>2026-03-10</time></p> -->
+				<!-- <p>written <time>2026-03-16</time></p> -->
 			</hgroup>
 			<p>
 				streaming irl is challenging, even when considered purely from a
@@ -52,14 +52,49 @@
 				irl streaming, i've decided i'd cover my (modest, but decent
 				quality) irl streaming setup.
 			</p>
+			<h2 id="equipment">equipment</h2>
 			<p>
-				however, in the process of choosing equipment, there are
-				tradeoffs i made which may not be acceptable for other people. i
-				prioritized portability and reliability over video/audio
-				quality, and weatherproofing+ergonomics over portability.
+				i made the following assumptions when putting together my
+				streaming setup:
 			</p>
+			<ul>
+				<li>
+					streams will take place outdoors and far away from my home
+					<ul>
+						<li>using a stable WiFi connection is not an option</li>
+						<li>
+							the quality of available cellular connections will
+							very wildly
+						</li>
+						<li>
+							weather conditions can vary and streams cannot be
+							postponed because of weather conditions
+						</li>
+					</ul>
+				</li>
+				<li>
+					streams will last several hours and involve a significant
+					amount of walking
+				</li>
+				<li>
+					the total cost and complexity should be kept as low as
+					reasonably possible
+					<ul>
+						<li>
+							items should only be included if necessary to
+							deliver <em>watchable</em> quality or avoid
+							equipment damage
+						</li>
+						<li>
+							an iPhone and backpack are already in your
+							possession rather than being an additional purchase
+						</li>
+					</ul>
+				</li>
+			</ul>
 			<p>
-				anyways, this is the equipment i bring in my
+				after weeks of iteration and trying different approaches, this
+				is what i now bring to my streaming locations in my
 				<a href="https://amzn.to/3L3N1h7">weather-resistant backpack</a
 				>:
 			</p>
@@ -103,7 +138,36 @@
 							</td>
 						</tr>
 						<tr>
-							<th rowspan="3">camera mounting</th>
+							<th rowspan="4">camera mounting</th>
+							<td>
+								<a
+									href="https://www.bhphotovideo.com/c/product/1863048-REG/insta360_cinscavl_backpack_clip.html"
+									>Insta360 Backpack Clip</a
+								>
+							</td>
+							<td>
+								backpack mounts are the least-bad POV
+								livestreaming option. you can still see the
+								phone's display for reading chat, and unlike
+								head or neck mounts, they're not horrendously
+								uncomfortable to wear for extended periods (they
+								still kind of suck to wear).
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a
+									href="https://www.bhphotovideo.com/c/product/1902134-REG/telesin_p7_mb_01_magnectic_adapter_for_phones.html"
+									>TELESIN 3-Claw Mount Smartphone Magnetic
+									Plate
+								</a>
+							</td>
+							<td>
+								allows you to attach a phone to the backpack
+								mount.
+							</td>
+						</tr>
+						<tr>
 							<td>
 								<a href="https://amzn.to/4u58vfE"
 									>Fantaseal Ergonomic Phone Handle</a
@@ -114,21 +178,6 @@
 								camera/phone for long periods of time. this
 								specific handle is the most lightweight one i've
 								found so far.
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<a href="https://amzn.to/4045gqX"
-									>Telesin Magnetic Phone Neck Mount</a
-								>
-							</td>
-							<td>
-								neck mounts are the least-bad POV livestreaming
-								option. you can still see the phone's display
-								for reading chat, and unlike head mounts,
-								they're not horrendously uncomfortable to wear
-								for extended periods (they still kind of suck to
-								wear).
 							</td>
 						</tr>
 						<tr>
@@ -187,7 +236,7 @@
 									>placing the microphone's receiver inside
 									the backpack</b
 								>
-								to protect it from rainy+windy conditions
+								to protect it from rainy+windy conditions.
 							</td>
 						</tr>
 						<tr>
@@ -287,42 +336,37 @@
 				>)
 			</p>
 			<p>now we can get into the software side of things.</p>
+			<h2>software</h2>
+			<h3 id="transcoding-server">transcoding server</h3>
 			<p>
-				i use <a href="https://github.com/eerimoq/moblin">Moblin</a> as
-				my streaming app, as it's open source and has pretty much all of
-				the features that most streamers would want.
+				if you're not streaming from somewhere with a stable,
+				high-bandwidth internet connection,
+				<b>you will need a transcoding server</b>.
 			</p>
 			<p>
-				assuming you're not streaming from somewhere with a stable,
-				high-bandwidth internet connection, you will need to stream to a
-				transcoding server and then have the transcoding server stream
-				to your target streaming platforms. using a transcoding server
-				offers the following advantages:
+				the role of a transcoding server is to act as an intermediary
+				between your phone and your target streaming platforms. this
+				does increase latency, but it allows you to do the following:
 			</p>
 			<ul>
 				<li>
-					it allows you to use the SRT protocol, which is much better
-					at handling unreliable connections and changes in available
-					bandwidth
+					add disconnect protection, so that the stream doesn't end
+					when your phone's connection drops
 				</li>
 				<li>
-					it allows you to bond together multiple connections using
-					SRTLA to increase available bandwidth and improve
-					reliability
+					use the SRT protocol, which is much better at handling
+					unreliable connections and changes in available bandwidth
+					than RTMP (which is what most streaming platforms use)
 				</li>
 				<li>
-					it adds disconnect protection, so that the stream doesn't
-					end when the connection drops
+					bond together multiple connections using SRTLA to increase
+					available bandwidth and improve reliability
 				</li>
 				<li>
-					it allows you to stream to multiple platforms without a
-					multiplicative increase in your bandwidth usage
+					stream to multiple platforms without a multiplicative
+					increase in your phone's bandwidth usage
 				</li>
 			</ul>
-			<p>
-				(the disadvantage of using a transcoding server is increased
-				latency, cost, and setup complexity.)
-			</p>
 			<p>
 				i use
 				<a href="https://streamrun.com">Streamrun</a> as my transcoding
@@ -373,7 +417,7 @@ paths:
               sampleRate: 48000
               channelCount: 2
         runOnReady: >
-            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,scale=1280x720:flags=lanczos" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7000k -minrate 7000k -maxrate 7000k -bufsize 7000k -c:a libfdk_aac -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
+            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,scale=1920x1080:flags=lanczos" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7500k -minrate 7500k -maxrate 7500k -bufsize 7500k -c:a libfdk_aac -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
         runOnReadyRestart: yes</code></pre>
 				<small
 					>you'll need a build of ffmpeg that includes the
@@ -395,10 +439,54 @@ paths:
 					<a href="/">home page</a>).
 				</p>
 			</details>
+			<h4 id="server-encoder-settings">server encoder settings</h4>
 			<p>
-				once you've setup your transcoding server, these are the
-				settings i'd recommend using in Moblin:
+				to reduce resource usage on your transcoding server and avoid
+				falling afoul of platform TOS (when multi-streaming, offering
+				better quality to some streaming platforms over others can
+				sometimes get you banned from the platforms you're streaming in
+				lower quality to), you'll want to only encode once and send the
+				same stream to multiple platforms.
 			</p>
+			<p>
+				the recommendations of your target streaming platforms is a good
+				starting point for your encoder settings. some streaming
+				platforms are willing to accept a higher bitrate than
+				recommended by their documentation, and if you're willing to
+				take the risk, you can find out these undocumented bitrate caps
+				on sites like reddit.
+			</p>
+			<p>
+				as of march 2026, these are the encoder settings i use on my
+				transcoding server when multistreaming to Twitch, Kick, and
+				YouTube:
+			</p>
+			<ul>
+				<li>
+					Resolution: 1280x720 or 1920x1080 (depending on source
+					resolution)
+				</li>
+				<li>
+					Frame rate: 30 fps or 60 fps (depending on source framerate)
+				</li>
+				<li>Audio channels: stereo</li>
+				<li>Audio sample rate: 44.1 kHz or 48 kHz</li>
+				<li>Video codec: H.264</li>
+				<li>
+					Video bitrate: 7.5 mbit/s CBR (twitch's official max bitrate
+					is 6 mbit/s, but the unofficial max bitrate is 8.5 mbit/s)
+				</li>
+				<li>Keyframe interval: 2s</li>
+				<li>Audio codec: AAC</li>
+				<li>Audio bitrate: 160 kbit/s</li>
+			</ul>
+			<h3 id="moblin">moblin</h3>
+			<p>
+				i use <a href="https://github.com/eerimoq/moblin">Moblin</a> as
+				my streaming app, as it's open source and has pretty much all of
+				the features that most streamers would want.
+			</p>
+			<p>these are the settings i'd recommend using in Moblin:</p>
 			<ul>
 				<li>
 					Stream:
@@ -559,10 +647,6 @@ paths:
 					</ul>
 				</li>
 			</ul>
-			<p>
-				(when it comes to the encoder settings on your streaming server,
-				just use whatever your target streaming platforms recommend)
-			</p>
 			<p>don't forget to:</p>
 			<ul>
 				<li>
