@@ -378,19 +378,6 @@
 				<a href="https://ffmpeg.org">ffmpeg</a> and
 				<a href="https://github.com/irlserver/srtla">srtla</a>.
 			</p>
-			<aside>
-				<p>
-					when it comes to the fallback stream, i personally use a
-					test pattern w/ silent audio (i personally really like
-					<a
-						href="https://gist.github.com/hum4n0id/cda96fb07a34300cdb2c0e314c14df0a"
-						>GStreamer's test pattern</a
-					>, which is used by Streamrun Pro's test video) and overlaid
-					text saying "Technical Difficulties", as generic "No Signal"
-					or "Stream is Offline" messages can be confusing to viewers.
-				</p>
-			</aside>
-			<br />
 			<details>
 				<summary>notes on self-hosting a transcoding server</summary>
 				<p>
@@ -480,6 +467,30 @@ paths:
 				<li>Audio codec: AAC</li>
 				<li>Audio bitrate: 160 kbit/s</li>
 			</ul>
+			<h4 id="fallback-stream">fallback stream</h4>
+			<p>
+				default transcoding server fallback feeds can be very confusing
+				to viewers. a message on the stream saying "Stream is offline"
+				or "No signal" could make a viewer mistakenly think that the
+				livestream has ended.
+			</p>
+			<p>
+				instead, you should make a fallback feed that clearly indicates
+				the issue is on the <em>streamer's</em> end, not the viewer's
+				end. once possible way you could do this would be by overlaying
+				a test pattern (such as
+				<a
+					href="https://gist.github.com/hum4n0id/cda96fb07a34300cdb2c0e314c14df0a"
+					>GStreamer's test pattern</a
+				>, which is used by Streamrun Pro's test video) with the text
+				"Technical Difficulties".
+			</p>
+			<p>
+				just make sure your fallback feed is either silent or has
+				<em>quiet</em> music to listen to. nobody wants to be stuck
+				listening to something obnoxious (like a 1kHz sine wave) while
+				waiting for you to reconnect.
+			</p>
 			<h3 id="moblin">moblin</h3>
 			<p>
 				i use <a href="https://github.com/eerimoq/moblin">Moblin</a> as
