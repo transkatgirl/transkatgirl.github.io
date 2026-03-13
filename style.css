@@ -80,7 +80,7 @@ pre > code {
 }
 
 pre {
-	text-wrap: pretty;
+	white-space: pre-wrap;
 	overflow-wrap: break-word;
 }
 
