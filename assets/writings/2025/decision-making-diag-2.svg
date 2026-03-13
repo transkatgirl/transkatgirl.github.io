@@ -236,13 +236,4 @@
 	<rect x="129" y="100" width="2" height="2" fill="black" />
 	<rect x="129" y="104" width="2" height="2" fill="black" />
 	<rect x="129" y="108" width="2" height="2" fill="black" />
-
-
-	<!--
-
-	reference:
-	- https://developer.mozilla.org/en-US/docs/Web/SVG
-	- https://www.w3.org/TR/SVG11/
-
-	-->
 </svg>
