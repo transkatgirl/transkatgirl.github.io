@@ -175,6 +175,10 @@ hr {
 	border: 0.06em solid #68625e;
 }
 
+details {
+	margin: 1em 0;
+}
+
 /* Colors:
 
 #36384f - oklch(0.35 0.04 280)
