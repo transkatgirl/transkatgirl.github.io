@@ -418,7 +418,7 @@ paths:
               sampleRate: 48000
               channelCount: 2
         runOnReady: >
-            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,scale=1920x1080:flags=lanczos:reset_sar=1:out_color_matrix=bt709:out_range=tv" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7500k -minrate 7500k -maxrate 7500k -bufsize 7500k -c:a libfdk_aac -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
+            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,scale=1920x1080:flags=lanczos:reset_sar=1:out_color_matrix=bt709:out_range=tv" -c:v libx264 -preset faster -tune zerolatency -profile:v high -g 60 -b:v 7500k -minrate 7500k -maxrate 7500k -bufsize 7500k -c:a libfdk_aac -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
         runOnReadyRestart: yes</code></pre>
 				<small
 					>you'll need a build of ffmpeg that includes the
@@ -494,7 +494,7 @@ paths:
 				end. once possible way you could do this would be by overlaying
 				a test pattern with the text "Please Stand By":
 			</p>
-			<pre><code>ffmpeg -colorspace bt709 -color_range tv -color_primaries bt709 -color_trc bt709 -f lavfi -i "yuvtestsrc=s=1920x1080:r=30:d=60:sar=1,drawtext=text='Please Stand By':font=monospace:fontcolor=white:fontsize=96:box=1:boxcolor=black@0.5:boxborderw=5:x=(w-text_w)/2:y=(h-text_h)/2:text_align=M+C,format=yuv420p" -f lavfi -i "anullsrc=cl=stereo:r=48000:d=60" -c:v libx265 -crf 0 -c:a aac -b:a 320k -movflags +faststart fallback.mp4</code></pre>
+			<pre><code>ffmpeg -colorspace bt709 -color_range tv -color_primaries bt709 -color_trc bt709 -f lavfi -i "yuvtestsrc=s=1920x1080:r=30:d=60:sar=1,drawtext=text='Please Stand By':font=monospace:fontcolor=white:fontsize=96:box=1:boxcolor=black@0.5:boxborderw=5:x=(w-text_w)/2:y=(h-text_h)/2:text_align=M+C,format=yuv420p" -f lavfi -i "anullsrc=cl=stereo:r=48000:d=60" -c:v libx265 -crf 0 -preset veryslow -c:a aac -b:a 320k -movflags +faststart fallback.mp4</code></pre>
 			<small
 				>alternatively, you can generate quiet brown noise using
 				<code
