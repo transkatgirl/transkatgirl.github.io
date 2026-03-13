@@ -29,6 +29,6 @@ ffmpeg -y -colorspace bt709 -color_range tv -color_primaries bt709 -color_trc bt
 		[test_hued][blend]blend=all_mode=overlay:all_opacity=0.4[final];
 		[final]vignette=angle=0.5+0.3*sin(t/5),scale=out_color_matrix=bt709:out_range=tv,format=yuv420p[out];
 	" -t $DURATION -map "[out]" -map 3:a -c:v libx265 -c:a aac_at -shortest \
-	-crf 18 -preset slow -b:a 256k -movflags +faststart ethereal_dreams.mp4
+	-crf 18 -preset slow -b:a 320k -movflags +faststart ethereal_dreams.mp4
 
 rm -f audio.wav
