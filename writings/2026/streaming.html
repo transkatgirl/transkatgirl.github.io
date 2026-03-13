@@ -418,7 +418,7 @@ paths:
               sampleRate: 48000
               channelCount: 2
         runOnReady: >
-            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,setsar=1,scale=1920x1080:flags=lanczos:out_color_matrix=bt709:out_range=tv" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7500k -minrate 7500k -maxrate 7500k -bufsize 7500k -c:a libfdk_aac -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
+            ffmpeg -fflags nobuffer -flags low_delay -rtsp_transport tcp -i rtsp://localhost:$RTSP_PORT/$MTX_PATH -af "aresample=flags=res:async=1,aformat=channel_layouts=stereo" -vf "fps=fps=30,format=yuv420p,scale=1920x1080:flags=lanczos:reset_sar=1:out_color_matrix=bt709:out_range=tv" -c:v libx264 -preset medium -tune zerolatency -profile:v high -g 60 -b:v 7500k -minrate 7500k -maxrate 7500k -bufsize 7500k -c:a libfdk_aac -b:a 160k -max_muxing_queue_size 1024 -f rtsp rtsp://localhost:$RTSP_PORT/compressed
         runOnReadyRestart: yes</code></pre>
 				<small
 					>you'll need a build of ffmpeg that includes the
