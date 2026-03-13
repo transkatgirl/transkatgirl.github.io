@@ -10,7 +10,7 @@ DURATION=60
   #synth $DURATION sine mix 55 \
   #reverb 40 \
 
-sox -n audio.wav \
+sox -c 2 -n audio.wav \
 	synth $DURATION brownnoise mix \
 	synth $DURATION sine mix 20 \
 	reverb 50 \
@@ -28,7 +28,7 @@ ffmpeg -y -colorspace bt709 -color_range tv -color_primaries bt709 -color_trc bt
 		[cell1_hued][cell2_hued]blend=all_mode=lighten:all_opacity=0.7[blend];
 		[test_hued][blend]blend=all_mode=overlay:all_opacity=0.4[final];
 		[final]vignette=angle=0.5+0.3*sin(t/5),scale=out_color_matrix=bt709:out_range=tv,format=yuv420p[out];
-	" -map "[out]" -map 3:a -c:v libx265 -c:a aac_at -shortest \
+	" -t $DURATION -map "[out]" -map 3:a -c:v libx265 -c:a aac_at -shortest \
 	-crf 18 -preset slow -b:a 256k -movflags +faststart ethereal_dreams.mp4
 
 rm -f audio.wav
