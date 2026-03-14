@@ -386,10 +386,10 @@
 				i use
 				<a href="https://streamrun.com">Streamrun</a> as my transcoding
 				server due to its ease of use, affordability, and reliability.
-				however, if you already have a spare computer w/ a stable
-				internet connection and are willing to spend some time
-				tinkering, you can host a transcoding server yourself using
-				<a href="https://mediamtx.org">mediamtx</a>,
+				however, if you already have a spare computer w/
+				<em>a stable internet connection</em> and are willing to spend
+				some time tinkering, you can host a transcoding server yourself
+				using <a href="https://mediamtx.org">mediamtx</a>,
 				<a href="https://ffmpeg.org">ffmpeg</a> and
 				<a href="https://github.com/irlserver/srtla">srtla</a>.
 			</p>
@@ -442,14 +442,17 @@ paths:
 				</p>
 			</details>
 			<details>
-				<summary>notes on self-hosting a SRTLA to SRT proxy</summary>
+				<summary>
+					notes on self-hosting a SRTLA to SRT proxy
+					(<b>recommended</b>)
+				</summary>
 				<p>
 					it's possible to host your own SRTLA -> SRT proxy, and only
 					use a cloud service like
 					<a href="https://streamrun.com">Streamrun</a> for video
 					transcoding. this has the advantage of allowing you to
-					control the SRTLA implementation used, which can have a
-					significant impact in real-world stream stability.
+					control the SRTLA implementation used, which can
+					significantly improve real-world stream stability.
 				</p>
 				<p>
 					this can be accomplished using
@@ -601,6 +604,11 @@ paths:
 											5000ms
 										</li>
 									</ul>
+								</li>
+								<li>
+									When using connection bonding, make sure to
+									choose a latency value suitable for all
+									connections you're using
 								</li>
 								<li>
 									Adaptive bitrate: on
