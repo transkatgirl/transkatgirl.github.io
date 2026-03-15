@@ -396,15 +396,16 @@
 				<li>
 					Frame rate: 30 fps or 60 fps (depending on source framerate)
 				</li>
-				<li>Audio channels: stereo</li>
-				<li>Audio sample rate: 44.1 kHz or 48 kHz</li>
 				<li>Video codec: H.264</li>
 				<li>
 					Video bitrate: 7.5 mbit/s CBR (twitch's official max bitrate
 					is 6 mbit/s, but the unofficial max bitrate is 8.5 mbit/s)
 				</li>
 				<li>Keyframe interval: 2s</li>
-				<li>H.264 Profile: High</li>
+				<li>H.264 Profile: high</li>
+				<li>H.264 Tune: zerolatency</li>
+				<li>Audio channels: stereo</li>
+				<li>Audio sample rate: 44.1 kHz or 48 kHz</li>
 				<li>Audio codec: AAC</li>
 				<li>Audio bitrate: 160 kbit/s</li>
 			</ul>
@@ -447,11 +448,42 @@
 					<ul>
 						<li>
 							URL (with connection bonding): make sure it starts
-							with <code>srtla://</code>
+							with <code>srtla://</code> or <code>rist://</code>
 						</li>
 						<li>
 							URL (without connection bonding): make sure it
-							starts with <code>srt://</code>
+							starts with <code>srt://</code> or
+							<code>rist://</code>
+						</li>
+						<li>
+							RIST:
+							<ul>
+								<li>
+									Network type specific recommendations:
+									<ul>
+										<li>
+											WiFi: URL should end with
+											<code
+												>?bandwidth=16500&rtt-min=100&rtt-max=1000&buffer-min=600&buffer-max=4000</code
+											>
+										</li>
+										<li>
+											Cellular: URL should end with
+											<code
+												>?bandwidth=16500&rtt-min=100&rtt-max=1000&buffer-min=1500&buffer-max=4000</code
+											>
+										</li>
+										<li>
+											Moving Starlink: URL should end with
+											<code
+												>?bandwidth=16500&rtt-min=100&rtt-max=1000&buffer-min=3000&buffer-max=5000</code
+											>
+										</li>
+									</ul>
+								</li>
+								<li>Adaptive bitrate: on</li>
+								<li>Bonding: on</li>
+							</ul>
 						</li>
 						<li>
 							SRT(LA):
