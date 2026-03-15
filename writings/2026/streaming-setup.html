@@ -414,34 +414,6 @@ paths:
 					<a href="/">home page</a>).
 				</p>
 			</details>
-			<details>
-				<summary>
-					notes on self-hosting a SRTLA to SRT proxy
-					(<b>recommended</b>)
-				</summary>
-				<p>
-					it's possible to host your own SRTLA -> SRT proxy, and only
-					use a cloud service like
-					<a href="https://streamrun.com">Streamrun</a> for video
-					transcoding. this has the advantage of allowing you to
-					control the SRTLA implementation used, which can
-					significantly improve real-world stream stability.
-				</p>
-				<p>
-					this can be accomplished using
-					<a href="https://github.com/irlserver/srtla"
-						>irlserver/srtla</a
-					>
-					(this example uses Streamrun's ingest, but you can use any
-					ingest that supports SRT):
-				</p>
-				<pre><code>./srtla_rec --srt_hostname ingest.streamrun.io --srt_port 8890</code></pre>
-				<p>
-					then, when configuring Moblin, you use the IP and port
-					(default is <code>5000</code>) of your proxy server while
-					keeping the stream ID the same.
-				</p>
-			</details>
 			<h4 id="server-encoder-settings">server encoder settings</h4>
 			<p>
 				to reduce resource usage on your transcoding server and avoid
