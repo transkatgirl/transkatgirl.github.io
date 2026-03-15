@@ -364,7 +364,10 @@
 				some time tinkering, you can host a transcoding server yourself
 				using <a href="https://obsproject.com">OBS</a> (highly
 				recommended that you compile OBS from source with
-				ENABLE_LIBFDK=ON if not using macOS).
+				ENABLE_LIBFDK=ON if not using macOS) and
+				<a href="https://github.com/datagutt/bbox-receiver"
+					>datagutt/bbox-receiver</a
+				>.
 			</p>
 			<h4 id="server-encoder-settings">server encoder settings</h4>
 			<p>
@@ -448,42 +451,11 @@
 					<ul>
 						<li>
 							URL (with connection bonding): make sure it starts
-							with <code>srtla://</code> or <code>rist://</code>
+							with <code>srtla://</code>
 						</li>
 						<li>
 							URL (without connection bonding): make sure it
-							starts with <code>srt://</code> or
-							<code>rist://</code>
-						</li>
-						<li>
-							RIST:
-							<ul>
-								<li>
-									Network type specific recommendations:
-									<ul>
-										<li>
-											WiFi: URL should end with
-											<code
-												>?bandwidth=16500&rtt-min=100&rtt-max=1000&buffer-min=600&buffer-max=4000</code
-											>
-										</li>
-										<li>
-											Cellular: URL should end with
-											<code
-												>?bandwidth=16500&rtt-min=100&rtt-max=1000&buffer-min=1500&buffer-max=4000</code
-											>
-										</li>
-										<li>
-											Moving Starlink: URL should end with
-											<code
-												>?bandwidth=16500&rtt-min=100&rtt-max=1000&buffer-min=3000&buffer-max=5000</code
-											>
-										</li>
-									</ul>
-								</li>
-								<li>Adaptive bitrate: on</li>
-								<li>Bonding: on</li>
-							</ul>
+							starts with <code>srt://</code>
 						</li>
 						<li>
 							SRT(LA):
