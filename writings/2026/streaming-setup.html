@@ -352,6 +352,49 @@
 					>datagutt/bbox-receiver</a
 				>.
 			</p>
+			<details>
+				<summary>OBS Media Source settings</summary>
+				<p>
+					After setting the OBS canvas resolution to the source
+					resolution, add a Media Source with the following
+					properties:
+				</p>
+				<ul>
+					<li>Local File: off</li>
+					<li>Restart playback when source becomes active: on</li>
+					<li>Network Buffering: 0 MB</li>
+					<li>
+						Input (w/ bbox-receiver):
+						<code
+							>srt://localhost:8282/?streamid=play/stream/belabox?srtauth=belabox</code
+						>
+					</li>
+					<li>
+						Input (w/o bbox-receiver):
+						<code>srt://0.0.0.0:5000?mode=listener</code>
+					</li>
+					<li>Input Format: mpegts</li>
+					<li>Reconnect Delay: 5s</li>
+					<li>Use hardware decoding when available: on</li>
+					<li>Show nothing when playback ends: off</li>
+					<li>Close file when inactive: off</li>
+					<li>YUV Color Range: Auto</li>
+					<li>Apply alpha in linear space: off</li>
+					<li>Seekable: off</li>
+				</ul>
+				<p>
+					After configuring the Media Source, add a Scaling/Aspect
+					Ratio filter on it with the following settings:
+				</p>
+				<ul>
+					<li>Scale Filtering: Lanczos</li>
+					<li>Resolution: [canvas resolution]</li>
+					<li>
+						Undistort center of image when scaling from ultrawide:
+						off
+					</li>
+				</ul>
+			</details>
 			<h4 id="server-encoder-settings">server encoder settings</h4>
 			<p>
 				to reduce resource usage on your transcoding server and avoid
