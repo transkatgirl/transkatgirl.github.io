@@ -366,12 +366,14 @@
 					<li>
 						Input (w/ bbox-receiver):
 						<code
-							>srt://localhost:8282/?streamid=play/stream/belabox?srtauth=belabox</code
+							>srt://localhost:8282/?timeout=5000000&streamid=play/stream/belabox?srtauth=belabox</code
 						>
 					</li>
 					<li>
 						Input (w/o bbox-receiver):
-						<code>srt://0.0.0.0:5000/?mode=listener</code>
+						<code
+							>srt://0.0.0.0:5000/?timeout=5000000&mode=listener</code
+						>
 					</li>
 					<li>Input Format: mpegts</li>
 					<li>Reconnect Delay: 5s</li>
