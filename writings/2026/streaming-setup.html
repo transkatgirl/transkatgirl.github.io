@@ -19,7 +19,7 @@
 		<meta name="author" content="transkatgirl" />
 		<meta
 			name="description"
-			content="livestreaming from the wilderness is technically challenging"
+			content="livestreaming outdoors is technically challenging"
 		/>
 		<meta name="theme-color" content="#36384f" />
 	</head>
@@ -30,8 +30,10 @@
 		<main>
 			<hgroup>
 				<h1>my irl streaming setup</h1>
-				<p>🚧 this page is a work in progress!</p>
-				<!-- <p>written <time>2026-03-26</time></p> -->
+				<p>
+					written <time>2026-03-18</time
+					><!--, last updated <time>2026-03-18</time>-->
+				</p>
 			</hgroup>
 			<p>
 				streaming irl is challenging, even when considered purely from a
@@ -355,6 +357,14 @@
 			<details>
 				<summary>OBS Media Source settings</summary>
 				<p>
+					🚧 i haven't tested the listed OBS settings in real-world
+					conditions yet due to time constraints (i'm currently
+					working on moving away from Streamrun so that i have more
+					control over the technical aspects of my streams). if you
+					encounter any issues from using them, please
+					<a href="/index.html#external-links">let me know</a>.
+				</p>
+				<p>
 					after setting the OBS canvas resolution to the source
 					resolution, add a Media Source with the following
 					properties:
@@ -449,7 +459,10 @@
 					>)
 				</li>
 				<li>Audio channels: stereo</li>
-				<li>Audio sample rate: 44.1 kHz or 48 kHz</li>
+				<li>
+					Audio sample rate: 44.1 kHz or 48 kHz (depending on source
+					sample rate)
+				</li>
 				<li>Audio codec: AAC (using libfdk AAC encoder)</li>
 				<li>Audio bitrate: 160 kbit/s</li>
 			</ul>
