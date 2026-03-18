@@ -1,6 +1,5 @@
 var textbox = document.querySelector("#textbox");
 var timeoutID = null;
-var filenameBox = document.querySelector("#filename");
 
 // Automatically load/save cache in local storage when opening and closing the page
 textbox.value = localStorage.getItem("browserpad") || "";
@@ -30,53 +29,13 @@ textbox.onkeyup = function () {
 	timeoutID = window.setTimeout(storeLocally, 1000);
 };
 
-// Save textarea contents as a text file
-document.querySelector("#save a").onclick = function () {
-	this.download = (filenameBox.value || "browserpad.txt").replace(
-		/^([^.]*)$/,
-		"$1.txt"
-	);
-	this.href = URL.createObjectURL(
-		new Blob([document.querySelector("#textbox").value], {
-			type: "text/plain",
-		})
-	);
-};
-
-// Load contents from a text file
-document.querySelector("#open a").onclick = function () {
-	document.querySelector("#open input").click();
-};
-document.querySelector("#open input").onchange = function () {
-	var reader = new FileReader();
-	reader.file = this.files[0]; // Custom property so the filenameBox can be set from within reader.onload()
-	reader.onload = function () {
-		filenameBox.value = this.file.name;
-		textbox.value = this.result; // this = FileReader object
-	};
-	reader.readAsText(this.files[0]); // this = input element
-};
-
 // Toggle spell-checking
-document.querySelector("#spellcheck").onchange = function () {
-	textbox.spellcheck = this.checked;
-};
-textbox.spellcheck = document.querySelector("#spellcheck").checked; // Initialize
-
-// Keyboard shortcuts for the save and load functions (`Ctrl+S`, `Ctrl+O`)
+textbox.spellcheck = true;
 document.onkeydown = function (event) {
 	if (event.ctrlKey) {
-		if (event.key === "s") {
-			document.querySelector("#save a").click();
-			event.preventDefault();
-		} else if (event.key === "o") {
-			document.querySelector("#open input").click();
+		if (event.key === "t") {
+			textbox.spellcheck = !textbox.spellcheck;
 			event.preventDefault();
 		}
 	}
-};
-
-// Show the about dialog
-document.querySelector("#about-icon").onclick = function () {
-	document.querySelector("#about").showModal();
 };
