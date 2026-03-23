@@ -400,11 +400,11 @@
 				</ul>
 				<p>
 					after configuring the Media Source, add a Scaling/Aspect
-					Ratio filter on it with the following settings:
+					Ratio effect filter on it with the following settings:
 				</p>
 				<ul>
 					<li>Scale Filtering: Lanczos</li>
-					<li>Resolution: [canvas resolution]</li>
+					<li>Resolution: Base (Canvas) Resolution</li>
 					<li>
 						Undistort center of image when scaling from ultrawide:
 						off
@@ -452,8 +452,8 @@
 					is 6 mbit/s, but the unofficial max bitrate is 8.5 mbit/s)
 				</li>
 				<li>Keyframe interval: 2s</li>
-				<li>H.264 Profile: high</li>
 				<li>x264 Preset: faster or medium</li>
+				<li>H.264 Profile: high</li>
 				<li>
 					x264 Tune: zerolatency (optional, see
 					<a
@@ -461,12 +461,15 @@
 						>The Quality Cost of Low-Latency Transcoding</a
 					>)
 				</li>
-				<li>Audio channels: stereo</li>
 				<li>
 					Audio sample rate: 44.1 kHz or 48 kHz (depending on source
 					sample rate)
 				</li>
-				<li>Audio codec: AAC (using libfdk AAC encoder)</li>
+				<li>Audio channels: stereo</li>
+				<li>
+					Audio codec: AAC (using either libfdk or CoreAudio AAC
+					encoders)
+				</li>
 				<li>Audio bitrate: 160 kbit/s</li>
 			</ul>
 			<h3 id="moblin">moblin</h3>
