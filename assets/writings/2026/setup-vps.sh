@@ -1,5 +1,5 @@
 # Assumes your VPS service has a way to view the VM's graphical display
-# Tested on Vultr
+# Tested on Vultr with Ubuntu 25.10
 
 # Part 1
 passwd && apt update && apt -y upgrade && apt install -y ubuntu-desktop && ubuntu-drivers install nvidia && ufw allow ssh && ufw enable && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-password && reboot
