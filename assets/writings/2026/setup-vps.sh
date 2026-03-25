@@ -3,7 +3,7 @@
 # 12GB RAM recommended during setup, 4GB RAM & NVIDIA GPU recommended during usage
 
 # Part 1
-apt update && apt -y upgrade && apt install -y ubuntu-desktop && ubuntu-drivers install && ufw allow ssh && ufw enable && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-password && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-autologin && sed -i -e 's/#  AutomaticLoginEnable = true/AutomaticLoginEnable = true/g' -e 's/#  AutomaticLogin = user1/AutomaticLogin = root/g' /etc/gdm3/custom.conf && reboot
+apt update && apt -y upgrade && apt install -y ubuntu-desktop && ubuntu-drivers install && ufw allow ssh && ufw enable && systemctl disable systemd-networkd-wait-online.service && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-password && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-autologin && sed -i -e 's/#  AutomaticLoginEnable = true/AutomaticLoginEnable = true/g' -e 's/#  AutomaticLogin = user1/AutomaticLogin = root/g' /etc/gdm3/custom.conf && reboot
 
 # Part 2
 set -euxo pipefail
@@ -47,6 +47,7 @@ echo '{
 }' > config.json
 docker run --restart=always -d --name belabox-receiver -p 5000:5000/udp -p 8181:8181/tcp -p 8282:8282/udp -p 3000:3000/tcp -v $HOME/config.json:/app/config.json bbox-receiver
 ufw allow 5000/udp
+# ?streamid=live/stream/belabox?srtauth=belabox
 
 ### MorrowShore/Prism
 git clone https://github.com/MorrowShore/Prism.git
