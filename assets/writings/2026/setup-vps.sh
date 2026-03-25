@@ -3,7 +3,7 @@
 # 12GB RAM recommended during setup, 4GB RAM & NVIDIA GPU recommended during usage
 
 # Part 1
-passwd && apt update && apt -y upgrade && apt install -y ubuntu-desktop && ubuntu-drivers install && ufw allow ssh && ufw enable && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-password && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-autologin && sed -i -e 's/#  AutomaticLoginEnable = true/AutomaticLoginEnable = true/g' -e 's/#  AutomaticLogin = user1/AutomaticLogin = root/g' /etc/gdm3/custom.conf && reboot
+apt update && apt -y upgrade && apt install -y ubuntu-desktop && ubuntu-drivers install && ufw allow ssh && ufw enable && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-password && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-autologin && sed -i -e 's/#  AutomaticLoginEnable = true/AutomaticLoginEnable = true/g' -e 's/#  AutomaticLogin = user1/AutomaticLogin = root/g' /etc/gdm3/custom.conf && reboot
 
 # Part 2
 set -euxo pipefail
