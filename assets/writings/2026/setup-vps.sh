@@ -1,9 +1,9 @@
 # Assumes your VPS service has a way to view the VM's graphical display
 # Tested on Vultr with Ubuntu 25.10 w/ 30GB disk
-# 12GB RAM recommended during setup, NVIDIA GPU recommended during usage
+# 12GB RAM recommended during setup, 4GB RAM & NVIDIA GPU recommended during usage
 
 # Part 1
-passwd && apt update && apt -y upgrade && apt install -y ubuntu-desktop && ubuntu-drivers install && ufw allow ssh && ufw enable && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-password && reboot
+passwd && apt update && apt -y upgrade && apt install -y ubuntu-desktop && ubuntu-drivers install && ufw allow ssh && ufw enable && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-password && sed -i -e 's/auth	required	pam_succeed_if.so/#auth	required	pam_succeed_if.so/g' /etc/pam.d/gdm-autologin && sed -i -e 's/#  AutomaticLoginEnable = true/AutomaticLoginEnable = true/g' -e 's/#  AutomaticLogin = user1/AutomaticLogin = root/g' /etc/gdm3/custom.conf && reboot
 
 # Part 2
 set -euxo pipefail
@@ -22,6 +22,8 @@ cmake --build build_ubuntu
 cmake --install build_ubuntu
 ldconfig
 cd ..
+mkdir ~/.config/autorun
+cp obs-studio/frontend/cmake/linux/com.obsproject.Studio.desktop ~/.config/autorun
 
 ## Containers
 apt install -y docker.io
@@ -31,9 +33,27 @@ git clone https://github.com/datagutt/bbox-receiver.git
 cd bbox-receiver
 docker build -t bbox-receiver .
 cd ..
+docker run --restart=always -d --name belabox-receiver -p 5000:5000/udp -p 8181:8181/tcp -p 8282:8282/udp -p 3000:3000/tcp -v ./config.json:/app/config.json bbox-receiver
 
 ### MorrowShore/Prism
 git clone https://github.com/MorrowShore/Prism.git
 cd Prism
 docker build -t prism .
 cd ..
+#docker run --restart=always -d -p 1935:1935 --name prism \
+#	-e YOUTUBE_KEY="your-youtube-key" \
+#	-e FACEBOOK_KEY="your-facebook-key" \
+#	-e INSTAGRAM_KEY="your-instagram-key" \
+#	-e TWITCH_URL="your-twitch-server" \
+#	-e TWITCH_KEY="your-twitch-key" \
+#	-e TROVO_KEY="your-trovo-key" \
+#	-e KICK_KEY="your-kick-key" \
+#	-e CLOUDFLARE_KEY="your-cf-key" \
+#	-e INSTAGRAM_KEY="your-ig-key" \
+#	-e RTMP1_URL="custom-rtmp1-server" \
+#	-e RTMP1_KEY="custom-rtmp1-key" \
+#	-e RTMP2_URL="custom-rtmp2-server" \
+#	-e RTMP2_KEY="custom-rtmp2-key" \
+#	-e RTMP3_URL="custom-rtmp3-server" \
+#	-e RTMP3_KEY="custom-rtmp3-key" \
+#	prism
