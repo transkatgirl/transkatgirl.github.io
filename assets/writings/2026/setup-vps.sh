@@ -22,8 +22,8 @@ cmake --build build_ubuntu
 cmake --install build_ubuntu
 ldconfig
 cd ..
-mkdir ~/.config/autorun
-cp obs-studio/frontend/cmake/linux/com.obsproject.Studio.desktop ~/.config/autorun
+mkdir ~/.config/autostart
+cp obs-studio/frontend/cmake/linux/com.obsproject.Studio.desktop ~/.config/autostart
 
 ## Containers
 apt install -y docker.io
@@ -33,7 +33,20 @@ git clone https://github.com/datagutt/bbox-receiver.git
 cd bbox-receiver
 docker build -t bbox-receiver .
 cd ..
-docker run --restart=always -d --name belabox-receiver -p 5000:5000/udp -p 8181:8181/tcp -p 8282:8282/udp -p 3000:3000/tcp -v ./config.json:/app/config.json bbox-receiver
+echo '{
+  "auth": [
+    {
+      "user": "belabox",
+      "key": "belabox"
+    },
+    {
+      "user": "second_user",
+      "key": "secret_key"
+    }
+  ]
+}' > config.json
+docker run --restart=always -d --name belabox-receiver -p 5000:5000/udp -p 8181:8181/tcp -p 8282:8282/udp -p 3000:3000/tcp -v $HOME/config.json:/app/config.json bbox-receiver
+
 
 ### MorrowShore/Prism
 git clone https://github.com/MorrowShore/Prism.git
