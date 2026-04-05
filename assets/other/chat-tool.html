@@ -22,11 +22,11 @@
 			document.getElementById("chat").src =
 				"https://socialstream.ninja/dock.html?session=" +
 				params.get("session") +
-				"&compact&delaytime=1000&notime&hidemenu&server&noavatar"; // not here, but used in my actual OBS overlay: alignbottom
+				"&compact&alignbottom&delaytime=1000&notime&hidemenu&server&noavatar";
 			document.getElementById("alerts").src =
 				"https://socialstream.ninja/multi-alerts.html?session=" +
 				params.get("session") +
-				"&compact&queue&align=center&server";
+				"&compact&queue&align=center&server&beep"; // &beep not used in the OBS overlay
 		</script>
 	</body>
 </html>
