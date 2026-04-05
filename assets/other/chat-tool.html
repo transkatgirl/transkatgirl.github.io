@@ -2,14 +2,23 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta
+			name="viewport"
+			content="width=device-width,initial-scale=1,user-scalable=no"
+		/>
 		<style>
 			iframe {
+				border: none;
 				position: absolute;
 				top: 0;
 				left: 0;
 				width: 100vw;
 				height: 100vh;
+			}
+
+			#alerts {
+				pointer-events: none;
+				opacity: 0.85;
 			}
 		</style>
 	</head>
