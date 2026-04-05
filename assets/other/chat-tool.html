@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<style>
+			iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+			}
+		</style>
+	</head>
+	<body>
+		<iframe id="chat"></iframe>
+		<iframe id="alerts"></iframe>
+		<script>
+			const params = new URL(window.location.href).searchParams;
+
+			document.getElementById("chat").src =
+				"https://socialstream.ninja/dock.html?session=" +
+				params.get("session") +
+				"&compact&alignbottom&delaytime=1000&notime&hidemenu&server&noavatar";
+			document.getElementById("alerts").src =
+				"https://socialstream.ninja/multi-alerts.html?session=" +
+				params.get("session") +
+				"&compact&queue&align=center&server";
+		</script>
+	</body>
+</html>
