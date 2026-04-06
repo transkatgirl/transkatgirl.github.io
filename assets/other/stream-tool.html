@@ -84,11 +84,21 @@
 		<script>
 			const params = new URL(window.location.href).searchParams;
 
-			document.getElementById("camera").src =
-				"https://psychosis.live/?role=sender&stats=true&id=" +
-				params.get("id") +
-				"&width=1920&height=1080&frameRate=30&facingMode=environment&autoGainControl=true&audioContentHint=music&videoContentHint=motion&maxAudioBitrate=192&dynamicAudioBitrate=true&dynamicVideoFramerate=true&maxVideoBitrate=10000&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D#" +
-				params.get("pass");
+			if (params.has("iceServers")) {
+				document.getElementById("camera").src =
+					"https://psychosis.live/?role=sender&stats=true&id=" +
+					params.get("id") +
+					"&width=1920&height=1080&frameRate=30&facingMode=environment&autoGainControl=true&audioContentHint=music&videoContentHint=motion&maxAudioBitrate=192&dynamicAudioBitrate=true&dynamicVideoFramerate=true&maxVideoBitrate=10000&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D&iceServers=" +
+					params.get("iceServers") +
+					"#" +
+					params.get("pass");
+			} else {
+				document.getElementById("camera").src =
+					"https://psychosis.live/?role=sender&stats=true&id=" +
+					params.get("id") +
+					"&width=1920&height=1080&frameRate=30&facingMode=environment&autoGainControl=true&audioContentHint=music&videoContentHint=motion&maxAudioBitrate=192&dynamicAudioBitrate=true&dynamicVideoFramerate=true&maxVideoBitrate=10000&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D#" +
+					params.get("pass");
+			}
 
 			// &sdk not used in the OBS overlay
 
