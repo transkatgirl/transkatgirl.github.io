@@ -66,8 +66,16 @@
 			id="camera"
 			allow="autoplay *;camera *;microphone *;picture-in-picture *;screen-wake-lock *;speaker-selection *"
 		></iframe>
-		<iframe class="chat" id="chat"></iframe>
-		<iframe class="chat" id="alerts"></iframe>
+		<iframe
+			class="chat"
+			id="chat"
+			allow="autoplay *;screen-wake-lock *;speaker-selection *"
+		></iframe>
+		<iframe
+			class="chat"
+			id="alerts"
+			allow="autoplay *;screen-wake-lock *;speaker-selection *"
+		></iframe>
 		<button
 			onclick="if (document.fullscreenElement) {document.exitFullscreen()} else {document.body.requestFullscreen()}"
 		>
@@ -87,7 +95,7 @@
 			document.getElementById("chat").src =
 				"https://socialstream.ninja/dock.html?session=" +
 				params.get("session") +
-				"&compact&alignbottom&notime&hidemenu&server&noavatar&autoscroll&sdk"; // not here, but used in OBS overlay: &delaytime=1000
+				"&compact&alignbottom&notime&hidemenu&server&noavatar&autoscroll&sdk"; // not here, but used in OBS overlay: &delaytime=800
 			document.getElementById("alerts").src =
 				"https://socialstream.ninja/multi-alerts.html?session=" +
 				params.get("session") +
