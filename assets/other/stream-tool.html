@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width,initial-scale=1,user-scalable=no"
+		/>
+		<style>
+			button {
+				position: absolute;
+				top: 1em;
+				left: 1em;
+			}
+
+			@media (max-aspect-ratio: 1/1) {
+				.camera {
+					top: 0;
+					left: 0;
+					width: 100vw;
+					height: 50vh;
+				}
+
+				.chat {
+					top: 50vh;
+					left: 0;
+					width: 100vw;
+					height: 50vh;
+				}
+			}
+
+			@media (min-aspect-ratio: 1/1) or (aspect-ratio: 1/1) {
+				.camera {
+					top: 0;
+					left: 0;
+					width: 50vw;
+					height: 100vh;
+				}
+
+				.chat {
+					top: 0;
+					left: 50vw;
+					width: 50vw;
+					height: 100vh;
+				}
+			}
+
+			iframe {
+				border: none;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+			}
+
+			#alerts {
+				pointer-events: none;
+				opacity: 0.85;
+			}
+		</style>
+	</head>
+	<body>
+		<iframe
+			class="camera"
+			id="camera"
+			allow="autoplay *;camera *;microphone *;picture-in-picture *;screen-wake-lock *;speaker-selection *"
+		></iframe>
+		<iframe class="chat" id="chat"></iframe>
+		<iframe class="chat" id="alerts"></iframe>
+		<button
+			onclick="if (document.fullscreenElement) {document.exitFullscreen()} else {document.body.requestFullscreen()}"
+		>
+			🟢
+		</button>
+		<script>
+			const params = new URL(window.location.href).searchParams;
+
+			document.getElementById("camera").src =
+				"https://psychosis.live/?role=sender&stats=true&id=" +
+				params.get("id") +
+				"&width=1920&height=1080&frameRate=30&autoGainControl=true&audioContentHint=music&videoContentHint=motion&maxAudioBitrate=192&dynamicAudioBitrate=true&dynamicVideoFramerate=true&maxVideoBitrate=10000&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D#" +
+				params.get("pass");
+
+			// &sdk not used in the OBS overlay
+
+			document.getElementById("chat").src =
+				"https://socialstream.ninja/dock.html?session=" +
+				params.get("session") +
+				"&compact&alignbottom&notime&hidemenu&server&noavatar&autoscroll&sdk"; // not here, but used in OBS overlay: &delaytime=1000
+			document.getElementById("alerts").src =
+				"https://socialstream.ninja/multi-alerts.html?session=" +
+				params.get("session") +
+				"&compact&queue&align=center&server&beep&sdk"; // &beep not used in OBS overlay
+		</script>
+	</body>
+</html>
