@@ -76,12 +76,21 @@
 			id="alerts"
 			allow="autoplay *;screen-wake-lock *;speaker-selection *"
 		></iframe>
-		<button
-			onclick="if (document.fullscreenElement) {document.exitFullscreen()} else {document.body.requestFullscreen()}"
-		>
-			🟢
-		</button>
+		<button id="togglefull">🟢</button>
 		<script>
+			document.getElementById("togglefull").onclick = () => {
+				document.body.requestFullscreen();
+			};
+			document.body.onfullscreenchange = () => {
+				if (document.fullscreenElement) {
+					document.getElementById("togglefull").style.display =
+						"none";
+				} else {
+					document.getElementById("togglefull").style.display =
+						"unset";
+				}
+			};
+
 			const params = new URL(window.location.href).searchParams;
 
 			let streamingURL = (document.getElementById("camera").src =
