@@ -101,23 +101,23 @@
 				case "1080p60":
 					streamingURL =
 						streamingURL +
-						"&width=1920&height=1080&frameRate=60&maxAudioBitrate=192&dynamicAudioBitrate=true&dynamicVideoFramerate=true&maxVideoBitrate=15000&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D";
+						"&width=1920&height=1080&frameRate=60&maxAudioBitrate=-1&maxVideoBitrate=-1&dynamicAudioBitrate=true&dynamicVideoFramerate=true&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D";
 					break;
 				case "1080p30":
 					streamingURL =
 						streamingURL +
-						"&width=1920&height=1080&frameRate=30&maxAudioBitrate=192&dynamicAudioBitrate=true&dynamicVideoFramerate=true&maxVideoBitrate=10000&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D";
+						"&width=1920&height=1080&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=-1&dynamicAudioBitrate=true&dynamicVideoFramerate=true&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D";
 					break;
 				case "720p60":
 					streamingURL =
 						streamingURL +
-						"&width=1280&height=720&frameRate=60&maxAudioBitrate=192&dynamicAudioBitrate=true&dynamicVideoFramerate=true&maxVideoBitrate=9000&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D";
+						"&width=1280&height=720&frameRate=60&maxAudioBitrate=-1&maxVideoBitrate=-1&dynamicAudioBitrate=true&dynamicVideoFramerate=true&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D";
 					break;
 				case "720p30":
 				default:
 					streamingURL =
 						streamingURL +
-						"&width=1280&height=720&frameRate=30&maxAudioBitrate=192&dynamicAudioBitrate=true&dynamicVideoFramerate=true&maxVideoBitrate=6000&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D";
+						"&width=1280&height=720&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=-1&dynamicAudioBitrate=true&dynamicVideoFramerate=true&codecPreferences=%5B%22video%2FAV1%22%2C%22video%2FVP9%22%2C%22video%2FH265%22%2C%22video%2FH264%22%2C%22video%2FVP8%22%2C%22audio%2Fopus%22%2C%22audio%2Fred%22%2C%22audio%2Fmp4a-latm%22%2C%22audio%2FG722%22%2C%22audio%2FPCMU%22%2C%22audio%2FPCMA%22%5D";
 					break;
 			}
 			if (params.has("iceServers")) {
