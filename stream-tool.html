@@ -7,10 +7,17 @@
 			content="width=device-width,initial-scale=1,user-scalable=no"
 		/>
 		<style>
-			button {
+			.overlay-btn {
 				position: absolute;
 				top: 1em;
-				left: 1em;
+				z-index: 10;
+				padding: 0.4em 0.7em;
+				border: none;
+				border-radius: 6px;
+				font-size: 1.1em;
+				cursor: pointer;
+				background: #333;
+				color: #fff;
 			}
 
 			@media (max-aspect-ratio: 1/1) {
@@ -58,6 +65,12 @@
 				pointer-events: none;
 				opacity: 0.85;
 			}
+
+			#togglefull { left: 1em; }
+
+			#tracker { right: 1em; }
+			#tracker.active { background: #0a0; }
+			#tracker.pending { background: #a80; }
 		</style>
 	</head>
 	<body>
@@ -76,7 +89,8 @@
 			id="alerts"
 			allow="autoplay *;screen-wake-lock *;speaker-selection *"
 		></iframe>
-		<button id="togglefull">🟢</button>
+		<button id="togglefull" class="overlay-btn">🟢</button>
+		<button id="tracker" class="overlay-btn" style="display:none">⏹</button>
 		<script>
 			document.getElementById("togglefull").onclick = () => {
 				document.body.requestFullscreen();
@@ -151,6 +165,74 @@
 				"https://socialstream.ninja/multi-alerts.html?session=" +
 				params.get("session") +
 				"&compact&queue&align=center&server&beep&sdk"; // &beep not used in OBS overlay
+
+			// --- Location tracker sender ---
+			(function() {
+				const trackerUrl = params.get("tracker");
+				const token = params.get("token");
+				if (!trackerUrl || !token) return;
+
+				const btn = document.getElementById("tracker");
+				btn.style.display = "unset";
+
+				const endpoint = trackerUrl.replace(/\/$/, "") + "/api/location";
+				const headers = { "Authorization": "Bearer " + token, "Content-Type": "application/json" };
+
+				const queue = [];
+				let watchId = null;
+				let sending = false;
+				let draining = false; // true = stop queued, don't add more locations
+
+				async function send(body) {
+					const r = await fetch(endpoint, { method: "POST", headers, body: JSON.stringify(body) });
+					if (!r.ok) throw new Error(r.status);
+				}
+
+				async function flush() {
+					if (sending) return;
+					sending = true;
+					while (queue.length) {
+						const item = queue[0];
+						const deadline = Date.now() + 120_000;
+						let delay = 1000;
+						while (Date.now() < deadline) {
+							try { await send(item); break; }
+							catch { await new Promise(r => setTimeout(r, delay)); delay = Math.min(delay * 2, 15_000); }
+						}
+						queue.shift();
+					}
+						sending = false;
+						if (draining) { draining = false; btn.textContent = "⏹"; btn.classList.remove("active", "pending"); }
+				}
+
+				function startTracking() {
+					draining = false;
+					watchId = navigator.geolocation.watchPosition(pos => {
+						if (draining) return;
+						queue.push({ type: "location", lat: pos.coords.latitude, lon: pos.coords.longitude, timestamp_ms: Date.now() });
+						flush();
+					});
+				}
+
+				function stopTracking() {
+					if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
+					draining = true;
+					queue.push({ type: "stop" });
+					flush();
+				}
+
+				btn.onclick = () => {
+					if (draining) return; // already stopping
+					if (watchId !== null) { stopTracking(); btn.textContent = "⏳"; btn.classList.add("pending"); btn.classList.remove("active"); }
+					else { startTracking(); btn.textContent = "📡"; btn.classList.add("active"); btn.classList.remove("pending"); }
+				};
+
+				// On load: check if server has an active session and resume
+				fetch(endpoint + "/status", { headers })
+					.then(r => r.json())
+					.then(data => { if (data.live) { startTracking(); btn.textContent = "📡"; btn.classList.add("active"); } })
+					.catch(() => {});
+			})();
 		</script>
 	</body>
 </html>
