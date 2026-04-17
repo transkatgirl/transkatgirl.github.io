@@ -11,25 +11,3 @@ index 1c671690247e2..85efba89eec8c 100644
    }
 
    // Callbacks
-diff --git a/media/capture/video/android/java/src/org/chromium/media/VideoCaptureCamera2.java b/media/capture/video/android/java/src/org/chromium/media/VideoCaptureCamera2.java
-index f1473ea2e7ac9..568a3e54f81bc 100644
---- a/media/capture/video/android/java/src/org/chromium/media/VideoCaptureCamera2.java
-+++ b/media/capture/video/android/java/src/org/chromium/media/VideoCaptureCamera2.java
-@@ -477,7 +477,7 @@ public class VideoCaptureCamera2 extends VideoCapture {
-                                                 .width();
-             }
-             // There is no min-zoom per se, so clamp it to always 1.
--            builder.setDouble(PhotoCapabilityDouble.MIN_ZOOM, 1.0)
-+            builder.setDouble(PhotoCapabilityDouble.MIN_ZOOM, 0.0)
-                     .setDouble(PhotoCapabilityDouble.MAX_ZOOM, mMaxZoom)
-                     .setDouble(PhotoCapabilityDouble.CURRENT_ZOOM, currentZoom)
-                     .setDouble(PhotoCapabilityDouble.STEP_ZOOM, 0.1);
-@@ -848,7 +848,7 @@ public class VideoCaptureCamera2 extends VideoCapture {
-
-             if (mOptions.zoom != 0) {
-                 final float normalizedZoom =
--                        Math.max(1.0f, Math.min((float) mOptions.zoom, mMaxZoom));
-+                        Math.max(0.0f, Math.min((float) mOptions.zoom, mMaxZoom));
-                 final float cropFactor = (normalizedZoom - 1) / (2 * normalizedZoom);
-
-                 mCropRect =
