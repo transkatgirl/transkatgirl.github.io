@@ -9,5 +9,96 @@ index 1c671690247e2..85efba89eec8c 100644
 -                     : AAUDIO_INPUT_PRESET_CAMCORDER);
 +                     : AAUDIO_INPUT_PRESET_VOICE_PERFORMANCE);
    }
-
+ 
    // Callbacks
+diff --git a/media/capture/video/android/java/src/org/chromium/media/VideoCaptureCamera2.java b/media/capture/video/android/java/src/org/chromium/media/VideoCaptureCamera2.java
+index f1473ea2e7ac9..a82cfd5843cad 100644
+--- a/media/capture/video/android/java/src/org/chromium/media/VideoCaptureCamera2.java
++++ b/media/capture/video/android/java/src/org/chromium/media/VideoCaptureCamera2.java
+@@ -463,24 +463,12 @@ public class VideoCaptureCamera2 extends VideoCapture {
+                             PhotoCapabilityInt.CURRENT_WIDTH,
+                             (mPhotoWidth > 0) ? mPhotoWidth : mCaptureFormat.getWidth());
+ 
+-            float currentZoom = 1.0f;
+-            if (cameraCharacteristics.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE)
+-                            != null
+-                    && mPreviewRequest.get(CaptureRequest.SCALER_CROP_REGION) != null) {
+-                currentZoom =
+-                        cameraCharacteristics
+-                                        .get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE)
+-                                        .width()
+-                                / (float)
+-                                        mPreviewRequest
+-                                                .get(CaptureRequest.SCALER_CROP_REGION)
+-                                                .width();
+-            }
+             // There is no min-zoom per se, so clamp it to always 1.
+-            builder.setDouble(PhotoCapabilityDouble.MIN_ZOOM, 1.0)
++            builder.setDouble(PhotoCapabilityDouble.MIN_ZOOM, mMinZoom)
+                     .setDouble(PhotoCapabilityDouble.MAX_ZOOM, mMaxZoom)
+-                    .setDouble(PhotoCapabilityDouble.CURRENT_ZOOM, currentZoom)
++                    .setDouble(PhotoCapabilityDouble.CURRENT_ZOOM, 1.0f)
+                     .setDouble(PhotoCapabilityDouble.STEP_ZOOM, 0.1);
++            mZoom = 1.0f;
+ 
+             // Classify the Focus capabilities. In CONTINUOUS and SINGLE_SHOT, we can call
+             // autoFocus(AutoFocusCallback) to configure region(s) to focus onto.
+@@ -846,18 +834,15 @@ public class VideoCaptureCamera2 extends VideoCapture {
+             final Rect canvas =
+                     cameraCharacteristics.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE);
+ 
+-            if (mOptions.zoom != 0) {
+-                final float normalizedZoom =
+-                        Math.max(1.0f, Math.min((float) mOptions.zoom, mMaxZoom));
+-                final float cropFactor = (normalizedZoom - 1) / (2 * normalizedZoom);
++            mZoom = (float)mOptions.zoom;
+ 
++            if (mOptions.zoom != 0) {
+                 mCropRect =
+                         new Rect(
+-                                Math.round(canvas.width() * cropFactor),
+-                                Math.round(canvas.height() * cropFactor),
+-                                Math.round(canvas.width() * (1 - cropFactor)),
+-                                Math.round(canvas.height() * (1 - cropFactor)));
+-                Log.d(TAG, "zoom level %f, rectangle: %s", normalizedZoom, mCropRect.toString());
++                                0,
++                                0,
++                                canvas.width(),
++                                canvas.height());
+             }
+ 
+             if (mOptions.focusMode != AndroidMeteringMode.NOT_SET) mFocusMode = mOptions.focusMode;
+@@ -1140,6 +1125,8 @@ public class VideoCaptureCamera2 extends VideoCapture {
+ 
+     private @Nullable Range<Integer> mAeFpsRange;
+     private @CameraState int mCameraState = CameraState.STOPPED;
++    private float mZoom = 1.0f;
++    private float mMinZoom = 1.0f;
+     private float mMaxZoom = 1.0f;
+     private Rect mCropRect = new Rect();
+     private int mPhotoWidth;
+@@ -1420,6 +1407,10 @@ public class VideoCaptureCamera2 extends VideoCapture {
+                 requestBuilder.set(CaptureRequest.CONTROL_AWB_REGIONS, array);
+             }
+ 
++            if (mZoom != 0) {
++                requestBuilder.set(CaptureRequest.CONTROL_ZOOM_RATIO, mZoom);
++            }
++
+             if (!mCropRect.isEmpty()) {
+                 requestBuilder.set(CaptureRequest.SCALER_CROP_REGION, mCropRect);
+             }
+@@ -1741,9 +1732,12 @@ public class VideoCaptureCamera2 extends VideoCapture {
+ 
+         final CameraCharacteristics cameraCharacteristics = getCameraCharacteristics(id);
+         if (cameraCharacteristics != null) {
++            mMinZoom =
++                    cameraCharacteristics.get(
++                            CameraCharacteristics.CONTROL_ZOOM_RATIO_RANGE).getLower();
+             mMaxZoom =
+                     cameraCharacteristics.get(
+-                            CameraCharacteristics.SCALER_AVAILABLE_MAX_DIGITAL_ZOOM);
++                            CameraCharacteristics.CONTROL_ZOOM_RATIO_RANGE).getUpper();
+         }
+     }
+ 

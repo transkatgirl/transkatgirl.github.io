@@ -22,3 +22,5 @@ git apply "~/Android Chromium 149.0.7796.1.patch"
 ensure_bootstrap
 gn args out/Default --args="target_os=\"android\" target_cpu=\"arm64\" use_remoteexec = false is_component_build = false"
 autoninja -C out/Default chrome_public_apk
+
+cp out/Default/apks/ChromePublic.apk ~
