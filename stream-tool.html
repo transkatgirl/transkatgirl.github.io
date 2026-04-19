@@ -118,6 +118,11 @@
 						streamingURL +
 						"&width=1920&height=1080&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=-1";
 					break;
+				case "8mbit":
+					streamingURL =
+						streamingURL +
+						"&width=1920&height=1080&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=8000";
+					break;
 				case "720p60":
 					streamingURL =
 						streamingURL +
@@ -127,6 +132,10 @@
 					streamingURL =
 						streamingURL +
 						"&width=1280&height=720&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=-1";
+				case "4mbit":
+					streamingURL =
+						streamingURL +
+						"&width=1280&height=720&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=4000";
 				case "540p30":
 				default:
 					streamingURL =
