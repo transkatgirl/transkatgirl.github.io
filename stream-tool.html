@@ -153,14 +153,22 @@
 			streamingURL = streamingURL + "#" + params.get("pass");
 			document.getElementById("camera").src = streamingURL;
 
+			let overlayRoot = "https://socialstream.ninja";
+
+			if (params.has("overlayRoot")) {
+				overlayRoot = params.get("overlayRoot");
+			}
+
 			// &sdk not used in the OBS overlay
 
 			document.getElementById("chat").src =
-				"https://socialstream.ninja/dock.html?session=" +
+				overlayRoot +
+				"/dock.html?session=" +
 				params.get("session") +
 				"&compact&alignbottom&notime&hidemenu&server&noavatar&autoscroll&sdk&loadlast"; // not here, but used in OBS overlay: &delaytime=500; &loadlast not used in OBS overlay
 			document.getElementById("alerts").src =
-				"https://socialstream.ninja/multi-alerts.html?session=" +
+				overlayRoot +
+				"/multi-alerts.html?session=" +
 				params.get("session") +
 				"&compact&queue&align=center&server&beep&sdk"; // &beep not used in OBS overlay
 		</script>
