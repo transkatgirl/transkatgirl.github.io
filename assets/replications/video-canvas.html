@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- This page was made using LLM assistance -->
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<style>
+			body {
+				display: flex;
+				gap: 1rem;
+				padding: 1rem;
+				font-family: sans-serif;
+				background: #111;
+				color: #fff;
+			}
+
+			.stream-container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			video,
+			canvas {
+				width: 960px;
+				height: 540px;
+				border-radius: 8px;
+				border: 2px solid #444;
+				background: #000;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="stream-container">
+			<label>video element</label>
+			<video id="video" autoplay playsinline muted></video>
+		</div>
+		<div class="stream-container">
+			<label>canvas element</label>
+			<canvas id="canvas" width="960" height="540"></canvas>
+		</div>
+
+		<script>
+			const video = document.getElementById("video");
+			const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d");
+
+			navigator.mediaDevices
+				.getUserMedia({ video: true, audio: false })
+				.then((stream) => {
+					video.srcObject = stream;
+
+					video.addEventListener("play", () => {
+						function drawFrame() {
+							const videoAspect =
+								video.videoWidth / video.videoHeight;
+							const canvasAspect = canvas.width / canvas.height;
+
+							let drawWidth, drawHeight, offsetX, offsetY;
+
+							if (videoAspect > canvasAspect) {
+								drawWidth = canvas.width;
+								drawHeight = canvas.width / videoAspect;
+							} else {
+								drawHeight = canvas.height;
+								drawWidth = canvas.height * videoAspect;
+							}
+
+							offsetX = (canvas.width - drawWidth) / 2;
+							offsetY = (canvas.height - drawHeight) / 2;
+
+							ctx.clearRect(0, 0, canvas.width, canvas.height);
+							ctx.drawImage(
+								video,
+								offsetX,
+								offsetY,
+								drawWidth,
+								drawHeight
+							);
+							requestAnimationFrame(drawFrame);
+						}
+						drawFrame();
+					});
+				})
+				.catch((err) => {
+					console.error("Camera access denied or unavailable:", err);
+				});
+		</script>
+	</body>
+</html>
