@@ -6,6 +6,14 @@
 			name="viewport"
 			content="width=device-width,initial-scale=1,user-scalable=no"
 		/>
+		<!--
+			Note: A precompiled binary of the patched Android Chromium build necessary to fix some of the most major input device bugs can be found at https://drive.google.com/file/d/1qB7MVyEPb76aJGJpYDjosrmIQjdXv0gt/view.
+			(Source code is available in /assets/patches/ directory of this repository).
+
+			Keep in mind that this build has plenty of bugs of its own (i'm not exactly the most experienced with Chromium development lol), and is not recommended for non-streaming use cases. Only use it if you NEED it (such as if you plan on using an external microphone), and watch out for any regressions that it might cause.
+
+			Regardless of what device and software you plan on using for streaming, you should always heavily test your whole software stack before using it live.
+		-->
 		<style>
 			button {
 				position: relative;
