@@ -168,11 +168,21 @@
 					)) {
 						button.style.display = "none";
 					}
+					for (const input of document.getElementsByTagName(
+						"input"
+					)) {
+						input.style.display = "none";
+					}
 				} else {
 					for (const button of document.getElementsByTagName(
 						"button"
 					)) {
 						button.style.display = "unset";
+					}
+					for (const input of document.getElementsByTagName(
+						"input"
+					)) {
+						input.style.display = "unset";
 					}
 				}
 			};
