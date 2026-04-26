@@ -215,22 +215,14 @@
 			streamingURL = streamingURL + "#" + params.get("pass");
 			document.getElementById("camera").src = streamingURL;
 
-			let overlayRoot = "https://socialstream.ninja";
-
-			if (params.has("overlayRoot")) {
-				overlayRoot = params.get("overlayRoot");
-			}
-
 			document.getElementById("chat").src =
-				overlayRoot +
-				"/dock.html?session=" +
+				"https://socialstream.ninja/dock.html?session=" +
 				params.get("session") +
-				"&compact&alignbottom&notime&hidemenu&server&noavatar&autoscroll&loadlast&sdk"; // &loadlast&sdk not used in the OBS overlay; not used here, but used in OBS overlay: &delaytime=500
+				"&compact&alignbottom&notime&hidemenu&server&server2&server3&noavatar&autoscroll&loadlast"; // &loadlast not used in the OBS overlay; not used here, but used in OBS overlay: &delaytime=500
 			document.getElementById("alerts").src =
-				overlayRoot +
-				"/multi-alerts.html?session=" +
+				"https://socialstream.ninja/multi-alerts.html?session=" +
 				params.get("session") +
-				"&compact&queue&align=center&server&beep&sdk"; // &beep&sdk not used in OBS overlay
+				"&compact&queue&align=center&server&server2&server3";
 
 			document.getElementById("reloadcamera").onclick = () => {
 				const frame = document.getElementById("camera");
