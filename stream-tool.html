@@ -8,9 +8,14 @@
 		/>
 		<style>
 			button {
-				position: absolute;
+				position: relative;
 				top: 1em;
-				left: 1em;
+				left: 0;
+				margin-left: 0.6em;
+			}
+
+			button:first-of-type {
+				margin-left: 1em;
 			}
 
 			@media (max-aspect-ratio: 1/1) {
@@ -23,6 +28,20 @@
 
 				.chat {
 					top: 50vh;
+					left: 0;
+					width: 100vw;
+					height: 50vh;
+				}
+
+				.swap .camera {
+					top: 50vh;
+					left: 0;
+					width: 100vw;
+					height: 50vh;
+				}
+
+				.swap .chat {
+					top: 0;
 					left: 0;
 					width: 100vw;
 					height: 50vh;
@@ -40,6 +59,20 @@
 				.chat {
 					top: 0;
 					left: 50vw;
+					width: 50vw;
+					height: 100vh;
+				}
+
+				.swap .camera {
+					top: 0;
+					left: 50vw;
+					width: 50vw;
+					height: 100vh;
+				}
+
+				.swap .chat {
+					top: 0;
+					left: 0;
 					width: 50vw;
 					height: 100vh;
 				}
@@ -77,17 +110,33 @@
 			allow="autoplay *;screen-wake-lock *;speaker-selection *"
 		></iframe>
 		<button id="togglefull">🟢</button>
+		<button id="toggleswap">🔀</button>
+		<!-- <button id="reloadvideo">📹 🔄</button> -->
+		<button id="reloadchat">💬 🔄</button>
 		<script>
 			document.getElementById("togglefull").onclick = () => {
 				document.body.requestFullscreen();
 			};
+			document.getElementById("toggleswap").onclick = () => {
+				if (document.body.classList.contains("swap")) {
+					document.body.classList.remove("swap");
+				} else {
+					document.body.classList.add("swap");
+				}
+			};
 			document.body.onfullscreenchange = () => {
 				if (document.fullscreenElement) {
-					document.getElementById("togglefull").style.display =
-						"none";
+					for (const button of document.getElementsByTagName(
+						"button"
+					)) {
+						button.style.display = "none";
+					}
 				} else {
-					document.getElementById("togglefull").style.display =
-						"unset";
+					for (const button of document.getElementsByTagName(
+						"button"
+					)) {
+						button.style.display = "unset";
+					}
 				}
 			};
 
@@ -171,6 +220,17 @@
 				"/multi-alerts.html?session=" +
 				params.get("session") +
 				"&compact&queue&align=center&server&beep&sdk"; // &beep not used in OBS overlay
+
+			/*document.getElementById("reloadvideo").onclick = () => {
+				const frame = document.getElementById("camera");
+				frame.parentNode.replaceChild(frame.cloneNode(), frame);
+			};*/
+			document.getElementById("reloadchat").onclick = () => {
+				document.getElementById("chat").src =
+					document.getElementById("chat").src;
+				document.getElementById("alerts").src =
+					document.getElementById("alerts").src;
+			};
 		</script>
 	</body>
 </html>
