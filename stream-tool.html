@@ -142,6 +142,11 @@
 
 			const params = new URL(window.location.href).searchParams;
 
+			// On receiver side, the following non default parameters are used:
+			// - &overrideScaler=true (EXPERIMENTAL - test this beforehand)
+			// - &hideControls=true
+			// - &iceServers=[your URL-encoded ICE server JSON]
+
 			let streamingURL = (document.getElementById("camera").src =
 				"https://psychosis.live/?role=sender&stats=true&id=" +
 				params.get("id") +
@@ -208,18 +213,16 @@
 				overlayRoot = params.get("overlayRoot");
 			}
 
-			// &sdk not used in the OBS overlay
-
 			document.getElementById("chat").src =
 				overlayRoot +
 				"/dock.html?session=" +
 				params.get("session") +
-				"&compact&alignbottom&notime&hidemenu&server&noavatar&autoscroll&sdk&loadlast"; // not here, but used in OBS overlay: &delaytime=500; &loadlast not used in OBS overlay
+				"&compact&alignbottom&notime&hidemenu&server&noavatar&autoscroll&loadlast&sdk"; // &loadlast&sdk not used in the OBS overlay; not used here, but used in OBS overlay: &delaytime=500
 			document.getElementById("alerts").src =
 				overlayRoot +
 				"/multi-alerts.html?session=" +
 				params.get("session") +
-				"&compact&queue&align=center&server&beep&sdk"; // &beep not used in OBS overlay
+				"&compact&queue&align=center&server&beep&sdk"; // &beep&sdk not used in OBS overlay
 
 			document.getElementById("reloadcamera").onclick = () => {
 				const frame = document.getElementById("camera");
