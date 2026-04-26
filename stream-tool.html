@@ -150,10 +150,14 @@
 
 			const params = new URL(window.location.href).searchParams;
 
-			// On receiver side, the following non default parameters are used:
-			// - &overrideScaler=true (EXPERIMENTAL - test this beforehand)
-			// - &hideControls=true
-			// - &iceServers=[your URL-encoded ICE server JSON]
+			/*
+
+			On psychosis.live receiver side, the following non-default parameters are used:
+			- &overrideScaler=true (EXPERIMENTAL - test this beforehand)
+			- &hideControls=true
+			- &iceServers=[your URL-encoded ICE server JSON]
+
+			*/
 
 			let streamingURL = (document.getElementById("camera").src =
 				"https://psychosis.live/?role=sender&stats=true&id=" +
@@ -214,6 +218,18 @@
 			}
 			streamingURL = streamingURL + "#" + params.get("pass");
 			document.getElementById("camera").src = streamingURL;
+
+			/*
+
+			Make sure to enable the following options in Social Stream Ninja:
+			- Enable remote API control of extension
+			- Enable Dock to use and publish via API server
+			- Send chat messages to API server (for external listeners)
+			- Dock sends its commands to Extension via server
+
+			(Based on https://github.com/steveseguin/social_stream/issues/814#issuecomment-4322138949)
+
+			*/
 
 			document.getElementById("chat").src =
 				"https://socialstream.ninja/dock.html?session=" +
