@@ -111,7 +111,7 @@
 		></iframe>
 		<button id="togglefull">🟢</button>
 		<button id="toggleswap">🔀</button>
-		<!-- <button id="reloadvideo">📹 🔄</button> -->
+		<button id="reloadcamera">📹 🔄</button>
 		<button id="reloadchat">💬 🔄</button>
 		<script>
 			document.getElementById("togglefull").onclick = () => {
@@ -221,15 +221,21 @@
 				params.get("session") +
 				"&compact&queue&align=center&server&beep&sdk"; // &beep not used in OBS overlay
 
-			/*document.getElementById("reloadvideo").onclick = () => {
+			document.getElementById("reloadcamera").onclick = () => {
 				const frame = document.getElementById("camera");
 				frame.parentNode.replaceChild(frame.cloneNode(), frame);
-			};*/
+			};
 			document.getElementById("reloadchat").onclick = () => {
-				document.getElementById("chat").src =
-					document.getElementById("chat").src;
-				document.getElementById("alerts").src =
-					document.getElementById("alerts").src;
+				const chatFrame = document.getElementById("chat");
+				chatFrame.parentNode.replaceChild(
+					chatFrame.cloneNode(),
+					chatFrame
+				);
+				const alertFrame = document.getElementById("alerts");
+				alertFrame.parentNode.replaceChild(
+					alertFrame.cloneNode(),
+					alertFrame
+				);
 			};
 		</script>
 	</body>
