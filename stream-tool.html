@@ -173,6 +173,7 @@
 			/*
 
 			On psychosis.live receiver side, the following non-default parameters are used:
+			- &overrideScaler=true (can be problematic - test this beforehand)
 			- &hideControls=true
 			- &iceServers=[your URL-encoded ICE server JSON]
 
@@ -231,6 +232,12 @@
 						"&width=960&height=540&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=-1";
 					break;
 			}
+			if (params.has("overrideScaler")) {
+				streamingURL =
+					streamingURL +
+					"&overrideScaler=" +
+					params.get("overrideScaler");
+			}
 			if (params.has("iceServers")) {
 				streamingURL =
 					streamingURL + "&iceServers=" + params.get("iceServers");
@@ -275,6 +282,9 @@
 					alertFrame
 				);
 			};
+
+			// TODO: Add retries for location pings
+			// This is non-trival to implement, as we need to make sure that all pings are completed *before* a stop message is sent
 
 			let sendLocation = false;
 
