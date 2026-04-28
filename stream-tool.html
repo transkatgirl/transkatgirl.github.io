@@ -324,7 +324,7 @@
 				sendLocation = event.target.checked;
 
 				if (sendLocation) {
-					navigator.geolocation.watchPosition(
+					navigator.geolocation.getCurrentPosition(
 						(position) => {
 							if (!sendLocation) return;
 
