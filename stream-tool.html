@@ -132,35 +132,6 @@
 		<button id="reloadchat">💬 🔄</button>
 		<input type="checkbox" id="togglelocation" name="location" switch />
 		<script>
-			let sendLocation = false;
-
-			document.getElementById("togglefull").onclick = () => {
-				document.body.requestFullscreen();
-			};
-			document.getElementById("toggleswap").onclick = () => {
-				if (document.body.classList.contains("swap")) {
-					document.body.classList.remove("swap");
-				} else {
-					document.body.classList.add("swap");
-				}
-			};
-			document.getElementById("togglelocation").onchange = (event) => {
-				sendLocation = event.target.checked;
-
-				if (!sendLocation) {
-					if (params.has("rtirlPushKey")) {
-						fetch(
-							"https://rtirl.com/api/stop?key=" +
-								params.get("rtirlPushKey"),
-							{
-								method: "POST",
-							}
-						).then((response) => {
-							console.log(response);
-						});
-					}
-				}
-			};
 			document.body.onfullscreenchange = () => {
 				if (document.fullscreenElement) {
 					for (const button of document.getElementsByTagName(
@@ -184,6 +155,16 @@
 					)) {
 						input.style.display = "unset";
 					}
+				}
+			};
+			document.getElementById("togglefull").onclick = () => {
+				document.body.requestFullscreen();
+			};
+			document.getElementById("toggleswap").onclick = () => {
+				if (document.body.classList.contains("swap")) {
+					document.body.classList.remove("swap");
+				} else {
+					document.body.classList.add("swap");
 				}
 			};
 
@@ -295,32 +276,105 @@
 				);
 			};
 
-			navigator.geolocation.watchPosition(
-				(position) => {
-					if (!sendLocation) return;
+			let sendLocation = false;
 
+			function handlePosition(position) {
+				if (params.has("rtirlPushKey")) {
+					fetch(
+						"https://rtirl.com/api/push?key=" +
+							params.get("rtirlPushKey"),
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({
+								latitude: position.coords.latitude,
+								longitude: position.coords.longitude,
+								heading: position.coords.heading,
+								speed: position.coords.speed,
+								altitude: position.coords.altitude,
+								timestamp: position.timestamp,
+							}),
+						}
+					).then((response) => {
+						console.log(response);
+					});
+				}
+				if (params.has("katMapEndpoint") && params.has("katMapKey")) {
+					fetch(params.has("katMapEndpoint") + "/api/location", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: "Bearer " + params.has("katMapKey"),
+						},
+						body: JSON.stringify({
+							type: "location",
+							lat: position.coords.latitude,
+							lon: position.coords.longitude,
+							timestamp: position.timestamp,
+						}),
+					}).then((response) => {
+						console.log(response);
+					});
+				}
+			}
+
+			document.getElementById("togglelocation").onchange = (event) => {
+				sendLocation = event.target.checked;
+
+				if (sendLocation) {
+					navigator.geolocation.watchPosition(
+						(position) => {
+							if (!sendLocation) return;
+
+							handlePosition(position);
+						},
+						(error) => {
+							window.alert(error);
+						},
+						{
+							maximumAge: 0,
+							enableHighAccuracy: true,
+						}
+					);
+				} else {
 					if (params.has("rtirlPushKey")) {
 						fetch(
-							"https://rtirl.com/api/push?key=" +
+							"https://rtirl.com/api/stop?key=" +
 								params.get("rtirlPushKey"),
 							{
 								method: "POST",
-								headers: {
-									"Content-Type": "application/json",
-								},
-								body: JSON.stringify({
-									latitude: position.coords.latitude,
-									longitude: position.coords.longitude,
-									heading: position.coords.heading,
-									speed: position.coords.speed,
-									altitude: position.coords.altitude,
-									timestamp: position.timestamp,
-								}),
 							}
 						).then((response) => {
 							console.log(response);
 						});
 					}
+					if (
+						params.has("katMapEndpoint") &&
+						params.has("katMapKey")
+					) {
+						fetch(params.has("katMapEndpoint") + "/api/location", {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								Authorization:
+									"Bearer " + params.has("katMapKey"),
+							},
+							body: JSON.stringify({
+								type: "stop",
+							}),
+						}).then((response) => {
+							console.log(response);
+						});
+					}
+				}
+			};
+			navigator.geolocation.watchPosition(
+				(position) => {
+					if (!sendLocation) return;
+
+					handlePosition(position);
 				},
 				(error) => {
 					window.alert(error);
