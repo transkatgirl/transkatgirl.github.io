@@ -322,7 +322,12 @@
 							type: "location",
 							lat: position.coords.latitude,
 							lon: position.coords.longitude,
-							timestamp: position.timestamp,
+							timestamp_ms: position.timestamp,
+							accuracy: position.accuracy,
+							altitude: position.altitude,
+							altitude_accuracy: position.altitude_accuracy,
+							heading: position.heading,
+							speed: position.speed,
 						}),
 					}).then((response) => {
 						console.log(response);
@@ -341,7 +346,7 @@
 							handlePosition(position);
 						},
 						(error) => {
-							window.alert(error);
+							window.alert(error.message);
 						},
 						{
 							maximumAge: 0,
@@ -387,7 +392,7 @@
 					handlePosition(position);
 				},
 				(error) => {
-					window.alert(error);
+					window.alert(error.message);
 				},
 				{
 					maximumAge: 0,
