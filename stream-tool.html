@@ -312,11 +312,11 @@
 					});
 				}
 				if (params.has("katMapEndpoint") && params.has("katMapKey")) {
-					fetch(params.has("katMapEndpoint") + "/api/location", {
+					fetch(params.get("katMapEndpoint") + "/api/location", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
-							Authorization: "Bearer " + params.has("katMapKey"),
+							Authorization: "Bearer " + params.get("katMapKey"),
 						},
 						body: JSON.stringify({
 							type: "location",
@@ -369,12 +369,12 @@
 						params.has("katMapEndpoint") &&
 						params.has("katMapKey")
 					) {
-						fetch(params.has("katMapEndpoint") + "/api/location", {
+						fetch(params.get("katMapEndpoint") + "/api/location", {
 							method: "POST",
 							headers: {
 								"Content-Type": "application/json",
 								Authorization:
-									"Bearer " + params.has("katMapKey"),
+									"Bearer " + params.get("katMapKey"),
 							},
 							body: JSON.stringify({
 								type: "stop",
