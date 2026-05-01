@@ -21,10 +21,9 @@
 		fun
 		with chat!</text>
 
-	<text x="10" y="70" text-anchor="start" dominant-baseline="middle" class="body">Sunday @ Noon
+	<text x="10" y="70" text-anchor="start" dominant-baseline="middle" class="body">Friday @ 5 PM
 		PT</text>
-	<text x="10" y="79" text-anchor="start" dominant-baseline="middle" class="body">Saturday @
-		Noon
+	<text x="10" y="79" text-anchor="start" dominant-baseline="middle" class="body">Sunday @ Noon
 		PT</text>
 
 
