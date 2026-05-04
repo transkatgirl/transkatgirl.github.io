@@ -237,6 +237,12 @@
 					"&overrideScaler=" +
 					params.get("overrideScaler");
 			}
+			if (params.has("scalingFilter")) {
+				streamingURL =
+					streamingURL +
+					"&scalingFilter=" +
+					params.get("scalingFilter");
+			}
 			if (params.has("iceServers")) {
 				streamingURL =
 					streamingURL + "&iceServers=" + params.get("iceServers");
