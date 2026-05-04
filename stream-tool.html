@@ -319,11 +319,12 @@
 							lat: position.coords.latitude,
 							lon: position.coords.longitude,
 							timestamp_ms: position.timestamp,
-							accuracy: position.accuracy,
-							altitude: position.altitude,
-							altitude_accuracy: position.altitude_accuracy,
-							heading: position.heading,
-							speed: position.speed,
+							accuracy: position.coords.accuracy,
+							altitude: position.coords.altitude,
+							altitude_accuracy:
+								position.coords.altitude_accuracy,
+							heading: position.coords.heading,
+							speed: position.coords.speed,
 						}),
 					}).then((response) => {
 						console.log(response);
