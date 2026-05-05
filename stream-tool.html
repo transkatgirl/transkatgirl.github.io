@@ -178,7 +178,8 @@
 				- audio codec preferences are left as default, sometimes video/VP9 is preferred over video/AV1 due to the VP9 encoder often being more resource efficient on ARM and/or supporting hardware encoding. however, VP9 performs far worse at very low bitrates when compared to AV1
 
 			For remote controlling OBS, I personally use Tailscale + NoMachine (more bandwidth efficient but proprietary VNC alternative), as it gives me far more flexibility and troubleshooting ability than the Websocket interface.
-			Tailscale can also be a quick-and-dirty but less bandwidth-efficient alternative to a TURN server, which is definitely useful in a pinch but not what I'd recommend for long term use. If your home network's NAT configuration blocks WebRTC traffic, you should seriously look into configuring TURN.
+
+			Tailscale can also act as a quick-and-dirty but bandwidth-inefficient alternative (overhead of ~5.3%) to a TURN server, which is definitely useful in a pinch but not what I'd recommend for long term use.
 
 			*/
 
