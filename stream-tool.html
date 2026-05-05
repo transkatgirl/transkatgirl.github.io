@@ -173,9 +173,10 @@
 			/*
 
 			On psychosis.live receiver side, the following non-default parameters are used:
-			- &overrideScaler=true (can be problematic - test this beforehand)
+			- &overrideScaler=true (can be problematic but often delivers a noticeable quality improvement - test this beforehand)
 			- &iceServers=[your URL-encoded ICE server JSON]
-
+			- &dynamicVideoParams=[JSON encoded list of MIME type strings]
+				- audio codec preferences are left as default, sometimes video/VP9 is preferred over video/AV1 due to the VP9 encoder often being more resource efficient on ARM and/or supporting hardware encoding. however, VP9 performs far worse at very low bitrates when compared to AV1
 			*/
 
 			let streamingURL = (document.getElementById("camera").src =
@@ -232,12 +233,25 @@
 					break;
 			}
 			if (params.has("overrideScaler")) {
+				/*
+
+				Usually improves improve visual quality but can cause problems; ALWAYS TEST BEFOREHAND
+				Requires Chromium browser to work, along with a fairly powerful device.
+
+				*/
 				streamingURL =
 					streamingURL +
 					"&overrideScaler=" +
 					params.get("overrideScaler");
 			}
 			if (params.has("scalingFilter")) {
+				/*
+
+				Changing the scaling filter can help make overrideScaler less resource intensive.
+
+				Default scaler is highest quality, "canvas" scaler is less resource intensive but considerably lower quality (it's just the browser scaler). "media_constraints" is a weird hack that is the least resource intensive but is either the same or slightly lower quality than "canvas".
+
+				*/
 				streamingURL =
 					streamingURL +
 					"&scalingFilter=" +
@@ -287,6 +301,13 @@
 					alertFrame
 				);
 			};
+
+			/*
+
+			RealtimeIRL (closed source backend) - plug-and-play IRL streaming location sharing: https://rtirl.com
+			KatMap (open source) - custom bespoke thing made by my best friend for Twitch Plays Kat: https://github.com/sliced-paraiba/katmap/tree/main
+
+			*/
 
 			let sendLocation = false;
 
