@@ -209,15 +209,15 @@
 						streamingURL +
 						"&width=1920&height=1080&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=-1";
 					break;
-				case "960p60":
+				case "900p60":
 					streamingURL =
 						streamingURL +
-						"&width=1706&height=960&frameRate=60&maxAudioBitrate=-1&maxVideoBitrate=-1";
+						"&width=1600&height=900&frameRate=60&maxAudioBitrate=-1&maxVideoBitrate=-1";
 					break;
-				case "960p30":
+				case "900p30":
 					streamingURL =
 						streamingURL +
-						"&width=1706&height=960&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=-1";
+						"&width=1600&height=900&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=-1";
 					break;
 				case "720p60":
 					streamingURL =
@@ -230,10 +230,15 @@
 						"&width=1280&height=720&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=-1";
 					break;
 				case "540p30":
-				default:
 					streamingURL =
 						streamingURL +
 						"&width=960&height=540&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=-1";
+					break;
+				case "480p30":
+				default:
+					streamingURL =
+						streamingURL +
+						"&width=853&height=480&frameRate=30&maxAudioBitrate=-1&maxVideoBitrate=-1";
 					break;
 			}
 			if (params.has("overrideScaler")) {
