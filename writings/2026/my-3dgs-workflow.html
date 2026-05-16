@@ -56,11 +56,14 @@
 					>
 				</li>
 				<li>
-					(if applicable) convert MP4 to JPG frames:
+					(if applicable) convert MP4 to JPG frames using
+					<a href="https://github.com/Reflct/sharp-frames-python"
+						>sharp-frames</a
+					>:
 					<code
-						>for file in *.mp4; do mkdir ${file}_images; ffmpeg -i
-						$file -q:v 1 -vf fps=5 ${file}_images/%06d.jpg;
-						done</code
+						>for file in *.mp4; sharp-frames --selection-method
+						best-n --num-frames 300 --min-buffer 3 $file
+						${file}_images; done</code
 					>
 				</li>
 				<li>
