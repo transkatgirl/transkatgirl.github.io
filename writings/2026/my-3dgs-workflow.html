@@ -62,12 +62,8 @@
 					>:
 					<code
 						>for file in *.mp4; sharp-frames --selection-method
-						best-n --num-frames 300 --min-buffer 3 $file
-						${file}_images; done</code
+						batched $file ${file}_images; done</code
 					>
-					(increase <code>--num-frames</code> and
-					<code>--min-buffer</code> if necessary to get good scene
-					coverage)
 				</li>
 				<li>
 					open
