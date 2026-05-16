@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="preload" as="font" href="/fonts/Lexend.woff2" crossorigin />
+		<link
+			rel="preload"
+			as="font"
+			href="/fonts/FiraCode.woff2"
+			crossorigin
+		/>
+		<link rel="stylesheet" href="/style.css" />
+
+		<link rel="icon" type="image/png" href="/icon-small.png" />
+		<link rel="manifest" href="/manifest.json" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+		<title>
+			my workflow for making 3d gaussian splats without an NVIDIA GPU -
+			transkatgirl's blog
+		</title>
+		<meta name="author" content="transkatgirl" />
+		<meta name="description" content="she 3d on my gaussian till i splat" />
+		<meta name="theme-color" content="#36384f" />
+	</head>
+	<body>
+		<header>
+			<nav><a href="/">← go back</a></nav>
+		</header>
+		<main>
+			<hgroup>
+				<h1>
+					my workflow for making 3d gaussian splats without an NVIDIA
+					GPU
+				</h1>
+				<p>🚧 this page is a work in progress!</p>
+				<!-- <p>written <time>2026-05-16</time></p> -->
+			</hgroup>
+			<p>
+				the vast majority of open source software for making 3d gaussian
+				splats (3DGS) requires CUDA, making it unusable for those
+				without an NVIDIA GPU. in the interest of helping people find
+				alternatives, i've decided i should document my 3DGS workflow.
+			</p>
+			<p>
+				i personally use MacOS on an Apple Silicon Mac, but none of the
+				software i use is MacOS-specific.
+			</p>
+			<h2>my workflow</h2>
+			<p>
+				expect the total processing time to be several hours long on a
+				reasonably powerful GPU
+			</p>
+			<ol>
+				<li>
+					(if applicable) convert HEIC to JPG using
+					<code
+						>for file in *.HEIC; magick convert $file -auto-orient
+						$file.jpg; end</code
+					>
+				</li>
+				<li>
+					open
+					<a href="https://colmap.github.io/index.html">COLMAP</a>
+					<ol>
+						<li>
+							File -> New project
+							<ul>
+								<li>
+									specify database location & input image
+									folder
+								</li>
+								<li>click Save</li>
+							</ul>
+						</li>
+						<li>
+							Extras -> Set options for...
+							<ul>
+								<li>
+									set dataset type to either "Individual
+									images" or "Video frames" ("Individual
+									images" is O(n^2) time complexity)
+								</li>
+								<li>set quality to "Extreme"</li>
+							</ul>
+						</li>
+						<li>
+							Processing -> Feature extraction
+							<ul>
+								<li>
+									choose
+									<a
+										href="https://colmap.github.io/cameras.html"
+										>Camera model</a
+									>
+								</li>
+								<li>
+									if all images are taken with the same lens &
+									zoom, enable "Shared for all images"
+								</li>
+								<li>click Extract</li>
+							</ul>
+						</li>
+						<li>Processing -> Feature matching -> Run</li>
+						<li>Reconstruction -> Start reconstruction</li>
+						<li>
+							Extras -> Undistortion
+							<ul>
+								<li>specify output folder</li>
+								<li>click Undistort</li>
+							</ul>
+						</li>
+					</ol>
+				</li>
+				<li>
+					open
+					<a href="https://github.com/ArthurBrussee/brush">Brush</a>
+					<ol>
+						<li>
+							click Directory and choose output folder from last
+							step
+						</li>
+						<li>
+							set Dataset -> Max image resolution to the maximum
+							value
+						</li>
+						<li>click Start</li>
+						<li>after training is finished, click Export</li>
+					</ol>
+				</li>
+				<li>
+					open
+					<a href="https://superspl.at/editor">SuperSplat Editor</a>
+					<ol>
+						<li>
+							click File -> Import and choose output PLY file from
+							last step
+						</li>
+						<li>
+							edit splat as necessary (see
+							<a
+								href="https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/"
+								>SuperSplat User Guide</a
+							>)
+						</li>
+						<li>File -> Export -> PLY</li>
+					</ol>
+				</li>
+				<li>
+					final PLY file can be lossily compressed to SOG using
+					<a href="https://github.com/playcanvas/splat-transform"
+						>splat-transform</a
+					>
+				</li>
+			</ol>
+			<h2>recommended reading</h2>
+			<p>how gaussian splats work:</p>
+			<ul>
+				<li>
+					<a href="https://learnopencv.com/3d-gaussian-splatting/"
+						>3D Gaussian Splatting Introduction - LearnOpenCV</a
+					>
+				</li>
+				<li>
+					<a
+						href="https://towardsdatascience.com/a-comprehensive-overview-of-gaussian-splatting-e7d570081362/"
+						>A Comprehensive Overview of Gaussian Splatting -
+						Towards Data Science</a
+					>
+				</li>
+			</ul>
+			<p>software documentation:</p>
+			<ul>
+				<li>
+					<a href="https://colmap.github.io/index.html"
+						>COLMAP documentation</a
+					>
+				</li>
+				<li>
+					<a href="https://github.com/ArthurBrussee/brush"
+						>Brush GitHub</a
+					>
+				</li>
+				<li>
+					<a
+						href="https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/"
+						>SuperSplat User Guide</a
+					>
+				</li>
+				<li>
+					<a
+						href="https://github.com/playcanvas/splat-transform#cli-usage"
+						>splat-transform CLI Usage</a
+					>
+				</li>
+			</ul>
+		</main>
+		<footer>
+			<small
+				>all content on this site is marked
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					href="https://creativecommons.org/publicdomain/zero/1.0/"
+					>CC0 1.0</a
+				><br />
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					href="https://copyheart.org"
+					>♡</a
+				>
+				copying is an act of love. love is not subject to law.</small
+			>
+		</footer>
+	</body>
+</html>
