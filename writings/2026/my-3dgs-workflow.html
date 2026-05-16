@@ -49,10 +49,18 @@
 			</p>
 			<ol>
 				<li>
-					(if applicable) convert HEIC to JPG using
+					(if applicable) convert HEIC to JPG:
 					<code
-						>for file in *.HEIC; magick convert $file -auto-orient
-						$file.jpg; end</code
+						>for file in *.HEIC; do magick $file -quality 100
+						-auto-orient $file.jpg; done</code
+					>
+				</li>
+				<li>
+					(if applicable) convert MP4 to JPG frames:
+					<code
+						>for file in *.mp4; do mkdir ${file}_images; ffmpeg -i
+						$file -q:v 1 -vf fps=5 ${file}_images/%06d.jpg;
+						done</code
 					>
 				</li>
 				<li>
