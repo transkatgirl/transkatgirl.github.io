@@ -88,21 +88,8 @@
 								<li>
 									set dataset type to either "Individual
 									images" or "Video frames"
-									<ul>
-										<li>
-											"Individual images" is O(n^2) time
-											complexity
-										</li>
-									</ul>
 								</li>
-								<li>
-									set quality to "Extreme" if using
-									"Individual images"
-								</li>
-								<li>
-									set quality to "High" if using "Video
-									frames"
-								</li>
+								<li>set quality to "Extreme"</li>
 							</ul>
 						</li>
 						<li>
@@ -122,7 +109,20 @@
 								<li>click Extract</li>
 							</ul>
 						</li>
-						<li>Processing -> Feature matching -> Run</li>
+						<li>
+							Processing -> Feature matching
+							<ul>
+								<li>
+									if dataset type == "Individual images", use
+									Exhaustive matching
+								</li>
+								<li>
+									if dataset type == "Video frames", use
+									Sequential matching
+								</li>
+								<li>click Run</li>
+							</ul>
+						</li>
 						<li>Reconstruction -> Start reconstruction</li>
 						<li>
 							Extras -> Undistortion
