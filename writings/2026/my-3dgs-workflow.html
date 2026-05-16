@@ -56,7 +56,7 @@
 					>
 				</li>
 				<li>
-					(if applicable) convert MP4 to JPG frames using
+					(if applicable) extract frames from MP4 using
 					<a href="https://github.com/Reflct/sharp-frames-python"
 						>sharp-frames</a
 					>:
@@ -65,6 +65,8 @@
 						best-n --num-frames 300 --min-buffer 3 $file
 						${file}_images; done</code
 					>
+					(adjust <code>--num-frames</code> and
+					<code>--min-buffer</code> based on your scene)
 				</li>
 				<li>
 					open
