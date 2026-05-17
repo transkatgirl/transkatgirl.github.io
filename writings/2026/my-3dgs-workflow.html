@@ -64,9 +64,11 @@
 						>sharp-frames</a
 					>:
 					<code
-						>for file in *.mp4; sharp-frames $file
+						>for file in *.mp4; sharp-frames $file --fps 10
 						--selection-method batched ${file}_images; done</code
 					>
+					(adjust FPS based on the speed of your video; batched
+					selection @ 10 FPS will result in 1 frame every 300-700ms)
 				</li>
 				<li>
 					open
