@@ -150,15 +150,24 @@
 					</ol>
 				</li>
 				<li>
-					(optional) post-processing using
+					(optional) post-process exported PLY file from last step
+					using
 					<a href="https://github.com/playcanvas/splat-transform"
 						>splat-transform</a
-					>:
-					<code
-						>for file in *.ply; do splat-transform $file
-						--filter-cluster --filter-floaters $file.filtered.ply;
-						done</code
 					>
+					with
+					<code>--filter-cluster --filter-floaters</code>
+					<ul>
+						<li>
+							splat-transform's flags are ordering sensitive;
+							swapping the ordering of these flags may cause
+							processing to fail
+						</li>
+						<li>
+							make sure that the output file is also in PLY format
+							to avoid generation loss
+						</li>
+					</ul>
 				</li>
 				<li>
 					open
