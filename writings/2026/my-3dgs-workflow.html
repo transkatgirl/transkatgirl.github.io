@@ -173,8 +173,16 @@
 						</li>
 						<li>set Dataset -> Max image resolution to 8192</li>
 						<li>
-							if your scene is very complex, consider increasing
-							Training -> steps
+							set Training -> steps based on your scene's
+							complexity
+							<ul>
+								<li>30k is a decent value for most scenes</li>
+								<li>
+									very complex scenes may benefit from 100k
+									steps, but this can degrade quality on
+									poorly captured scenes
+								</li>
+							</ul>
 						</li>
 						<li>
 							set Training -> Max Splats Cap based on your use
@@ -232,7 +240,7 @@
 			</ol>
 			<p>
 				on my hardware (Apple M4 Pro w/ 48GB RAM), i find that it
-				usually takes 2-5 hours to turn input images to a finished
+				usually takes 2-8 hours to turn input images to a finished
 				splat.
 			</p>
 			<h2>recommended reading</h2>
