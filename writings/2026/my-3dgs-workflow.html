@@ -61,8 +61,8 @@
 						>sharp-frames</a
 					>:
 					<code
-						>for file in *.mp4; sharp-frames --selection-method
-						batched $file ${file}_images; done</code
+						>for file in *.mp4; sharp-frames $file
+						--selection-method batched ${file}_images; done</code
 					>
 				</li>
 				<li>
@@ -145,6 +145,17 @@
 						<li>click Start</li>
 						<li>after training is finished, click Export</li>
 					</ol>
+				</li>
+				<li>
+					(optional) post-processing using
+					<a href="https://github.com/playcanvas/splat-transform"
+						>splat-transform</a
+					>:
+					<code
+						>for file in *.ply; do splat-transform $file
+						--filter-cluster --filter-floaters $file.filtered.ply;
+						done</code
+					>
 				</li>
 				<li>
 					open
