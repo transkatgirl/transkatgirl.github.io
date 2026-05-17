@@ -46,10 +46,30 @@
 				listed below is MacOS-specific.
 			</p>
 			<h2>my workflow</h2>
-			<p>
-				expect the total processing time to be several hours long on a
-				reasonably powerful GPU
-			</p>
+			<aside>
+				<p>keep in mind the following limitations:</p>
+				<ul>
+					<li>
+						splats look bad when viewed from camera positions far
+						from that of the input images.
+					</li>
+					<li>
+						insufficient overlap (&lt;60%) between input images
+						worsens reconstruction quality.
+					</li>
+					<li>
+						avoid dirty lenses, vignetting, chromatic aberration,
+						blur, sensor noise, inconsistent exposure, on-camera
+						processing (such as digital sharpening), and compression
+						artifacts.
+					</li>
+					<li>
+						the algorithms used struggle with movement,
+						transparency, insufficient texture, and inconsistent
+						illumination.
+					</li>
+				</ul>
+			</aside>
 			<ol>
 				<li>
 					(if applicable) convert HEIC to JPG:
@@ -147,6 +167,11 @@
 							set Dataset -> Max image resolution to the maximum
 							value
 						</li>
+						<li>
+							set Training -> Max Splats Cap based on your use
+							case (high splat counts improve quality at the cost
+							of rendering performance)
+						</li>
 						<li>click Start</li>
 						<li>after training is finished, click Export</li>
 					</ol>
@@ -196,6 +221,11 @@
 					>
 				</li>
 			</ol>
+			<p>
+				on my hardware (Apple M4 Pro w/ 48GB RAM), i find that it
+				usually takes 2-5 hours to turn input images to a finished
+				splat.
+			</p>
 			<h2>recommended reading</h2>
 			<p>how gaussian splats work:</p>
 			<ul>
