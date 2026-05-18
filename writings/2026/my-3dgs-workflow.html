@@ -195,6 +195,13 @@
 							case (high splat counts improve quality at the cost
 							of rendering performance)
 						</li>
+						<!--
+							SuperSplat Editor doesn't support SH degree >3 yet
+						-->
+						<!-- <li>
+							(optional) if you don't plan on compressing the
+							splat, set Model -> Spherical Harmonics Degree to 4
+						</li> -->
 						<li>
 							set Dataset -> Max image resolution to 8192
 							(arbitrary values can be entered into the textbox
@@ -291,11 +298,24 @@
 							of rendering performance)
 							<ul>
 								<li>
-									the value used here must also be used during
-									the second Brush run
+									the same value must be used during the
+									second Brush run
 								</li>
 							</ul>
 						</li>
+						<!--
+							SuperSplat Editor doesn't support SH degree >3 yet
+						-->
+						<!-- <li>
+							(optional) if you don't plan on compressing the
+							splat, set Model -> Spherical Harmonics Degree to 4
+							<ul>
+								<li>
+									the same value must be used during the
+									second Brush run
+								</li>
+							</ul>
+						</li> -->
 						<li>set Dataset -> Max image resolution to 8192</li>
 						<li>enable Dataset -> Split dataset for evaluation</li>
 						<li>enable Rerun.io -> Enable rerun</li>
