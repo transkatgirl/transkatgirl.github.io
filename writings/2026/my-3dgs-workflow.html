@@ -152,12 +152,13 @@
 							Processing -> Feature matching
 							<ul>
 								<li>
-									if dataset type is "Individual images", use
-									Exhaustive matching
+									if dataset type is "Individual images" or
+									image count is &lt;1000, use Exhaustive
+									matching
 								</li>
 								<li>
-									if dataset type is "Video frames", use
-									Sequential matching
+									if dataset type is "Video frames" and image
+									count is &gt;1000, use Sequential matching
 								</li>
 								<li>click Run</li>
 							</ul>
