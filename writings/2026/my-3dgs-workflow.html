@@ -144,11 +144,20 @@
 									>
 								</li>
 								<li>
-									if all images are taken with the same lens &
-									zoom, enable "Shared for all images"
+									if all images are taken with the same lens,
+									zoom, and focal length, enable "Shared for
+									all images"
 								</li>
 								<li>click Extract</li>
 							</ul>
+						</li>
+						<li>
+							(optional)
+							<a
+								href="https://colmap.github.io/tutorial.html#database-management"
+								>adjust camera parameters</a
+							>
+							as necessary
 						</li>
 						<li>
 							Processing -> Feature matching
@@ -166,6 +175,19 @@
 							</ul>
 						</li>
 						<li>Reconstruction -> Start reconstruction</li>
+						<li>
+							find and remove any incorrectly placed images (see
+							<a href="https://colmap.github.io/gui.html"
+								>COLMAP Graphical User Interface</a
+							>)
+							<ul>
+								<li>
+									if you end up removing any images, click
+									Reconstruction -> Reset reconstruction and
+									then repeat step 6
+								</li>
+							</ul>
+						</li>
 						<li>
 							Extras -> Undistortion
 							<ul>
