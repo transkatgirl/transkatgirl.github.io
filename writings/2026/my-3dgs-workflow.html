@@ -326,22 +326,18 @@
 <code>colmap exhaustive_matcher --project_path colmap.ini</code>
 <code>colmap mapper --project_path colmap_mapper.ini</code>
 <code>if [ -f sparse/1 ]; then</code>
+<code>	echo 'input_path=sparse/merged</code>
+<code>output_path=sparse/refined' | cat - colmap.ini &gt; colmap_adjuster.ini</code>
 <code>	for item in sparse/*; do</code>
 <code>		if [ "$item" != "sparse/0" ]; then</code>
-<code>			mkdir sparse/merged</code>
+<code>			mkdir sparse/merged sparse/refined</code>
 <code>			colmap model_merger --input_path1 sparse/0 --input_path2 $item --output_path sparse/merged</code>
-<code>			rm -r sparse/0 $item</code>
-<code>			mv sparse/merged sparse/0</code>
+<code>			colmap bundle_adjuster --project_path colmap_adjuster.ini</code>
+<code>			rm -r sparse/0 $item sparse/merged</code>
+<code>			mv sparse/refined sparse/0</code>
 <code>		fi</code>
 <code>	done</code>
-<code></code>
-<code>	echo 'input_path=sparse/0</code>
-<code>output_path=sparse/refined' | cat - colmap.ini &gt; colmap_adjuster.ini</code>
-<code>	mkdir sparse/refined</code>
-<code>	colmap bundle_adjuster --project_path colmap_adjuster.ini</code>
 <code>	rm colmap_adjuster.ini</code>
-<code>	rm -r sparse/0</code>
-<code>	mv sparse/refined sparse/0</code>
 <code>fi</code>
 <code>colmap image_undistorter --project_path colmap_undistorter.ini</code>
 <code>rm colmap_mapper.ini colmap_undistorter.ini</code>
