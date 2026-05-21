@@ -310,8 +310,10 @@
 			<h3 id="automated-colmap-workflow">
 				automated COLMAP workflow (replaces step 3)
 			</h3>
-			run the following commands within the input folder:
+			run the following bash script within the input folder:
 			<pre>
+<code>set -euo pipefail</code>
+<code></code>
 <code>colmap project_generator --quality extreme --output colmap.ini</code>
 <code>sed -i '' -e 's/database_path=/database_path=project.db/g' colmap.ini</code>
 <code>sed -i '' -e 's/image_path=/image_path=./g' colmap.ini</code>
