@@ -31,7 +31,7 @@
 				<h1>my workflow for making 3d gaussian splats</h1>
 				<p>
 					written <time>2026-05-16</time>, last updated
-					<time>2026-05-20</time>
+					<time>2026-05-21</time>
 				</p>
 			</hgroup>
 			<p>
@@ -230,9 +230,8 @@
 							>
 						</li>
 						<li>
-							set Training -> Max Splats Cap based on your use
-							case (high splat counts improve quality at the cost
-							of rendering performance)
+							(optional) set Training -> LOD levels based on your
+							use case
 						</li>
 						<!--
 							SuperSplat Editor doesn't support SH degree >3 yet
@@ -249,7 +248,6 @@
 							next to the slider)
 						</li>
 						<li>click Start</li>
-						<li>after training is finished, click Export</li>
 					</ol>
 				</li>
 				<li>
@@ -374,17 +372,6 @@
 					<ol>
 						<li>click Directory and choose COLMAP output folder</li>
 						<li>set Training -> steps to 300k</li>
-						<li>
-							set Training -> Max Splats Cap based on your use
-							case (high splat counts improve quality at the cost
-							of rendering performance)
-							<ul>
-								<li>
-									the same value must be used during the
-									second Brush run
-								</li>
-							</ul>
-						</li>
 						<!--
 							SuperSplat Editor doesn't support SH degree >3 yet
 						-->
@@ -464,6 +451,14 @@
 					<a href="https://www.tanksandtemples.org/download/"
 						>Tanks and Temples</a
 					>
+				</li>
+				<li>
+					<a href="https://jonbarron.info/mipnerf360/"
+						>Mip-NeRF 360</a
+					>
+				</li>
+				<li>
+					<a href="https://github.com/luchongshan/OMMO">OMMO</a>
 				</li>
 			</ul>
 			<p>capturing techniques:</p>
