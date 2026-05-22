@@ -256,10 +256,6 @@
 								>based on your scene's complexity</a
 							>
 						</li>
-						<li>
-							(optional) set Training -> LOD levels based on your
-							use case
-						</li>
 						<!--
 							SuperSplat Editor doesn't support SH degree >3 yet
 						-->
@@ -276,6 +272,9 @@
 						</li>
 						<li>click Start</li>
 					</ol>
+				</li>
+				<li>
+					(optional) <a href="#lod-workflow">run the LOD workflow</a>
 				</li>
 				<li>
 					open
@@ -432,6 +431,37 @@
 					proceed with the remaining steps in the workflow, making
 					sure to use the ideal step count determined from this
 					analysis
+				</li>
+			</ol>
+			<h3 id="lod-workflow">LOD workflow</h3>
+			<ol>
+				<li>
+					copy desired Brush checkpoint back into COLMAP output
+					folder, then rename it to <code>init.ply</code>
+				</li>
+				<li>
+					open
+					<a href="https://github.com/ArthurBrussee/brush">Brush</a>
+					<ol>
+						<li>click Directory and choose COLMAP output folder</li>
+						<li>set Training -> steps to 1</li>
+						<li>
+							set Training -> LOD levels to ceil(log2(steps /
+							500000))
+						</li>
+						<li>enable Model -> Render mode</li>
+						<li>set Model -> Render mode to Mip</li>
+						<li>
+							set Dataset -> Max image resolution to 8192
+							(arbitrary values can be entered into the textbox
+							next to the slider)
+						</li>
+						<li>click Start</li>
+					</ol>
+				</li>
+				<li>
+					delete <code>export_1.ply</code> from the Brush output
+					folder
 				</li>
 			</ol>
 			<h2 id="recommended-reading">recommended reading</h2>
