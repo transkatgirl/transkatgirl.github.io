@@ -315,7 +315,7 @@
 <code>set -euo pipefail</code>
 <code></code>
 <code>colmap project_generator --quality extreme --output colmap.ini</code>
-<code>sed -i '' -e 's/max_extra_param=1/max_extra_param=1.7976931348623157e+308/g' colmap.ini # https://github.com/colmap/colmap/blob/c03cb50eb0f565e0b0ec34dbbfe37568b31979be/src/colmap/controllers/option_manager.cc#L90</code>
+<code>sed -i '' -e 's/max_extra_param=1$/max_extra_param=1.7976931348623157e+308/g' colmap.ini # https://github.com/colmap/colmap/blob/c03cb50eb0f565e0b0ec34dbbfe37568b31979be/src/colmap/controllers/option_manager.cc#L90</code>
 <code>sed -i '' -e 's/database_path=/database_path=project.db/g' colmap.ini</code>
 <code>sed -i '' -e 's/image_path=/image_path=./g' colmap.ini</code>
 <code>echo 'output_path=sparse' | cat - colmap.ini &gt; colmap_mapper.ini</code>
