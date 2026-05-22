@@ -183,13 +183,29 @@
 						</li>
 						<li>Reconstruction -> Start reconstruction</li>
 						<li>
-							find any badly placed images (see
+							analyze the sparse reconstructed scene (see
 							<a href="https://colmap.github.io/gui.html"
 								>COLMAP Graphical User Interface</a
 							>)
 							<ul>
 								<li>
-									if you end up finding any badly placed
+									if you end up capturing additional images to
+									improve coverage, do the following:
+									<ol>
+										<li>
+											add the newly captured images to the
+											input image folder
+										</li>
+										<li>repeat COLMAP steps 3-5</li>
+										<li>
+											Reconstruction -> Reset
+											reconstruction
+										</li>
+										<li>repeat COLMAP steps 6-7</li>
+									</ol>
+								</li>
+								<li>
+									if you end up finding any problematic
 									images, do the following:
 									<ol>
 										<li>
@@ -343,7 +359,7 @@
 <code>colmap image_undistorter --project_path colmap_undistorter.ini</code>
 <code>rm colmap_mapper.ini colmap_undistorter.ini</code>
 <code></code>
-<code>colmap gui --import_path sparse/0 --database_path project.db --image_path . # review for any badly placed images before continuing (recommended but not required)</code>
+<code>colmap gui --import_path sparse/0 --database_path project.db --image_path . # (recommended) analyze the sparse reconstructed scene before continuing on to further steps</code>
 <code>rm -r sparse</code>
 <code>rm colmap.ini project.db*</code>
 </pre>
