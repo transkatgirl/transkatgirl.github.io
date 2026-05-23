@@ -31,7 +31,7 @@
 				<h1>my workflow for making 3d gaussian splats</h1>
 				<p>
 					written <time>2026-05-16</time>, last updated
-					<time>2026-05-22</time>
+					<time>2026-05-23</time>
 				</p>
 			</hgroup>
 			<p>
@@ -445,6 +445,13 @@
 						<li>set Training -> steps to 1</li>
 						<li>
 							set Training -> LOD levels based on your use case
+							<ul>
+								<li>
+									image resolution is halved every time the
+									LOD level increases, so this should be
+									bounded by your input image resolution
+								</li>
+							</ul>
 						</li>
 						<li>enable Model -> Render mode</li>
 						<li>set Model -> Render mode to Mip</li>
