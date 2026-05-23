@@ -433,26 +433,31 @@
 			<h3 id="lod-workflow">LOD workflow</h3>
 			<p>
 				high-quality LODs can be generated using the following bash
-				script (requires splat-transform and brush):
+				script (requires splat-transform and Brush):
 			</p>
 			<pre>
 <code>set -euo pipefail</code>
 <code></code>
 <code>cp $1 $2/init.ply</code>
+<code>cp $1 ${2}.LOD-0.ply</code>
 <code>mv ${2}_exports ${2}_train_exports</code>
 <code></code>
 <code>n=0</code>
-<code>while [ "$n" -lt 5 ]; do</code>
+<code>while [ "$n" -lt 3 ]; do</code>
 <code>	n=$(( n + 1 ))</code>
 <code></code>
 <code>	splat-transform $2/init.ply -F 50% $2/decimated.ply # splat-transform has much higher quality decimation than brush</code>
 <code>	rm $2/init.ply</code>
 <code>	mv $2/decimated.ply $2/init.ply</code>
 <code>	brush --total-train-iters 5000 --render-mode mip --growth-stop-iter 0 --max-resolution 8192 $2</code>
-<code>	mv ${2}_exports ${2}_decimated_${n}_exports</code>
+<code>	mv ${2}_exports/export_5000.ply ${2}.LOD-${n}.ply</code>
 <code>done</code>
 <code></code>
-<code>rm $2/init.ply</code>
+<code>splat-transform --lod-chunk-count 1024 --lod-chunk-extent 32 ${2}.LOD-0.ply -l 0 ${2}.LOD-1.ply -l 1 ${2}.LOD-2.ply -l 2 ${2}.LOD-3.ply -l 3 ${2}_SSOG/lod-meta.json --filter-nan</code>
+<code></code>
+<code>zip -9r ${2}_SSOG.zip ${2}_SSOG/*</code>
+<code>rm -r $2/init.ply ${2}.LOD-0.ply ${2}_SSOG ${2}_exports</code>
+<code>mv ${2}_train_exports ${2}_exports</code>
 </pre>
 			<p>required arguments:</p>
 			<ul>
