@@ -431,39 +431,34 @@
 				</li>
 			</ol>
 			<h3 id="lod-workflow">LOD workflow</h3>
-			<ol>
-				<li>
-					copy desired Brush checkpoint back into COLMAP output
-					folder, then rename it to <code>init.ply</code>
-				</li>
-				<li>
-					open Brush
-					<ol>
-						<li>
-							click Directory and choose the COLMAP output folder
-						</li>
-						<li>set Training -> steps to 1</li>
-						<li>
-							set Training -> LOD levels based on your use case
-							<ul>
-								<li>
-									image resolution is halved every time the
-									LOD level increases, so this should be
-									bounded by your input image resolution
-								</li>
-							</ul>
-						</li>
-						<li>enable Model -> Render mode</li>
-						<li>set Model -> Render mode to Mip</li>
-						<li>set Dataset -> Max image resolution to 8192</li>
-						<li>click Start</li>
-					</ol>
-				</li>
-				<li>
-					delete <code>export_1.ply</code> from the Brush output
-					folder
-				</li>
-			</ol>
+			<p>
+				high-quality LODs can be generated using the following bash
+				script (requires splat-transform and brush):
+			</p>
+			<pre>
+<code>set -euo pipefail</code>
+<code></code>
+<code>cp $1 $2/init.ply</code>
+<code>mv ${2}_exports ${2}_train_exports</code>
+<code></code>
+<code>n=0</code>
+<code>while [ "$n" -lt 5 ]; do</code>
+<code>	n=$(( n + 1 ))</code>
+<code></code>
+<code>	splat-transform $2/init.ply -F 50% $2/decimated.ply # splat-transform has much higher quality decimation than brush</code>
+<code>	rm $2/init.ply</code>
+<code>	mv $2/decimated.ply $2/init.ply</code>
+<code>	brush --total-train-iters 5000 --render-mode mip --growth-stop-iter 0 --max-resolution 8192 $2</code>
+<code>	mv ${2}_exports ${2}_decimated_${n}_exports</code>
+<code>done</code>
+<code></code>
+<code>rm $2/init.ply</code>
+</pre>
+			<p>required arguments:</p>
+			<ul>
+				<li>$1 = Brush output checkpoint</li>
+				<li>$2 = COLMAP output folder</li>
+			</ul>
 			<h2 id="recommended-reading">recommended reading</h2>
 			<p>how gaussian splats work:</p>
 			<ul>
