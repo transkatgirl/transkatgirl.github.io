@@ -453,7 +453,7 @@
 <code>	mv ${2}_exports/export_5000.ply ${2}.LOD-${n}.ply</code>
 <code>done</code>
 <code></code>
-<code>splat-transform --lod-chunk-count 1024 --lod-chunk-extent 32 ${2}.LOD-0.ply -l 0 ${2}.LOD-1.ply -l 1 ${2}.LOD-2.ply -l 2 ${2}.LOD-3.ply -l 3 ${2}_SSOG/lod-meta.json --filter-nan</code>
+<code>splat-transform --lod-chunk-count 1024 --lod-chunk-extent 32 ${2}.LOD-0.ply -l 0 ${2}.LOD-1.ply -l 1 ${2}.LOD-2.ply -l 2 ${2}.LOD-3.ply -l 3 ${2}_SSOG/lod-meta.json --filter-nan # see https://developer.playcanvas.com/user-manual/splat-transform/#generating-lod-format</code>
 <code></code>
 <code>zip -9r ${2}_SSOG.zip ${2}_SSOG/*</code>
 <code>rm -r $2/init.ply ${2}.LOD-0.ply ${2}_SSOG ${2}_exports</code>
@@ -554,8 +554,8 @@
 				</li>
 				<li>
 					<a
-						href="https://github.com/playcanvas/splat-transform#cli-usage"
-						>splat-transform CLI Usage</a
+						href="https://developer.playcanvas.com/user-manual/splat-transform"
+						>splat-transform manual</a
 					>
 				</li>
 			</ul>
