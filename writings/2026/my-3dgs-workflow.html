@@ -302,12 +302,26 @@
 								href="https://developer.playcanvas.com/user-manual/splat-transform/#supported-formats"
 								>format conversion</a
 							>
+							<ul>
+								<li>
+									<code>splat-transform $1.ply $1.sog</code>
+								</li>
+							</ul>
 						</li>
 						<li>
 							<a
 								href="https://developer.playcanvas.com/user-manual/splat-transform/collision/"
 								>collision mesh generation</a
 							>
+							<ul>
+								<li>
+									<code
+										>splat-transform $1.ply --filter-cluster
+										$1.voxel.json --voxel-params 0.025,0.1
+										-K faces</code
+									>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</li>
