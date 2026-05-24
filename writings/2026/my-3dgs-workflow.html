@@ -170,9 +170,38 @@
 							Processing -> Feature matching
 							<ul>
 								<li>
-									if dataset type is "Individual images" or
-									image count is &lt;1000, use Exhaustive
+									if image count is &lt;1000, use Exhaustive
 									matching
+								</li>
+								<li>
+									if dataset type is "Individual images" and
+									image count is &gt;1000, use VocabTree
+									matching
+									<ol>
+										<li>
+											download the appropriate faiss
+											vocabulary tree for your dataset
+											size from
+											<a
+												href="https://github.com/colmap/colmap/releases/tag/3.11.1"
+												>COLMAP release 3.11.1</a
+											>
+											<ul>
+												<li>
+													256k words = 1,000 - 10,000
+													images
+												</li>
+												<li>
+													1M words = 10,000 - 100,000
+													images
+												</li>
+											</ul>
+										</li>
+										<li>
+											set vocab_tree_path to the
+											downloaded file
+										</li>
+									</ol>
 								</li>
 								<li>
 									if dataset type is "Video frames" and image
@@ -348,9 +377,20 @@
 			<pre>
 <code>set -euo pipefail</code>
 <code></code>
+<code>ITEM_COUNT="$(ls -1q | wc -l)"</code>
+<code>if [ ! -f ~/.cache/vocab_tree_faiss_flickr100K_words32K.bin ]; then</code>
+<code>	curl -L https://github.com/colmap/colmap/releases/download/3.11.1/vocab_tree_faiss_flickr100K_words32K.bin -o ~/.cache/vocab_tree_faiss_flickr100K_words32K.bin</code>
+<code>fi</code>
+<code>if [ ! -f ~/.cache/vocab_tree_faiss_flickr100K_words256K.bin ]; then</code>
+<code>	curl -L https://github.com/colmap/colmap/releases/download/3.11.1/vocab_tree_faiss_flickr100K_words256K.bin -o ~/.cache/vocab_tree_faiss_flickr100K_words256K.bin</code>
+<code>fi</code>
+<code>if [ ! -f ~/.cache/vocab_tree_faiss_flickr100K_words1M.bin ]; then</code>
+<code>	curl -L https://github.com/colmap/colmap/releases/download/3.11.1/vocab_tree_faiss_flickr100K_words1M.bin -o ~/.cache/vocab_tree_faiss_flickr100K_words1M.bin</code>
+<code>fi</code>
 <code>colmap project_generator --quality extreme --output colmap.ini</code>
 <code>sed -i '' -e 's/max_extra_param=1$/max_extra_param=1.7976931348623157e+308/g' colmap.ini # https://github.com/colmap/colmap/blob/c03cb50eb0f565e0b0ec34dbbfe37568b31979be/src/colmap/controllers/option_manager.cc#L90</code>
 <code>sed -i '' -e 's/database_path=/database_path=project.db/g' colmap.ini</code>
+<code>sed -i '' -e 's/vocab_tree_path=/vocab_tree_path=vocab_tree.bin/g' colmap.ini</code>
 <code>sed -i '' -e 's/image_path=/image_path=./g' colmap.ini</code>
 <code>echo 'output_path=sparse' | cat - colmap.ini &gt; colmap_mapper.ini</code>
 <code>echo 'input_path=sparse/0</code>
@@ -358,7 +398,17 @@
 <code>mkdir sparse colmap_output</code>
 <code></code>
 <code>colmap feature_extractor --project_path colmap.ini</code>
-<code>colmap exhaustive_matcher --project_path colmap.ini</code>
+<code>if [ "$ITEM_COUNT" -lt "1000" ]; then</code>
+<code>	colmap exhaustive_matcher --project_path colmap.ini</code>
+<code>else</code>
+<code>	if [ "$ITEM_COUNT" -lt "10000" ]; then</code>
+<code>		cp ~/.cache/vocab_tree_faiss_flickr100K_words256K.bin vocab_tree.bin</code>
+<code>	else</code>
+<code>		cp ~/.cache/vocab_tree_faiss_flickr100K_words1M.bin vocab_tree.bin</code>
+<code>	fi</code>
+<code>	colmap vocab_tree_matcher --project_path colmap.ini</code>
+<code>	rm vocab_tree.bin</code>
+<code>fi</code>
 <code>colmap view_graph_calibrator --project_path colmap.ini # marginally improves quality relative to the GUI workflow</code>
 <code>colmap mapper --project_path colmap_mapper.ini</code>
 <code>if [ -f sparse/1 ]; then</code>
@@ -399,16 +449,34 @@
 				<pre>
 <code>set -euo pipefail</code>
 <code></code>
+<code>ITEM_COUNT="$(ls -1q | wc -l)"</code>
+<code>if [ ! -f ~/.cache/vocab_tree_faiss_flickr100K_words32K.bin ]; then</code>
+<code>	curl -L https://github.com/colmap/colmap/releases/download/3.11.1/vocab_tree_faiss_flickr100K_words32K.bin -o ~/.cache/vocab_tree_faiss_flickr100K_words32K.bin</code>
+<code>fi</code>
+<code>if [ ! -f ~/.cache/vocab_tree_faiss_flickr100K_words256K.bin ]; then</code>
+<code>	curl -L https://github.com/colmap/colmap/releases/download/3.11.1/vocab_tree_faiss_flickr100K_words256K.bin -o ~/.cache/vocab_tree_faiss_flickr100K_words256K.bin</code>
+<code>fi</code>
+<code>if [ ! -f ~/.cache/vocab_tree_faiss_flickr100K_words1M.bin ]; then</code>
+<code>	curl -L https://github.com/colmap/colmap/releases/download/3.11.1/vocab_tree_faiss_flickr100K_words1M.bin -o ~/.cache/vocab_tree_faiss_flickr100K_words1M.bin</code>
+<code>fi</code>
 <code>colmap project_generator --quality low --output colmap.ini</code>
 <code>sed -i '' -e 's/database_path=/database_path=project.db/g' colmap.ini</code>
+<code>sed -i '' -e 's/vocab_tree_path=/vocab_tree_path=vocab_tree.bin/g' colmap.ini</code>
 <code>sed -i '' -e 's/image_path=/image_path=./g' colmap.ini</code>
 <code>echo 'output_path=sparse' | cat - colmap.ini &gt; colmap_mapper.ini</code>
 <code>mkdir sparse</code>
 <code></code>
 <code>colmap feature_extractor --project_path colmap.ini</code>
+<code>if [ "$ITEM_COUNT" -lt "1000" ]; then</code>
+<code>	cp ~/.cache/vocab_tree_faiss_flickr100K_words32K.bin vocab_tree.bin</code>
+<code>elif [ "$ITEM_COUNT" -lt "10000" ]; then</code>
+<code>	cp ~/.cache/vocab_tree_faiss_flickr100K_words256K.bin vocab_tree.bin</code>
+<code>else</code>
+<code>	cp ~/.cache/vocab_tree_faiss_flickr100K_words1M.bin vocab_tree.bin</code>
+<code>fi</code>
 <code>colmap vocab_tree_matcher --project_path colmap.ini</code>
 <code>colmap global_mapper --project_path colmap_mapper.ini</code>
-<code>rm colmap_mapper.ini</code>
+<code>rm colmap_mapper.ini vocab_tree.bin</code>
 <code>mv -f colmap.ini sparse/0/project.ini</code>
 <code></code>
 <code>colmap gui --import_path sparse/0 --database_path project.db --image_path . # <b>analyze the sparse reconstructed scene</b></code>
