@@ -359,6 +359,7 @@
 <code></code>
 <code>colmap feature_extractor --project_path colmap.ini</code>
 <code>colmap exhaustive_matcher --project_path colmap.ini</code>
+<code>colmap view_graph_calibrator --project_path colmap.ini # marginally improves quality relative to the GUI workflow</code>
 <code>colmap mapper --project_path colmap_mapper.ini</code>
 <code>if [ -f sparse/1 ]; then</code>
 <code>	echo 'input_path=sparse/merged</code>
@@ -385,6 +386,36 @@
 				output directory is
 				<code>./colmap_output</code>
 			</p>
+			<details>
+				<summary>preview workflow</summary>
+				<p>
+					in some cases, it may be worth running a short "preview"
+					quality COLMAP workflow to rapidly check scene coverage.
+				</p>
+				<p>
+					to preview scene coverage, run the following bash script
+					within the input folder:
+				</p>
+				<pre>
+<code>set -euo pipefail</code>
+<code></code>
+<code>colmap project_generator --quality low --output colmap.ini</code>
+<code>sed -i '' -e 's/database_path=/database_path=project.db/g' colmap.ini</code>
+<code>sed -i '' -e 's/image_path=/image_path=./g' colmap.ini</code>
+<code>echo 'output_path=sparse' | cat - colmap.ini &gt; colmap_mapper.ini</code>
+<code>mkdir sparse</code>
+<code></code>
+<code>colmap feature_extractor --project_path colmap.ini</code>
+<code>colmap vocab_tree_matcher --project_path colmap.ini</code>
+<code>colmap global_mapper --project_path colmap_mapper.ini</code>
+<code>rm colmap_mapper.ini</code>
+<code>mv -f colmap.ini sparse/0/project.ini</code>
+<code></code>
+<code>colmap gui --import_path sparse/0 --database_path project.db --image_path . # <b>analyze the sparse reconstructed scene</b></code>
+<code>rm -r sparse</code>
+<code>rm project.db*</code>
+</pre>
+			</details>
 			<h3 id="high-overlap-workflow">
 				Brush workflow for high-overlap scenes (replaces step 4)
 			</h3>
