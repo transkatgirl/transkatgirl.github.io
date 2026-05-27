@@ -284,7 +284,7 @@
 						<li>enable Model -> Render mode</li>
 						<li>set Model -> Render mode to Mip</li>
 						<li>
-							set Dataset -> Max image resolution to 8192
+							set Dataset -> Max image resolution to 4096
 							(arbitrary values can be entered into the textbox
 							next to the slider)
 						</li>
@@ -525,7 +525,7 @@
 						</li> -->
 						<li>enable Model -> Render mode</li>
 						<li>set Model -> Render mode to Mip</li>
-						<li>set Dataset -> Max image resolution to 8192</li>
+						<li>set Dataset -> Max image resolution to 4096</li>
 						<li>enable Dataset -> Split dataset for evaluation</li>
 						<li>enable Rerun.io -> Enable rerun</li>
 						<li>click Start</li>
@@ -573,7 +573,7 @@
 <code>	splat-transform $2/init.ply -F 50% $2/decimated.ply # splat-transform has much higher quality decimation than brush</code>
 <code>	rm $2/init.ply</code>
 <code>	mv $2/decimated.ply $2/init.ply</code>
-<code>	brush --total-train-iters 5000 --render-mode mip --growth-stop-iter 0 --max-resolution 8192 $2</code>
+<code>	brush --total-train-iters 5000 --render-mode mip --growth-stop-iter 0 --max-resolution 4096 $2</code>
 <code>	mv ${2}_exports/export_5000.ply ${2}.LOD-${n}.ply</code>
 <code>done</code>
 <code></code>
