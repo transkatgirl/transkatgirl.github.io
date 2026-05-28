@@ -31,7 +31,7 @@
 				<h1>my workflow for making 3d gaussian splats</h1>
 				<p>
 					written <time>2026-05-16</time>, last updated
-					<time>2026-05-27</time>
+					<time>2026-05-28</time>
 				</p>
 			</hgroup>
 			<p>
@@ -294,7 +294,9 @@
 					</ol>
 				</li>
 				<li>
-					(optional) run the <a href="#lod-workflow">LOD workflow</a>
+					(optional) run the
+					<a href="#lod-workflow">LOD workflow</a> (recommended if
+					splat count > 1M)
 				</li>
 				<li>
 					open
@@ -348,8 +350,7 @@
 							<ul>
 								<li>
 									<code
-										>splat-transform --lod-chunk-count 1024
-										--lod-chunk-extent 32 $1.ply -l 0
+										>splat-transform $1.ply -l 0
 										$1.LOD-1.ply -l 1 $1.LOD-2.ply -l 2
 										$1.LOD-3.ply -l 3
 										${1}_SSOG/lod-meta.json --filter-nan
@@ -600,7 +601,7 @@
 <code>	mv ${2}_exports/export_5000.ply ${2}.LOD-${n}.ply</code>
 <code>done</code>
 <code></code>
-<code>splat-transform --lod-chunk-count 1024 --lod-chunk-extent 32 ${2}.LOD-0.ply -l 0 ${2}.LOD-1.ply -l 1 ${2}.LOD-2.ply -l 2 ${2}.LOD-3.ply -l 3 ${2}_SSOG/lod-meta.json --filter-nan --iterations 20 # see https://developer.playcanvas.com/user-manual/splat-transform/#generating-lod-format</code>
+<code>splat-transform ${2}.LOD-0.ply -l 0 ${2}.LOD-1.ply -l 1 ${2}.LOD-2.ply -l 2 ${2}.LOD-3.ply -l 3 ${2}_SSOG/lod-meta.json --filter-nan --iterations 20 # see https://developer.playcanvas.com/user-manual/splat-transform/#generating-lod-format</code>
 <code></code>
 <code>zip -9r ${2}_SSOG.zip ${2}_SSOG/*</code>
 <code>rm -r $2/init.ply ${2}.LOD-0.ply ${2}_SSOG ${2}_exports</code>
