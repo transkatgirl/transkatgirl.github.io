@@ -274,15 +274,21 @@
 							click Directory and choose output folder from last
 							step
 						</li>
-						<!--
-							SuperSplat Editor doesn't support SH degree >3 yet
-						-->
-						<!-- <li>
-							(optional) if you don't plan on compressing the
-							splat, set Model -> Spherical Harmonics Degree to 4
-						</li> -->
-						<li>enable Model -> Render mode</li>
-						<li>set Model -> Render mode to Mip</li>
+						<li>
+							(optional)
+							<b
+								>if you don't plan on editing / futher
+								processing or publicly distributing the splat</b
+							>, use non-standard settings to further improve
+							quality:
+							<ul>
+								<li>
+									set Model -> Spherical Harmonics Degree to 4
+								</li>
+								<li>enable Model -> Render mode</li>
+								<li>set Model -> Render mode to Mip</li>
+							</ul>
+						</li>
 						<li>set Dataset -> Max image resolution to 4096</li>
 						<li>click Start</li>
 					</ol>
@@ -527,21 +533,21 @@
 							be entered into the textbox next to the slider)
 						</li>
 						<li>set Training -> Max Splats Cap to 30000k</li>
-						<!--
-							SuperSplat Editor doesn't support SH degree >3 yet
-						-->
-						<!-- <li>
-							(optional) if you don't plan on compressing the
-							splat, set Model -> Spherical Harmonics Degree to 4
+						<li>
+							(optional)
+							<b
+								>if you don't plan on editing / futher
+								processing or publicly distributing the splat</b
+							>, use non-standard settings to further improve
+							quality:
 							<ul>
 								<li>
-									the same value must be used during the
-									second Brush run
+									set Model -> Spherical Harmonics Degree to 4
 								</li>
+								<li>enable Model -> Render mode</li>
+								<li>set Model -> Render mode to Mip</li>
 							</ul>
-						</li> -->
-						<li>enable Model -> Render mode</li>
-						<li>set Model -> Render mode to Mip</li>
+						</li>
 						<li>set Dataset -> Max image resolution to 4096</li>
 						<li>enable Dataset -> Split dataset for evaluation</li>
 						<li>enable Rerun.io -> Enable rerun</li>
@@ -590,7 +596,7 @@
 <code>	splat-transform $2/init.ply -F 50% $2/decimated.ply # splat-transform has much higher quality decimation than brush</code>
 <code>	rm $2/init.ply</code>
 <code>	mv $2/decimated.ply $2/init.ply</code>
-<code>	brush --total-train-iters 5000 --render-mode mip --growth-stop-iter 0 --max-resolution 4096 $2</code>
+<code>	brush --total-train-iters 5000 --growth-stop-iter 0 --max-resolution 4096 $2</code>
 <code>	mv ${2}_exports/export_5000.ply ${2}.LOD-${n}.ply</code>
 <code>done</code>
 <code></code>
