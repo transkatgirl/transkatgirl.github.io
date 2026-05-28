@@ -295,6 +295,12 @@
 				</li>
 				<li>
 					(optional) run the
+					<a href="#standardization-workflow"
+						>non-standard PLY conversion workflow</a
+					>
+				</li>
+				<li>
+					(optional) run the
 					<a href="#lod-workflow">LOD workflow</a> (recommended if
 					splat count > 1M)
 				</li>
@@ -578,6 +584,32 @@
 					</ul>
 				</li>
 			</ol>
+			<h3 id="standardization-workflow">
+				non-standard PLY conversion workflow
+			</h3>
+			<p>
+				Brush-only PLYs (SH degree >3 or Mip splatting) can be converted
+				into standard 3DGS PLYs using the following bash script
+				(requires splat-transform and Brush):
+			</p>
+			<pre>
+<code>set -euo pipefail</code>
+<code></code>
+<code>cp $1 $2/init.ply</code>
+<code>mv ${2}_exports ${2}_original_exports</code>
+<code></code>
+<code>splat-transform $2/init.ply --filter-harmonics 3 $2/stripped.ply</code>
+<code>rm $2/init.ply</code>
+<code>mv $2/stripped.ply $2/init.ply</code>
+<code></code>
+<code>brush --total-train-iters 10000 --growth-stop-iter 0 --max-resolution 4096 $2</code>
+<code>rm $2/init.ply</code>
+</pre>
+			<p>required arguments:</p>
+			<ul>
+				<li>$1 = Brush output checkpoint</li>
+				<li>$2 = COLMAP output folder</li>
+			</ul>
 			<h3 id="lod-workflow">LOD workflow</h3>
 			<p>
 				high-quality LODs can be generated using the following bash
