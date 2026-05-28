@@ -274,6 +274,8 @@
 							click Directory and choose output folder from last
 							step
 						</li>
+						<li>enable Model -> Render mode</li>
+						<li>set Model -> Render mode to Mip</li>
 						<li>set Dataset -> Max image resolution to 4096</li>
 						<li>
 							(optional)
@@ -286,18 +288,10 @@
 								<li>
 									set Model -> Spherical Harmonics Degree to 4
 								</li>
-								<li>enable Model -> Render mode</li>
-								<li>set Model -> Render mode to Mip</li>
 							</ul>
 						</li>
 						<li>click Start</li>
 					</ol>
-				</li>
-				<li>
-					(optional) run the
-					<a href="#standardization-workflow"
-						>non-standard PLY conversion workflow</a
-					>
 				</li>
 				<li>
 					(optional) run the
@@ -379,6 +373,14 @@
 									>
 								</li>
 							</ul>
+						</li>
+						<li>
+							note: when configuring
+							<a
+								href="https://github.com/playcanvas/supersplat-viewer"
+								>SuperSplat Viewer</a
+							>, make sure to enable anti-aliased rendering using
+							the <code>?aa</code> URL parameter
 						</li>
 					</ul>
 				</li>
@@ -540,6 +542,8 @@
 							be entered into the textbox next to the slider)
 						</li>
 						<li>set Training -> Max Splats Cap to 30000k</li>
+						<li>enable Model -> Render mode</li>
+						<li>set Model -> Render mode to Mip</li>
 						<li>set Dataset -> Max image resolution to 4096</li>
 						<li>
 							(optional)
@@ -552,8 +556,6 @@
 								<li>
 									set Model -> Spherical Harmonics Degree to 4
 								</li>
-								<li>enable Model -> Render mode</li>
-								<li>set Model -> Render mode to Mip</li>
 							</ul>
 						</li>
 						<li>enable Dataset -> Split dataset for evaluation</li>
@@ -584,32 +586,6 @@
 					</ul>
 				</li>
 			</ol>
-			<h3 id="standardization-workflow">
-				non-standard PLY conversion workflow
-			</h3>
-			<p>
-				Brush-only PLYs (SH degree >3 or Mip splatting) can be converted
-				into standard 3DGS PLYs using the following bash script
-				(requires splat-transform and Brush):
-			</p>
-			<pre>
-<code>set -euo pipefail</code>
-<code></code>
-<code>cp $1 $2/init.ply</code>
-<code>mv ${2}_exports ${2}_original_exports</code>
-<code></code>
-<code>splat-transform $2/init.ply --filter-harmonics 2 $2/stripped.ply</code>
-<code>rm $2/init.ply</code>
-<code>mv $2/stripped.ply $2/init.ply</code>
-<code></code>
-<code>brush --total-train-iters 10000 --growth-stop-iter 0 --max-resolution 4096 $2</code>
-<code>rm $2/init.ply</code>
-</pre>
-			<p>required arguments:</p>
-			<ul>
-				<li>$1 = Brush output checkpoint</li>
-				<li>$2 = COLMAP output folder</li>
-			</ul>
 			<h3 id="lod-workflow">LOD workflow</h3>
 			<p>
 				high-quality LODs can be generated using the following bash
@@ -629,7 +605,7 @@
 <code>	splat-transform $2/init.ply -F 50% $2/decimated.ply # splat-transform has much higher quality decimation than brush</code>
 <code>	rm $2/init.ply</code>
 <code>	mv $2/decimated.ply $2/init.ply</code>
-<code>	brush --total-train-iters 5000 --growth-stop-iter 0 --max-resolution 4096 $2</code>
+<code>	brush --total-train-iters 5000 --render-mode mip --growth-stop-iter 0 --max-resolution 4096 $2</code>
 <code>	mv ${2}_exports/export_5000.ply ${2}.LOD-${n}.ply</code>
 <code>done</code>
 <code></code>
