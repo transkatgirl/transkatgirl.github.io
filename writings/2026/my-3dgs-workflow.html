@@ -626,6 +626,23 @@
 				<li>$1 = Brush output checkpoint</li>
 				<li>$2 = COLMAP output folder</li>
 			</ul>
+			<p>
+				if necessary, LOD PLYs can be rotated using the following bash
+				script:
+			</p>
+			<pre>
+<code>set -euo pipefail</code>
+<code></code>
+<code>mkdir ${1}_rotated</code>
+<code>for file in $1.LOD-*.ply; do</code>
+<code>	splat-transform $file -r 0,0,180 -r $2 ${1}_rotated/$file</code>
+<code>done</code>
+</pre>
+			<p>required arguments:</p>
+			<ul>
+				<li>$1 = LOD root filename (argument $2 from last script)</li>
+				<li>$2 = rotation degrees (x, y, z)</li>
+			</ul>
 			<h2 id="recommended-reading">recommended reading</h2>
 			<p>how gaussian splats work:</p>
 			<ul>
