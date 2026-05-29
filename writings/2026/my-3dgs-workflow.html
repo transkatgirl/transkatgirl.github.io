@@ -31,7 +31,7 @@
 				<h1>my workflow for making 3d gaussian splats</h1>
 				<p>
 					written <time>2026-05-16</time>, last updated
-					<time>2026-05-28</time>
+					<time>2026-05-29</time>
 				</p>
 			</hgroup>
 			<p>
@@ -627,21 +627,22 @@
 				<li>$2 = COLMAP output folder</li>
 			</ul>
 			<p>
-				if necessary, LOD PLYs can be rotated using the following bash
-				script:
+				if necessary, LOD PLYs can be rotated and scaled using the
+				following bash script:
 			</p>
 			<pre>
 <code>set -euo pipefail</code>
 <code></code>
-<code>mkdir ${1}_rotated</code>
+<code>mkdir ${1}_adjusted</code>
 <code>for file in $1.LOD-*.ply; do</code>
-<code>	splat-transform $file -r 0,0,180 -r $2 ${1}_rotated/$file</code>
+<code>	splat-transform $file --rotate 0,0,180 --rotate $2 --scale $3 ${1}_adjusted/$file</code>
 <code>done</code>
 </pre>
 			<p>required arguments:</p>
 			<ul>
 				<li>$1 = LOD root filename (argument $2 from last script)</li>
 				<li>$2 = rotation degrees (x, y, z)</li>
+				<li>$3 = scaling factor (eg. 0.7 or 1.2)</li>
 			</ul>
 			<h2 id="recommended-reading">recommended reading</h2>
 			<p>how gaussian splats work:</p>
