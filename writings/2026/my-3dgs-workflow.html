@@ -253,6 +253,74 @@
 										</li>
 									</ol>
 								</li>
+								<li>
+									(optional) if the images are only
+									problematic due to incorrect placement, try
+									the following:
+									<ol>
+										<li>
+											move the images outside of the input
+											image folder
+										</li>
+										<li>close COLMAP</li>
+										<li>delete the project database</li>
+										<li>
+											repeat <em>the first 5 steps</em> of
+											the COLMAP workflow from the
+											beginning
+										</li>
+										<li>
+											add the problematic images back into
+											the input image folder
+										</li>
+										<li>repeat COLMAP steps 3-4</li>
+										<li>
+											create a plaintext file containing
+											image pairs to match (see
+											<a
+												href="https://colmap.github.io/tutorial.html#feature-matching-and-geometric-verification"
+												>COLMAP Feature Matching and
+												Geometric Verification</a
+											>). each line should contain two
+											filenames separated by a space
+											<ul>
+												<li>
+													aim to match <em>all</em>
+													images in the input folder
+													with at least 20% overlap to
+													each-other
+												</li>
+											</ul>
+										</li>
+										<li>
+											Processing -> Feature matching
+											<ol class="sublist">
+												<li>use Custom matching</li>
+												<li>
+													set type to "Image pairs"
+												</li>
+												<li>
+													set match_list_path to the
+													file created in the previous
+													step
+												</li>
+												<li>click Run</li>
+											</ol>
+										</li>
+										<li>
+											proceed with the remaining steps in
+											the COLMAP workflow
+											<ul>
+												<li>
+													if the images are still
+													positioned incorrectly,
+													perform the usual steps to
+													exclude problematic images
+												</li>
+											</ul>
+										</li>
+									</ol>
+								</li>
 							</ul>
 						</li>
 						<li>
