@@ -24,6 +24,10 @@ li {
 	margin: 0.125lh 0;
 }
 
+ol.sublist {
+	list-style-type: lower-alpha;
+}
+
 h1,
 h2,
 h3,
