@@ -350,11 +350,25 @@
 					open
 					<a href="https://github.com/ArthurBrussee/brush">Brush</a>
 					or use the
+					<a href="#automated-brush-workflow">automated workflow</a>
+					or
 					<a href="#high-overlap-workflow">high-overlap workflow</a>
 					<ol>
 						<li>
 							click Directory and choose output folder from last
 							step
+						</li>
+						<li>
+							set Training -> Max Splats Cap to 100000k (arbitrary
+							values can be entered into the textbox next to the
+							slider)
+							<ul>
+								<li>
+									keep in mind that this is only a cap; it
+									doesn't determine how many splats are used
+									unless you hit it.
+								</li>
+							</ul>
 						</li>
 						<li>enable Model -> Render mode</li>
 						<li>set Model -> Render mode to Mip</li>
@@ -500,7 +514,7 @@
 			<h3 id="automated-colmap-workflow">
 				automated COLMAP workflow (replaces step 3)
 			</h3>
-			run the following bash script within the input folder:
+			<p>run the following bash script within the input folder:</p>
 			<pre>
 <code>set -euo pipefail</code>
 <code></code>
@@ -611,6 +625,19 @@
 <code>rm project.db*</code>
 </pre>
 			</details>
+			<h3 id="automated-brush-workflow">
+				automated Brush workflow (replaces step 4)
+			</h3>
+			<p>
+				run the following bash script within the COLMAP output folder:
+			</p>
+			<pre>
+<code>set -euo pipefail</code>
+<code></code>
+<code>DIR="$(pwd)"</code>
+<code>cd ..</code>
+<code>brush --max-splats 100000000 --render-mode mip --max-resolution 4096 --with-viewer "$DIR"</code>
+</pre>
 			<h3 id="high-overlap-workflow">
 				Brush workflow for high-overlap scenes (replaces step 4)
 			</h3>
@@ -637,11 +664,8 @@
 						<li>
 							click Directory and choose the COLMAP output folder
 						</li>
-						<li>
-							set Training -> steps to 300k (arbitrary values can
-							be entered into the textbox next to the slider)
-						</li>
-						<li>set Training -> Max Splats Cap to 30000k</li>
+						<li>set Training -> steps to 300k</li>
+						<li>set Training -> Max Splats Cap to 100000k</li>
 						<li>
 							set Training -> Growth & refinement -> Growth stop
 							iteration to 20000
