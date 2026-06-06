@@ -31,7 +31,7 @@
 				<h1>my workflow for making 3d gaussian splats</h1>
 				<p>
 					written <time>2026-05-16</time>, last updated
-					<time>2026-06-05</time>
+					<time>2026-06-06</time>
 				</p>
 			</hgroup>
 			<p>
@@ -355,14 +355,29 @@
 					<a href="https://github.com/ArthurBrussee/brush">Brush</a>
 					or use the
 					<a href="#automated-brush-workflow">automated workflow</a>
-					or
-					<a href="#high-overlap-workflow">high-overlap workflow</a>
+					(see also:
+					<a href="#parameter-testing-workflow"
+						>parameter testing workflow</a
+					>)
 					<ol>
 						<li>
 							click Directory and choose output folder from last
 							step
 						</li>
-						<li>set Training -> steps to 50000</li>
+						<li>
+							set Training -> steps to 50000
+							<ul>
+								<li>
+									the
+									<a href="#parameter-testing-workflow"
+										>ideal values for most training
+										parameters are scene-dependent</a
+									>; however, <em>most</em> scenes benefit
+									from step counts greater than the default
+									(30000)
+								</li>
+							</ul>
+						</li>
 						<li>
 							set Training -> Max Splats Cap to 100000k (arbitrary
 							values can be entered into the textbox next to the
@@ -378,23 +393,36 @@
 						<li>
 							set Training -> Growth & refinement -> Growth stop
 							iteration to 20000
+							<ul>
+								<li>
+									(same caveats as Training -> steps apply
+									here)
+								</li>
+							</ul>
+						</li>
+						<li>
+							set Model -> Spherical Harmonics Degree based on the
+							scene
+							<ul>
+								<li>
+									SH degree &gt;3 is unsupported by almost all
+									splat viewing/editing software
+								</li>
+								<li>
+									if your scene has good coverage, the default
+									(3) usually delivers the best quality
+								</li>
+								<li>
+									if your scene has poor coverage
+									<em>and</em> lacks reflective objects,
+									lowering the SH degree will usually improve
+									visual quality.
+								</li>
+							</ul>
 						</li>
 						<li>enable Model -> Render mode</li>
 						<li>set Model -> Render mode to Mip</li>
 						<li>set Dataset -> Max image resolution to 4096</li>
-						<li>
-							(optional)
-							<b
-								>if you don't plan on editing / futher
-								processing or publicly distributing the splat</b
-							>, use non-standard settings to further improve
-							quality:
-							<ul>
-								<li>
-									set Model -> Spherical Harmonics Degree to 4
-								</li>
-							</ul>
-						</li>
 						<li>click Start</li>
 					</ol>
 				</li>
@@ -645,13 +673,9 @@
 <code>cd ..</code>
 <code>brush --total-train-iters 50000 --max-splats 100000000 --growth-stop-iter 20000 --render-mode mip --max-resolution 4096 --with-viewer "$DIR"</code>
 </pre>
-			<h3 id="high-overlap-workflow">
-				Brush workflow for high-overlap scenes (replaces step 4)
+			<h3 id="parameter-testing-workflow">
+				Brush workflow for testing parameter changes
 			</h3>
-			<p>
-				this workflow should only be used if
-				<b>all covered areas have 70% overlap or greater</b>
-			</p>
 			<ol>
 				<li>
 					open
@@ -671,52 +695,25 @@
 						<li>
 							click Directory and choose the COLMAP output folder
 						</li>
-						<li>set Training -> steps to 300000</li>
-						<li>set Training -> Max Splats Cap to 100000k</li>
-						<li>
-							set Training -> Growth & refinement -> Growth stop
-							iteration to 20000
-						</li>
-						<li>enable Model -> Render mode</li>
-						<li>set Model -> Render mode to Mip</li>
-						<li>set Dataset -> Max image resolution to 4096</li>
-						<li>
-							(optional)
-							<b
-								>if you don't plan on editing / futher
-								processing or publicly distributing the splat</b
-							>, use non-standard settings to further improve
-							quality:
-							<ul>
-								<li>
-									set Model -> Spherical Harmonics Degree to 4
-								</li>
-							</ul>
-						</li>
+						<li>adjust parameters as desired</li>
 						<li>enable Dataset -> Split dataset for evaluation</li>
 						<li>enable Rerun.io -> Enable rerun</li>
 						<li>click Start</li>
 					</ol>
 				</li>
 				<li>
-					analyze logged values in Rerun Viewer
+					analyze logged values in Rerun Viewer and/or output
+					checkpoints (written every 5k steps by default) as desired
 					<ul>
 						<li>
 							SSIM and PSNR are the two logged measures of visual
 							quality (both are higher = better)
 						</li>
 						<li>
-							focus on analyzing the mean values for all eval
-							images rather than rather than trying to analyze the
-							results for every eval image independently
-						</li>
-						<li>
-							your goal is to find the checkpoint with the lowest
-							step count that gives you the best possible visual
-							quality; training beyond the point where these
-							values plateau can cause the splat to overfit to the
-							input images, worsening visual quality at novel
-							positions
+							once you have decided on your parameters, repeating
+							the splat training run without a train/eval split
+							will usually improve visual quality (at the cost of
+							far fewer available metrics)
 						</li>
 					</ul>
 				</li>
