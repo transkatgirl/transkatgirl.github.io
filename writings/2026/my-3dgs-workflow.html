@@ -465,7 +465,7 @@
 									<pre>
 <code>splat-transform $1.LOD-0.ply -l 0 $1.LOD-1.ply -l 1 $1.LOD-2.ply -l 2 $1.LOD-3.ply -l 3 ${1}_SSOG/lod-meta.json --filter-nan --iterations 20</code>
 <code></code>
-<code>zip -9rX ${1}_SSOG.zip ${1}_SSOG/* # only necessary if uploading to SuperSplat</code>
+<code>zip -9rX --suffixes .webp ${1}_SSOG.zip ${1}_SSOG/* # only necessary if uploading to SuperSplat</code>
 </pre>
 								</li>
 							</ul>
