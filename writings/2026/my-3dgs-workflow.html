@@ -31,7 +31,7 @@
 				<h1>my workflow for making 3d gaussian splats</h1>
 				<p>
 					written <time>2026-05-16</time>, last updated
-					<time>2026-06-06</time>
+					<time>2026-06-08</time>
 				</p>
 			</hgroup>
 			<p>
@@ -207,7 +207,17 @@
 								<li>click Run</li>
 							</ol>
 						</li>
-						<li>Reconstruction -> Start reconstruction</li>
+						<li>
+							Reconstruction -> Start reconstruction
+							<ul>
+								<li>
+									Running the reconstruction twice (click
+									Reconstruction -> Reset reconstruction
+									before re-running) can improve the quality
+									of image undistortion.
+								</li>
+							</ul>
+						</li>
 						<li>
 							analyze the sparse reconstructed scene (see
 							<a href="https://colmap.github.io/gui.html"
@@ -585,7 +595,7 @@
 <code>	colmap vocab_tree_matcher --project_path colmap.ini</code>
 <code>	rm vocab_tree.bin</code>
 <code>fi</code>
-<code>colmap view_graph_calibrator --project_path colmap.ini # slightly improves quality relative to the GUI workflow</code>
+<code>colmap view_graph_calibrator --project_path colmap.ini # slightly improves image undistortion quality</code>
 <code>colmap mapper --project_path colmap_mapper.ini</code>
 <code>if [ -f sparse/1 ]; then</code>
 <code>	echo 'input_path=sparse/merged</code>
