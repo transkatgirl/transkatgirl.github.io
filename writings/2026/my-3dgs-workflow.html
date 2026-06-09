@@ -205,19 +205,18 @@
 									count is &gt;1000, use Sequential matching
 								</li>
 								<li>click Run</li>
+								<li>
+									if VocabTree or Sequential matching was
+									used, do the following after matching is
+									complete:
+									<ol>
+										<li>use Transitive matching</li>
+										<li>click Run</li>
+									</ol>
+								</li>
 							</ol>
 						</li>
-						<li>
-							Reconstruction -> Start reconstruction
-							<ul>
-								<li>
-									Running the reconstruction twice (click
-									Reconstruction -> Reset reconstruction
-									before re-running) can improve the quality
-									of image undistortion.
-								</li>
-							</ul>
-						</li>
+						<li>Reconstruction -> Start reconstruction</li>
 						<li>
 							analyze the sparse reconstructed scene (see
 							<a href="https://colmap.github.io/gui.html"
@@ -348,6 +347,16 @@
 											</ul>
 										</li>
 									</ol>
+								</li>
+							</ul>
+						</li>
+						<li>Reconstruction -> Reset reconstruction</li>
+						<li>
+							Reconstruction -> Start reconstruction
+							<ul>
+								<li>
+									running reconstruction twice improves
+									reconstruction quality
 								</li>
 							</ul>
 						</li>
@@ -593,6 +602,7 @@
 <code>		cp ~/.cache/vocab_tree_faiss_flickr100K_words1M.bin vocab_tree.bin</code>
 <code>	fi</code>
 <code>	colmap vocab_tree_matcher --project_path colmap.ini</code>
+<code>	colmap transitive_matcher --project_path colmap.ini</code>
 <code>	rm vocab_tree.bin</code>
 <code>fi</code>
 <code>colmap view_graph_calibrator --project_path colmap.ini # slightly improves image undistortion quality</code>
