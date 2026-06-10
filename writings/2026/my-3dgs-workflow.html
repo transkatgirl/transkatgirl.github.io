@@ -31,7 +31,7 @@
 				<h1>my workflow for making 3d gaussian splats</h1>
 				<p>
 					written <time>2026-05-16</time>, last updated
-					<time>2026-06-08</time>
+					<time>2026-06-10</time>
 				</p>
 			</hgroup>
 			<p>
@@ -386,16 +386,18 @@
 							step
 						</li>
 						<li>
-							set Training -> steps to 50000
+							(optional) set Training -> steps to 50000
 							<ul>
 								<li>
 									the
 									<a href="#parameter-testing-workflow"
 										>ideal values for most training
 										parameters are scene-dependent</a
-									>; however, <em>most</em> scenes benefit
+									>; <em>well-captured</em> scenes benefit
 									from step counts greater than the default
-									(30000)
+									(30000), while poorly captured scenes should
+									stick to the default value in the absense of
+									further parameter testing
 								</li>
 							</ul>
 						</li>
@@ -412,12 +414,11 @@
 							</ul>
 						</li>
 						<li>
-							set Training -> Growth & refinement -> Growth stop
-							iteration to 20000
+							(optional) set Training -> Growth & refinement ->
+							Growth stop iteration to 20000
 							<ul>
 								<li>
-									(same caveats as Training -> steps apply
-									here)
+									same caveats as Training -> steps apply here
 								</li>
 							</ul>
 						</li>
@@ -718,7 +719,18 @@
 							click Directory and choose the COLMAP output folder
 						</li>
 						<li>adjust parameters as desired</li>
-						<li>enable Dataset -> Split dataset for evaluation</li>
+						<li>
+							enable Dataset -> Split dataset for evaluation
+							<ul>
+								<li>
+									the effectiveness of the train/eval split at
+									measuring generalization (the visual quality
+									of your splat when viewed from novel
+									perspectives) depends heavily on your
+									dataset
+								</li>
+							</ul>
+						</li>
 						<li>enable Rerun.io -> Enable rerun</li>
 						<li>click Start</li>
 					</ol>
