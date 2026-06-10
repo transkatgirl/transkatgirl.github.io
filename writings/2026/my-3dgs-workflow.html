@@ -586,6 +586,11 @@
 <code>	curl -L https://github.com/colmap/colmap/releases/download/3.11.1/vocab_tree_faiss_flickr100K_words1M.bin -o ~/.cache/vocab_tree_faiss_flickr100K_words1M.bin</code>
 <code>fi</code>
 <code>colmap project_generator --quality extreme --output colmap.ini</code>
+<code>set +u</code>
+<code>if [ ! -z "$1" ]; then</code>
+<code>	sed -i '' -e "s/camera_model=SIMPLE_RADIAL/camera_model=$1/g" colmap.ini</code>
+<code>fi</code>
+<code>set -u</code>
 <code>sed -i '' -e 's/max_extra_param=1$/max_extra_param=1.7976931348623157e+308/g' colmap.ini # https://github.com/colmap/colmap/blob/c03cb50eb0f565e0b0ec34dbbfe37568b31979be/src/colmap/controllers/option_manager.cc#L90</code>
 <code>sed -i '' -e 's/database_path=/database_path=project.db/g' colmap.ini</code>
 <code>sed -i '' -e 's/vocab_tree_path=/vocab_tree_path=vocab_tree.bin/g' colmap.ini</code>
@@ -635,6 +640,10 @@
 				output directory is
 				<code>./colmap_output</code>
 			</p>
+			<p>optional arguments:</p>
+			<ul>
+				<li>$1 = camera model (eg. SIMPLE_RADIAL)</li>
+			</ul>
 			<details>
 				<summary>preview workflow</summary>
 				<p>
@@ -659,6 +668,11 @@
 <code>	curl -L https://github.com/colmap/colmap/releases/download/3.11.1/vocab_tree_faiss_flickr100K_words1M.bin -o ~/.cache/vocab_tree_faiss_flickr100K_words1M.bin</code>
 <code>fi</code>
 <code>colmap project_generator --quality low --output colmap.ini</code>
+<code>set +u</code>
+<code>if [ ! -z "$1" ]; then</code>
+<code>	sed -i '' -e "s/camera_model=SIMPLE_RADIAL/camera_model=$1/g" colmap.ini</code>
+<code>fi</code>
+<code>set -u</code>
 <code>sed -i '' -e 's/database_path=/database_path=project.db/g' colmap.ini</code>
 <code>sed -i '' -e 's/vocab_tree_path=/vocab_tree_path=vocab_tree.bin/g' colmap.ini</code>
 <code>sed -i '' -e 's/image_path=/image_path=./g' colmap.ini</code>
