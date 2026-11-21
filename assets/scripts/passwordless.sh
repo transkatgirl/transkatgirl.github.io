@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
+
+# Download & run this script with the following command:
+# wget -O - -o /dev/null https://transkatgirl.github.io/assets/scripts/passwordless.sh | bash
+
 set -euo pipefail
 
-if [ "$(id -u)" -eq 0 ]; then
-    echo "Run this as your normal user, not as root or via sudo." >&2
-    exit 1
-fi
-user=$(id -un)
-
-tmp=$(mktemp)
-trap 'rm -f "$tmp"' EXIT
+PAM_UNIX_AUTH_RE='^[[:space:]]*-?auth[[:space:]].*pam_unix[.]so'
+NULLOK_RE='[[:space:]]nullok([[:space:]]|$)'
 
 relabel() {
     if [ -e /sys/fs/selinux/enforce ]; then
@@ -16,109 +14,85 @@ relabel() {
     fi
 }
 
-dm_path=$(readlink -e /etc/systemd/system/display-manager.service || true)
-case "${dm_path##*/}" in
-    gdm.service|gdm3.service) ;;
-    "")
-        echo "Could not determine the display manager (no display-manager.service)." >&2
-        exit 1 ;;
-    *)
-        echo "Active display manager is ${dm_path##*/}, not GDM; GDM autologin would not apply." >&2
-        exit 1 ;;
-esac
+preflight() {
+    case $user in
+        ""|-*|*[!A-Za-z0-9._-]*)
+            echo "Unsupported username '$user' (only letters, digits, '.', '_' and '-' are handled)." >&2
+            exit 1 ;;
+    esac
 
-gdm_conf=""
-for bin in /usr/sbin/gdm /usr/sbin/gdm3 /usr/bin/gdm /usr/bin/gdm3; do
-    [ -f "$bin" ] || continue
-    gdm_conf=$(LC_ALL=C grep -aoE '[[:print:]]*/etc/gdm3?/(custom|daemon)\.conf' "$bin" \
-        | grep -m1 -xE '/etc/gdm3?/(custom|daemon)\.conf' || true)
-    [ -n "$gdm_conf" ] && break
-done
-if [ -z "$gdm_conf" ]; then
-    for f in /etc/gdm/custom.conf /etc/gdm3/daemon.conf /etc/gdm3/custom.conf; do
-        if [ -f "$f" ]; then gdm_conf=$f; break; fi
-    done
-fi
-if [ -z "$gdm_conf" ]; then
-    echo "No GDM config file found." >&2
-    exit 1
-fi
+    if ! awk -F: -v u="$user" '$1 == u { found = 1 } END { exit !found }' /etc/passwd; then
+        echo "'$user' is not a local account in /etc/passwd (directory, SSSD or systemd-homed" >&2
+        echo "accounts are not supported); nothing was changed." >&2
+        exit 1
+    fi
 
-gdm_src=$gdm_conf
-sudo test -f "$gdm_src" || gdm_src=/dev/null
+    if ! sudo test -d /etc/sudoers.d; then
+        echo "/etc/sudoers.d does not exist; nothing was changed." >&2
+        exit 1
+    fi
+    if ! sudo grep -Eq '^[[:space:]]*[#@]includedir[[:space:]]+/etc/sudoers\.d/?[[:space:]]*$' /etc/sudoers; then
+        echo "/etc/sudoers does not include /etc/sudoers.d; nothing was changed." >&2
+        exit 1
+    fi
+    if ! sudo visudo -c >/dev/null; then
+        echo "The existing sudoers configuration has errors (see 'sudo visudo -c'); nothing was changed." >&2
+        exit 1
+    fi
 
-sudo cat "$gdm_src" | awk -v user="$user" '
-    function add_keys() {
-        print "AutomaticLoginEnable=true"
-        print "AutomaticLogin=" user
-        added = 1
-    }
-    /^[ \t]*\[/ {
-        in_daemon = ($0 ~ /^[ \t]*\[daemon\][ \t]*$/)
-        print
-        if (in_daemon && !added) add_keys()
-        next
-    }
-    in_daemon && /^[ \t]*AutomaticLogin(Enable)?[ \t]*=/ { next }
-    { print }
-    END {
-        if (!added) { print ""; print "[daemon]"; add_keys() }
-    }
-' > "$tmp"
-if sudo test -f "$gdm_conf"; then
-    sudo test -e "$gdm_conf.bak" || sudo cp -p "$gdm_conf" "$gdm_conf.bak"
-fi
-gdm_dir=${gdm_conf%/*}
-if ! sudo test -d "$gdm_dir"; then
-    sudo install -d -m 755 -o root -g root "$gdm_dir"
-    relabel "$gdm_dir"
-fi
-sudo install -m 644 -o root -g root "$tmp" "$gdm_conf"
-relabel "$gdm_conf"
+    printf '%s ALL=(ALL:ALL) NOPASSWD:ALL\n' "$user" > "$sudoers_tmp"
+    if ! sudo visudo -cf "$sudoers_tmp" >/dev/null; then
+        echo "The generated sudoers rule failed validation; nothing was changed." >&2
+        exit 1
+    fi
+}
 
-printf '%s ALL=(ALL:ALL) NOPASSWD:ALL\n' "$user" > "$tmp"
-sudo visudo -cf "$tmp"
-sudo install -m 0440 -o root -g root "$tmp" /etc/sudoers.d/zz-nopasswd
-relabel /etc/sudoers.d/zz-nopasswd
+detect_dm() {
+    local id="" load="" dm=""
 
-sudo -k
-if ! sudo -n true 2>/dev/null; then
-    echo "Error: /etc/sudoers.d/zz-nopasswd is installed but not in effect." >&2
-    echo "       Check that /etc/sudoers includes /etc/sudoers.d and that nothing after" >&2
-    echo "       the include overrides the rule. Your password has not been changed." >&2
-    exit 1
-fi
+    if command -v systemctl >/dev/null 2>&1; then
+        load=$(systemctl show --value -p LoadState display-manager.service 2>/dev/null || true)
+        if [ "$load" = loaded ]; then
+            id=$(systemctl show --value -p Id display-manager.service 2>/dev/null || true)
+        fi
+    fi
+    if [ -z "$id" ]; then
+        id=$(readlink -e /etc/systemd/system/display-manager.service 2>/dev/null || true)
+        id=${id##*/}
+    fi
 
-polkit_done=0
+    case $id in
+        display-manager.service|display-manager-legacy.service)
+            if [ -r /etc/sysconfig/displaymanager ]; then
+                dm=$(sed -nE 's/^[[:space:]]*DISPLAYMANAGER[[:space:]]*=//p' /etc/sysconfig/displaymanager \
+                    | tail -n 1 | tr -d "\"' \t")
+            fi
+            if [ -z "$dm" ]; then
+                dm=$(readlink -e /etc/alternatives/default-displaymanager 2>/dev/null || true)
+                dm=${dm##*/}
+            fi
+            if [ -n "$dm" ]; then dm=$dm.service; fi ;;
+        *)
+            dm=$id ;;
+    esac
 
-if sudo test -d /etc/polkit-1/rules.d; then
-    cat > "$tmp" <<EOF
-polkit.addRule(function(action, subject) {
-    if (subject.user == "$user" && subject.local && subject.active) {
-        return polkit.Result.YES;
-    }
-});
-EOF
-    sudo install -m 644 -o root -g root "$tmp" /etc/polkit-1/rules.d/00-nopassword.rules
-    relabel /etc/polkit-1/rules.d/00-nopassword.rules
-    polkit_done=1
-fi
+    printf '%s\n' "$dm"
+}
 
-if sudo test -d /etc/polkit-1/localauthority/50-local.d; then
-    cat > "$tmp" <<EOF
-[No password prompt]
-Identity=unix-user:$user
-Action=*
-ResultActive=yes
-EOF
-    sudo install -m 644 -o root -g root "$tmp" /etc/polkit-1/localauthority/50-local.d/99-nopassword.pkla
-    relabel /etc/polkit-1/localauthority/50-local.d/99-nopassword.pkla
-    polkit_done=1
-fi
-
-if [ "$polkit_done" -eq 0 ]; then
-    echo "Warning: no polkit rules directory found; polkit prompts were not changed." >&2
-fi
+polkit_js_capable() {
+    local v
+    command -v pkaction >/dev/null 2>&1 || return 1
+    v=$(pkaction --version 2>/dev/null) || return 1
+    v=${v##* }
+    case $v in
+        0.*)
+            v=${v#0.}
+            v=${v%%[!0-9]*}
+            [ -n "$v" ] && [ "$v" -ge 106 ] ;;
+        [1-9]*) return 0 ;;
+        *) return 1 ;;
+    esac
+}
 
 gs_disable() {
     local schema=$1 key=$2 w
@@ -133,19 +107,6 @@ gs_disable() {
         return 1
     fi
 }
-
-if command -v gsettings >/dev/null 2>&1; then
-    rc=0
-    gs_disable org.gnome.desktop.screensaver lock-enabled || rc=$?
-    if [ "$rc" -eq 2 ]; then
-        echo "Warning: GNOME screensaver settings not found; lock screen was not changed." >&2
-    fi
-    gs_disable org.gnome.desktop.screensaver ubuntu-lock-on-suspend || true
-else
-    echo "Warning: gsettings not found; lock screen was not changed." >&2
-fi
-PAM_UNIX_AUTH_RE='^[[:space:]]*-?auth[[:space:]].*pam_unix[.]so'
-NULLOK_RE='[[:space:]]nullok([[:space:]]|$)'
 
 pam_files() {
     local d f name
@@ -186,6 +147,7 @@ pam_has_nullok() {
 enable_nullok() {
     local cur profile feats f real target note
     local authselect_active=0
+    local files=()
 
     if command -v authselect >/dev/null 2>&1 && cur=$(authselect current --raw 2>/dev/null); then
         if ! sudo authselect check >/dev/null 2>&1; then
@@ -217,7 +179,9 @@ enable_nullok() {
         fi
     fi
 
-    while IFS= read -r -d '' f <&3; do
+    mapfile -d '' -t files < <(pam_files)
+
+    for f in "${files[@]}"; do
         sudo awk -v unix="$PAM_UNIX_AUTH_RE" -v nullok="$NULLOK_RE" \
             '$0 ~ unix && $0 !~ nullok { f = 1 } END { exit !f }' "$f" || continue
 
@@ -258,17 +222,154 @@ enable_nullok() {
             echo "Note: pam-auth-update will now treat common-auth as locally modified and stop" >&2
             echo "      updating it; 'pam-auth-update --force' would remove nullok again." >&2
         fi
-    done 3< <(pam_files)
+    done
 }
 
-if ! pam_has_nullok; then
-    enable_nullok
-fi
+main() {
+    local dm bin f rc gdm_conf="" gdm_src gdm_dir polkit_done=0 polkit_new_dir=0
 
-if pam_has_nullok; then
-    sudo passwd -d "$user"
-else
-    echo "Warning: could not enable empty passwords in PAM; keeping your current password" >&2
-    echo "         so you can still log in and unlock. Files with pam_unix auth lines lacking nullok:" >&2
-    pam_check_nullok | sed 's/^/           /' >&2 || true
-fi
+    if [ "$(id -u)" -eq 0 ]; then
+        echo "Run this as your normal user, not as root or via sudo." >&2
+        exit 1
+    fi
+    user=$(id -un)
+
+    tmp="" sudoers_tmp=""
+    trap 'rm -f -- "$tmp" "$sudoers_tmp"' EXIT
+    tmp=$(mktemp)
+    sudoers_tmp=$(mktemp)
+
+    preflight
+
+    dm=$(detect_dm)
+    case $dm in
+        gdm.service|gdm3.service) ;;
+        "")
+            echo "Could not determine the display manager." >&2
+            exit 1 ;;
+        *)
+            echo "Active display manager is $dm, not GDM; GDM autologin would not apply." >&2
+            exit 1 ;;
+    esac
+
+    for bin in /usr/sbin/gdm /usr/sbin/gdm3 /usr/bin/gdm /usr/bin/gdm3; do
+        [ -f "$bin" ] || continue
+        gdm_conf=$(LC_ALL=C grep -aoE '[[:print:]]*/etc/gdm3?/(custom|daemon)\.conf' "$bin" \
+            | grep -m1 -xE '/etc/gdm3?/(custom|daemon)\.conf' || true)
+        [ -n "$gdm_conf" ] && break
+    done
+    if [ -z "$gdm_conf" ]; then
+        for f in /etc/gdm/custom.conf /etc/gdm3/daemon.conf /etc/gdm3/custom.conf; do
+            if [ -f "$f" ]; then gdm_conf=$f; break; fi
+        done
+    fi
+    if [ -z "$gdm_conf" ]; then
+        echo "No GDM config file found." >&2
+        exit 1
+    fi
+
+    gdm_src=$gdm_conf
+    sudo test -f "$gdm_src" || gdm_src=/dev/null
+
+    sudo cat "$gdm_src" | awk -v user="$user" '
+        function add_keys() {
+            print "AutomaticLoginEnable=true"
+            print "AutomaticLogin=" user
+            added = 1
+        }
+        /^[ \t]*\[/ {
+            in_daemon = ($0 ~ /^[ \t]*\[daemon\][ \t]*$/)
+            print
+            if (in_daemon && !added) add_keys()
+            next
+        }
+        in_daemon && /^[ \t]*AutomaticLogin(Enable)?[ \t]*=/ { next }
+        { print }
+        END {
+            if (!added) { print ""; print "[daemon]"; add_keys() }
+        }
+    ' > "$tmp"
+    if sudo test -f "$gdm_conf"; then
+        sudo test -e "$gdm_conf.bak" || sudo cp -p "$gdm_conf" "$gdm_conf.bak"
+    fi
+    gdm_dir=${gdm_conf%/*}
+    if ! sudo test -d "$gdm_dir"; then
+        sudo install -d -m 755 -o root -g root "$gdm_dir"
+        relabel "$gdm_dir"
+    fi
+    sudo install -m 644 -o root -g root "$tmp" "$gdm_conf"
+    relabel "$gdm_conf"
+
+    sudo install -m 0440 -o root -g root "$sudoers_tmp" /etc/sudoers.d/zz-nopasswd
+    relabel /etc/sudoers.d/zz-nopasswd
+
+    sudo -k
+    if ! sudo -n true 2>/dev/null; then
+        echo "Error: /etc/sudoers.d/zz-nopasswd is installed but not in effect." >&2
+        echo "       Check that nothing after the /etc/sudoers.d include overrides the rule." >&2
+        echo "       Your password has not been changed." >&2
+        exit 1
+    fi
+
+    if sudo test -d /etc/polkit-1/rules.d || polkit_js_capable; then
+        if ! sudo test -d /etc/polkit-1/rules.d; then
+            sudo install -d -m 755 -o root -g root /etc/polkit-1/rules.d
+            relabel /etc/polkit-1 /etc/polkit-1/rules.d
+            polkit_new_dir=1
+        fi
+        cat > "$tmp" <<EOF
+polkit.addRule(function(action, subject) {
+    if (subject.user == "$user" && subject.local && subject.active) {
+        return polkit.Result.YES;
+    }
+});
+EOF
+        sudo install -m 644 -o root -g root "$tmp" /etc/polkit-1/rules.d/00-nopassword.rules
+        relabel /etc/polkit-1/rules.d/00-nopassword.rules
+        polkit_done=1
+    fi
+
+    if sudo test -d /etc/polkit-1/localauthority/50-local.d; then
+        cat > "$tmp" <<EOF
+[No password prompt]
+Identity=unix-user:$user
+Action=*
+ResultActive=yes
+EOF
+        sudo install -m 644 -o root -g root "$tmp" /etc/polkit-1/localauthority/50-local.d/99-nopassword.pkla
+        relabel /etc/polkit-1/localauthority/50-local.d/99-nopassword.pkla
+        polkit_done=1
+    fi
+
+    if [ "$polkit_done" -eq 0 ]; then
+        echo "Warning: polkit not found; polkit prompts were not changed." >&2
+    elif [ "$polkit_new_dir" -eq 1 ]; then
+        echo "Note: created /etc/polkit-1/rules.d; polkit may not load the new rule until it" >&2
+        echo "      restarts (e.g. at the next reboot)." >&2
+    fi
+
+    if command -v gsettings >/dev/null 2>&1; then
+        rc=0
+        gs_disable org.gnome.desktop.screensaver lock-enabled || rc=$?
+        if [ "$rc" -eq 2 ]; then
+            echo "Warning: GNOME screensaver settings not found; lock screen was not changed." >&2
+        fi
+        gs_disable org.gnome.desktop.screensaver ubuntu-lock-on-suspend || true
+    else
+        echo "Warning: gsettings not found; lock screen was not changed." >&2
+    fi
+
+    if ! pam_has_nullok; then
+        enable_nullok
+    fi
+
+    if pam_has_nullok; then
+        sudo passwd -d "$user"
+    else
+        echo "Warning: could not enable empty passwords in PAM; keeping your current password" >&2
+        echo "         so you can still log in and unlock. Files with pam_unix auth lines lacking nullok:" >&2
+        pam_check_nullok | sed 's/^/           /' >&2 || true
+    fi
+}
+
+main "$@"
