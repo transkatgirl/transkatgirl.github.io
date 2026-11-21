@@ -3,11 +3,26 @@
 # Download & run this script with the following command:
 # wget -nv -O - https://transkatgirl.github.io/assets/scripts/passwordless.sh | bash
 
-set -euo pipefail
+set -Eeuo pipefail
 
 PAM_UNIX_AUTH_RE='^[[:space:]]*-?auth[[:space:]].*pam_unix[.]so'
 NULLOK_RE='[[:space:]]nullok([[:space:]]|$)'
 SUDOERS_RULE=/etc/sudoers.d/zz-nopasswd
+SYSCONFIG_DM=/etc/sysconfig/displaymanager
+
+changes_started=0
+
+on_error() {
+    local rc=$? line=$1 cmd=${2%%$'\n'*}
+    [ "$BASH_SUBSHELL" -eq 0 ] || return 0
+    if [ "$changes_started" -eq 1 ]; then
+        echo "Error: '$cmd' failed (line $line, status $rc)." >&2
+        echo "       Changes made before this point were left in place." >&2
+    else
+        echo "Error: '$cmd' failed (line $line, status $rc); nothing was changed." >&2
+    fi
+}
+trap 'on_error "$LINENO" "$BASH_COMMAND"' ERR
 
 relabel() {
     [ -e /sys/fs/selinux/enforce ] || return 0
@@ -70,8 +85,8 @@ detect_dm() {
 
     case $id in
         display-manager.service|display-manager-legacy.service)
-            if [ -r /etc/sysconfig/displaymanager ]; then
-                dm=$(sed -nE 's/^[[:space:]]*DISPLAYMANAGER[[:space:]]*=//p' /etc/sysconfig/displaymanager \
+            if [ -r "$SYSCONFIG_DM" ]; then
+                dm=$(sed -nE 's/^[[:space:]]*DISPLAYMANAGER[[:space:]]*=//p' "$SYSCONFIG_DM" \
                     | tail -n 1 | tr -d "\"' \t")
             fi
             if [ -z "$dm" ]; then
@@ -118,7 +133,7 @@ gs_disable() {
 pam_files() {
     local d f name
     local -A seen=()
-    for d in /etc/pam.d /usr/etc/pam.d /usr/lib/pam.d; do
+    for d in /etc/pam.d /usr/lib/pam.d /usr/etc/pam.d; do
         sudo test -d "$d" || continue
         while IFS= read -r -d '' f; do
             name=${f##*/}
@@ -215,6 +230,7 @@ enable_nullok() {
                 else
                     note="new override of $real; delete it to revert"
                 fi
+                sudo rm -f -- "$target"
                 sudo install -m 644 -o root -g root "$real" "$target" ;;
         esac
 
@@ -276,6 +292,7 @@ main() {
         exit 1
     fi
 
+    changes_started=1
     sudo install -m 0440 -o root -g root "$sudoers_tmp" "$SUDOERS_RULE"
     relabel "$SUDOERS_RULE"
     if ! sudo -n -k true 2>/dev/null; then
@@ -317,6 +334,20 @@ main() {
     fi
     sudo install -m 644 -o root -g root "$tmp" "$gdm_conf"
     relabel "$gdm_conf"
+
+    if sudo test -f "$SYSCONFIG_DM"; then
+        sudo cat "$SYSCONFIG_DM" | awk -v user="$user" '
+            /^[ \t]*DISPLAYMANAGER_AUTOLOGIN[ \t]*=/ {
+                if (!done) { print "DISPLAYMANAGER_AUTOLOGIN=\"" user "\""; done = 1 }
+                next
+            }
+            { print }
+            END { if (!done) print "DISPLAYMANAGER_AUTOLOGIN=\"" user "\"" }
+        ' > "$tmp"
+        sudo test -e "$SYSCONFIG_DM.bak" || sudo cp -p "$SYSCONFIG_DM" "$SYSCONFIG_DM.bak"
+        sudo install -m 644 -o root -g root "$tmp" "$SYSCONFIG_DM"
+        relabel "$SYSCONFIG_DM"
+    fi
 
     if sudo test -d /etc/polkit-1/rules.d || polkit_js_capable; then
         if ! sudo test -d /etc/polkit-1/rules.d; then
