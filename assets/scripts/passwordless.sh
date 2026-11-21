@@ -1,17 +1,22 @@
 #!/usr/bin/env bash
 
 # Download & run this script with the following command:
-# wget -O - -o /dev/null https://transkatgirl.github.io/assets/scripts/passwordless.sh | bash
+# wget -nv -O - https://transkatgirl.github.io/assets/scripts/passwordless.sh | bash
 
 set -euo pipefail
 
 PAM_UNIX_AUTH_RE='^[[:space:]]*-?auth[[:space:]].*pam_unix[.]so'
 NULLOK_RE='[[:space:]]nullok([[:space:]]|$)'
+SUDOERS_RULE=/etc/sudoers.d/zz-nopasswd
 
 relabel() {
-    if [ -e /sys/fs/selinux/enforce ]; then
-        sudo restorecon -F "$@"
+    [ -e /sys/fs/selinux/enforce ] || return 0
+    if ! sudo sh -c 'command -v restorecon' >/dev/null 2>&1; then
+        echo "Warning: SELinux is enabled but restorecon is not installed; not relabeling $*." >&2
+        return 0
     fi
+    sudo restorecon -F "$@" \
+        || echo "Warning: restorecon failed for $*; check its SELinux label." >&2
 }
 
 preflight() {
@@ -27,12 +32,14 @@ preflight() {
         exit 1
     fi
 
-    if ! sudo test -d /etc/sudoers.d; then
-        echo "/etc/sudoers.d does not exist; nothing was changed." >&2
+    if ! sudo -v; then
+        echo "Could not get sudo access (wrong password, no terminal, or '$user' is not" >&2
+        echo "allowed to use sudo); nothing was changed." >&2
         exit 1
     fi
-    if ! sudo grep -Eq '^[[:space:]]*[#@]includedir[[:space:]]+/etc/sudoers\.d/?[[:space:]]*$' /etc/sudoers; then
-        echo "/etc/sudoers does not include /etc/sudoers.d; nothing was changed." >&2
+
+    if ! sudo test -d /etc/sudoers.d; then
+        echo "/etc/sudoers.d does not exist; nothing was changed." >&2
         exit 1
     fi
     if ! sudo visudo -c >/dev/null; then
@@ -40,7 +47,7 @@ preflight() {
         exit 1
     fi
 
-    printf '%s ALL=(ALL:ALL) NOPASSWD:ALL\n' "$user" > "$sudoers_tmp"
+    printf '#%s ALL=(ALL:ALL) NOPASSWD:ALL\n' "$uid" > "$sudoers_tmp"
     if ! sudo visudo -cf "$sudoers_tmp" >/dev/null; then
         echo "The generated sudoers rule failed validation; nothing was changed." >&2
         exit 1
@@ -228,7 +235,8 @@ enable_nullok() {
 main() {
     local dm bin f rc gdm_conf="" gdm_src gdm_dir polkit_done=0 polkit_new_dir=0
 
-    if [ "$(id -u)" -eq 0 ]; then
+    uid=$(id -u)
+    if [ "$uid" -eq 0 ]; then
         echo "Run this as your normal user, not as root or via sudo." >&2
         exit 1
     fi
@@ -268,6 +276,16 @@ main() {
         exit 1
     fi
 
+    sudo install -m 0440 -o root -g root "$sudoers_tmp" "$SUDOERS_RULE"
+    relabel "$SUDOERS_RULE"
+    if ! sudo -n -k true 2>/dev/null; then
+        sudo rm -f -- "$SUDOERS_RULE"
+        echo "Error: $SUDOERS_RULE did not take effect, so it was removed; nothing was changed." >&2
+        echo "       Check that your sudoers file includes /etc/sudoers.d and that nothing" >&2
+        echo "       after the include overrides the rule." >&2
+        exit 1
+    fi
+
     gdm_src=$gdm_conf
     sudo test -f "$gdm_src" || gdm_src=/dev/null
 
@@ -299,17 +317,6 @@ main() {
     fi
     sudo install -m 644 -o root -g root "$tmp" "$gdm_conf"
     relabel "$gdm_conf"
-
-    sudo install -m 0440 -o root -g root "$sudoers_tmp" /etc/sudoers.d/zz-nopasswd
-    relabel /etc/sudoers.d/zz-nopasswd
-
-    sudo -k
-    if ! sudo -n true 2>/dev/null; then
-        echo "Error: /etc/sudoers.d/zz-nopasswd is installed but not in effect." >&2
-        echo "       Check that nothing after the /etc/sudoers.d include overrides the rule." >&2
-        echo "       Your password has not been changed." >&2
-        exit 1
-    fi
 
     if sudo test -d /etc/polkit-1/rules.d || polkit_js_capable; then
         if ! sudo test -d /etc/polkit-1/rules.d; then
