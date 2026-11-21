@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Updates a systemd+GDM distro (Ubuntu Desktop, Fedora Workstation, etc) to be passwordless.
+
 # Download & run this script with the following command:
 # wget -nv -O - https://transkatgirl.github.io/assets/scripts/passwordless.sh | bash
 
